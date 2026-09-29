@@ -6,6 +6,8 @@ Notebooks below are copied from [SkillCorner open data](https://github.com/Skill
 
 ## Open on mobile
 
+Phone-friendly HTML (GitHub Pages): https://elliottdon.github.io/AnalyticsCup2_0/
+
 - [`notebooks/tutorials/01_Getting_Started_with_SkillCorner_Data/Part1_Visualization_with_SkillCorner_Tutorial.ipynb`](notebooks/tutorials/01_Getting_Started_with_SkillCorner_Data/Part1_Visualization_with_SkillCorner_Tutorial.ipynb)
 - [`notebooks/tutorials/01_Getting_Started_with_SkillCorner_Data/Part2_Multiple_Metrics_and_Z_Scores_Tutorial.ipynb`](notebooks/tutorials/01_Getting_Started_with_SkillCorner_Data/Part2_Multiple_Metrics_and_Z_Scores_Tutorial.ipynb)
 - [`notebooks/tutorials/01_Getting_Started_with_SkillCorner_Data/Part3_Building_Striker_Archetypes_Tutorial.ipynb`](notebooks/tutorials/01_Getting_Started_with_SkillCorner_Data/Part3_Building_Striker_Archetypes_Tutorial.ipynb)
