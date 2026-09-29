@@ -1,0 +1,131 @@
+{
+  "n_matches": 20,
+  "match_ids": [
+    "1874553",
+    "1886347",
+    "1899585",
+    "1925299",
+    "1927964",
+    "1953632",
+    "1959846",
+    "1986691",
+    "1996435",
+    "1996436",
+    "2006229",
+    "2006363",
+    "2007448",
+    "2007721",
+    "2010085",
+    "2011166",
+    "2013725",
+    "2015213",
+    "2016236",
+    "2017461"
+  ],
+  "n_phases": 8834,
+  "n_player_possessions": 18710,
+  "n_on_ball_engagements": 17445,
+  "oop_phase_mix": [
+    {
+      "oop_phase_type": "medium_block",
+      "n_phases": 2880,
+      "total_duration_s": 24906.9,
+      "shot_rate": 0.09027777777777778,
+      "goal_rate": 0.007291666666666667
+    },
+    {
+      "oop_phase_type": "low_block",
+      "n_phases": 1623,
+      "total_duration_s": 13883.2,
+      "shot_rate": 0.18545902649414664,
+      "goal_rate": 0.021565003080714726
+    },
+    {
+      "oop_phase_type": "high_block",
+      "n_phases": 1196,
+      "total_duration_s": 10313.7,
+      "shot_rate": 0.06020066889632107,
+      "goal_rate": 0.007525083612040134
+    },
+    {
+      "oop_phase_type": "chaotic",
+      "n_phases": 1802,
+      "total_duration_s": 5985.6,
+      "shot_rate": 0.004439511653718091,
+      "goal_rate": 0.0
+    },
+    {
+      "oop_phase_type": "defending_set_play",
+      "n_phases": 360,
+      "total_duration_s": 2514.8,
+      "shot_rate": 0.28888888888888886,
+      "goal_rate": 0.030555555555555555
+    },
+    {
+      "oop_phase_type": "defending_direct",
+      "n_phases": 677,
+      "total_duration_s": 2283.5,
+      "shot_rate": 0.03249630723781388,
+      "goal_rate": 0.004431314623338257
+    },
+    {
+      "oop_phase_type": "defending_transition",
+      "n_phases": 185,
+      "total_duration_s": 2216.0,
+      "shot_rate": 0.25405405405405407,
+      "goal_rate": 0.05405405405405406
+    },
+    {
+      "oop_phase_type": "defending_quick_break",
+      "n_phases": 111,
+      "total_duration_s": 1007.4,
+      "shot_rate": 0.45045045045045046,
+      "goal_rate": 0.04504504504504504
+    }
+  ],
+  "shot_rate_by_organized_block": {
+    "low_block": {
+      "n_phases": 1623,
+      "n_shot": 301,
+      "shot_rate": 0.18545902649414664,
+      "goal_rate": 0.021565003080714726,
+      "total_duration_s": 13883.2
+    },
+    "medium_block": {
+      "n_phases": 2880,
+      "n_shot": 260,
+      "shot_rate": 0.09027777777777778,
+      "goal_rate": 0.007291666666666667,
+      "total_duration_s": 24906.9
+    },
+    "high_block": {
+      "n_phases": 1196,
+      "n_shot": 72,
+      "shot_rate": 0.06020066889632107,
+      "goal_rate": 0.007525083612040134,
+      "total_duration_s": 10313.7
+    }
+  },
+  "pressure_shot_rates": {
+    "no_pressure": 0.02242152466367713,
+    "low_pressure": 0.06478791400348634,
+    "medium_pressure": 0.10501138952164009,
+    "high_pressure": 0.1057919621749409,
+    "very_high_pressure": 0.21418439716312057
+  },
+  "pressure_bands_separate_shots": true,
+  "pressure_shot_rate_spread": 0.19176287249944343,
+  "bbox_mean_area_diff_shot_minus_nons": {
+    "low_block": -166.3002505800755,
+    "medium_block": -83.40622730471864,
+    "high_block": -46.02871719182531
+  },
+  "bbox_width_x_length_separates_shots": true,
+  "outputs": {
+    "phase_summary": "analysis/output/eda_phase_summary.csv",
+    "pressure_summary": "analysis/output/eda_pressure_summary.csv",
+    "engagement_summary": "analysis/output/eda_engagement_summary.csv",
+    "bbox_summary": "analysis/output/eda_bbox_summary.csv",
+    "headline": "analysis/output/eda_summary.json"
+  }
+}
