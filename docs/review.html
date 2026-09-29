@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Defensive positioning review</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.55;
+      padding: 1.5rem 1.15rem 3rem;
+      max-width: 40rem;
+    }
+    h1 {
+      font-size: 1.65rem;
+      line-height: 1.25;
+      margin: 0 0 0.5rem;
+    }
+    h2 {
+      font-size: 1.2rem;
+      margin: 2rem 0 0.65rem;
+      padding-top: 0.35rem;
+      border-top: 1px solid #ddd;
+    }
+    @media (prefers-color-scheme: dark) {
+      h2 { border-top-color: #444; }
+    }
+    p, li {
+      margin: 0 0 0.85rem;
+    }
+    .purpose {
+      margin: 0 0 0.25rem;
+      color: #555;
+      font-size: 1.05rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .purpose { color: #aaa; }
+    }
+    .mission {
+      margin: 0 0 0.85rem;
+      padding: 0.85rem 0 0.85rem 0.9rem;
+      border-left: 3px solid #888;
+      font-size: 1.05rem;
+    }
+    ul {
+      margin: 0 0 0.5rem;
+      padding-left: 1.25rem;
+    }
+    li { padding-left: 0.15rem; }
+    .thread-title {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .ideas {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
+      font-size: 1rem;
+      color: #444;
+    }
+    @media (prefers-color-scheme: dark) {
+      .ideas { border-top-color: #444; color: #aaa; }
+    }
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Defensive positioning review</h1>
+  <p class="purpose">Review the defensive question and note ideas on the go.</p>
+
+  <h2>Mission</h2>
+  <blockquote class="mission">
+    Football defensive positioning. How can tracking and contextual data help us understand how players and teams defend?
+    Team shape, spacing, pressure, compactness, marking, defensive decision-making.
+  </blockquote>
+
+  <h2>What was tested</h2>
+  <p>
+    Twenty A-League 2024/25 matches (SkillCorner). Organized blocks only (low, medium, high).
+    Two graphs per frame: a defense proximity graph and an attack Delaunay graph, coupled by Hungarian marking and a supra-Laplacian.
+    Compared against the trivial baselines already in the data: out-of-possession width, length, area, nearest defender to the ball, and on-ball pressure.
+  </p>
+
+  <h2>Findings</h2>
+  <ul>
+    <li>Shot rate by block: low about 18.5–18.7%, medium about 9.0–9.3%, high about 6.0%.</li>
+    <li>On-ball pressure separates shots: no pressure 2.2% to very high pressure 21.4%.</li>
+    <li>Shot phases have a smaller defensive box, strongest in the low block (about 148–166 m² smaller).</li>
+    <li>
+      After residualizing on width, length, area, nearest defender, and overall pressure, graph features mostly do not add separation.
+      Only supra-Laplacian λ₂ still has a residual shot-minus-nonshot difference of −0.013 (bootstrap interval −0.022 to −0.004).
+      Uncovered danger, free attackers, defense λ₂, structural pressure, and a λ₂ drop in the last 2 seconds do not.
+    </li>
+  </ul>
+
+  <h2>How to read that</h2>
+  <p>
+    The block’s box and the pressure on the ball-carrier already carry the shot signal in this sample.
+    The interaction of the two graphs did not reveal a large extra effect.
+    Twenty matches is a small sample.
+  </p>
+
+  <h2>Brainstorm</h2>
+  <ul>
+    <li>
+      <span class="thread-title">Compactness vs decision</span>
+      If the bounding box already measures compactness, the remaining question is a decision: who steps, who holds the line, and when the block slides versus jumps.
+    </li>
+    <li>
+      <span class="thread-title">Marking intent versus proximity</span>
+      Body pose (shoulder heading) exists for two matches only; proximity matching did not find free attackers that predict shots.
+      Intent may matter more than distance, but we barely have the signal to test that.
+    </li>
+    <li>
+      <span class="thread-title">Box–coupling disagreements</span>
+      Cases where the box looks compact but the supra-Laplacian coupling is weak: those disagreements are the film to watch, not the average.
+    </li>
+    <li>
+      <span class="thread-title">Ball pressure vs covering the graph</span>
+      Pressing the ball-carrier (the pressure label) versus covering the rest of the passing graph.
+      The second did not add much here. Ask whether that is because the sample is organized blocks, where the ball-carrier pressure and the box move together.
+    </li>
+    <li>
+      <span class="thread-title">Monday coaching change</span>
+      What a coach would change on Monday if the only reliable split is block height and box area.
+      If the answer is thin, the metric is not yet actionable enough.
+    </li>
+  </ul>
+
+  <p class="ideas">
+    Ideas: jot notes in a phone note keyed to the thread titles above.
+    No login, no backend—just this page and your notes app.
+  </p>
+
+  <p><a href="defend.html">Open the defense analysis notebook (HTML)</a></p>
+  <p><a href="index.html">Back to notebook index</a></p>
+</body>
+</html>
