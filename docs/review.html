@@ -70,11 +70,34 @@
       text-decoration: underline;
       text-underline-offset: 0.15em;
     }
+    .cta {
+      display: block;
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    @media (prefers-color-scheme: dark) {
+      .cta { border-color: #555; }
+    }
+    .cta:active, .cta:hover { background: rgba(127,127,127,0.12); }
+    .cta span {
+      display: block;
+      font-weight: 400;
+      font-size: 0.92rem;
+      margin-top: 0.25rem;
+      color: #666;
+    }
+    @media (prefers-color-scheme: dark) {
+      .cta span { color: #999; }
+    }
   </style>
 </head>
 <body>
   <h1>Defensive positioning review</h1>
-  <p class="purpose">Review the defensive question and note ideas on the go.</p>
+  <p class="purpose">Phone-first notes for the Analytics Cup defensive question.</p>
 
   <h2>Mission</h2>
   <blockquote class="mission">
@@ -82,56 +105,69 @@
     Team shape, spacing, pressure, compactness, marking, defensive decision-making.
   </blockquote>
 
+  <a class="cta" href="eda.html">
+    Open visual EDA (15 charts)
+    <span>Best for commute scrolling — shape, pressure, marking, structure</span>
+  </a>
+
   <h2>What was tested</h2>
   <p>
-    Twenty A-League 2024/25 matches (SkillCorner). Organized blocks only (low, medium, high).
-    Two graphs per frame: a defense proximity graph and an attack Delaunay graph, coupled by Hungarian marking and a supra-Laplacian.
-    Compared against the trivial baselines already in the data: out-of-possession width, length, area, nearest defender to the ball, and on-ball pressure.
+    Twenty A-League 2024/25 matches (SkillCorner Open Data). Phases of play + dynamic events
+    (pressure, on-ball engagements, organised-defense / inside-shape labels, pressing chains).
+    Plus an earlier graph experiment: defense proximity + attack Delaunay, Hungarian marking,
+    supra-Laplacian — compared to OOP width/length/area, nearest defender, and on-ball pressure.
   </p>
 
-  <h2>Findings</h2>
+  <h2>Findings (visual EDA)</h2>
   <ul>
-    <li>Shot rate by block: low about 18.5–18.7%, medium about 9.0–9.3%, high about 6.0%.</li>
-    <li>On-ball pressure separates shots: no pressure 2.2% to very high pressure 21.4%.</li>
-    <li>Shot phases have a smaller defensive box, strongest in the low block (about 148–166 m² smaller).</li>
+    <li>Shot rate by organized block: low ~18.5%, medium ~9.0%, high ~6.0%.</li>
+    <li>Shot phases sit in a smaller defensive box (strongest in the low block, ~150–166 m² smaller).</li>
+    <li>On-ball pressure ladder: ~2.2% (none) → ~21% (very high) — but high bands often mean the ball is already dangerous.</li>
+    <li>Organised defense ~2.5% shot rate vs ~10.5% when not; ball inside shape ~11.5% vs ~5.8% outside.</li>
+    <li>Engagement types: pressing / counter-press regain more; beaten-by-possession or movement flags precede shots.</li>
+    <li>Team board: mean OOP box area alone does not rank shot prevention (e.g. Melbourne City large box, low shot rate).</li>
+  </ul>
+
+  <h2>Findings (graph notebook)</h2>
+  <ul>
     <li>
-      After residualizing on width, length, area, nearest defender, and overall pressure, graph features mostly do not add separation.
-      Only supra-Laplacian λ₂ still has a residual shot-minus-nonshot difference of −0.013 (bootstrap interval −0.022 to −0.004).
-      Uncovered danger, free attackers, defense λ₂, structural pressure, and a λ₂ drop in the last 2 seconds do not.
+      After residualizing on width, length, area, nearest defender, and overall pressure, most graph features
+      do not add separation. Only supra-Laplacian λ₂ keeps a small residual (about −0.013).
     </li>
+    <li>Uncovered danger, free attackers, defense λ₂, structural pressure, and a late λ₂ drop do not beat the box+pressure baseline.</li>
   </ul>
 
   <h2>How to read that</h2>
   <p>
-    The block’s box and the pressure on the ball-carrier already carry the shot signal in this sample.
-    The interaction of the two graphs did not reveal a large extra effect.
-    Twenty matches is a small sample.
+    Contextual labels already carry most of the shot signal: block height, box compactness, organised shape,
+    and whether the ball is inside the block. Graph coupling did not reveal a large extra effect in this sample.
+    Twenty matches is still small.
   </p>
 
   <h2>Brainstorm</h2>
   <ul>
     <li>
       <span class="thread-title">Compactness vs decision</span>
-      If the bounding box already measures compactness, the remaining question is a decision: who steps, who holds the line, and when the block slides versus jumps.
+      If the bounding box already measures compactness, the remaining question is who steps, who holds,
+      and when the block slides versus jumps.
+    </li>
+    <li>
+      <span class="thread-title">Pressure as context, not cause</span>
+      Very high pressure co-occurs with shots. Film the subset where pressure is high but the box is open —
+      those are the decision mistakes, not the average ladder.
     </li>
     <li>
       <span class="thread-title">Marking intent versus proximity</span>
-      Body pose (shoulder heading) exists for two matches only; proximity matching did not find free attackers that predict shots.
-      Intent may matter more than distance, but we barely have the signal to test that.
+      Body pose exists for two matches only. Beaten-by-movement engagements are the practical proxy until pose coverage grows.
     </li>
     <li>
       <span class="thread-title">Box–coupling disagreements</span>
-      Cases where the box looks compact but the supra-Laplacian coupling is weak: those disagreements are the film to watch, not the average.
-    </li>
-    <li>
-      <span class="thread-title">Ball pressure vs covering the graph</span>
-      Pressing the ball-carrier (the pressure label) versus covering the rest of the passing graph.
-      The second did not add much here. Ask whether that is because the sample is organized blocks, where the ball-carrier pressure and the box move together.
+      Cases where the box looks compact but supra-Laplacian coupling is weak: those disagreements are the film to watch.
     </li>
     <li>
       <span class="thread-title">Monday coaching change</span>
-      What a coach would change on Monday if the only reliable split is block height and box area.
-      If the answer is thin, the metric is not yet actionable enough.
+      Actionable levers so far: stay organised, keep the ball outside the shape, manage low-block width.
+      If that is all a coach would change, we still need a sharper decision metric.
     </li>
   </ul>
 
@@ -140,7 +176,9 @@
     No login, no backend—just this page and your notes app.
   </p>
 
-  <p><a href="defend.html">Open the defense analysis notebook (HTML)</a></p>
+  <p><a href="eda.html">Visual EDA gallery</a></p>
+  <p><a href="eda_notebook.html">Full EDA notebook (HTML)</a></p>
+  <p><a href="defend.html">Graph analysis notebook (HTML)</a></p>
   <p><a href="index.html">Back to notebook index</a></p>
 </body>
 </html>

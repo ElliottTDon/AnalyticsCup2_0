@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Defensive positioning EDA</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      padding: 1.1rem 0.85rem 3rem;
+      max-width: 44rem;
+      margin-inline: auto;
+    }
+    h1 { font-size: 1.55rem; line-height: 1.25; margin: 0 0 0.4rem; }
+    h2 {
+      font-size: 1.15rem;
+      margin: 1.75rem 0 0.6rem;
+      padding-top: 0.4rem;
+      border-top: 1px solid #ddd;
+    }
+    @media (prefers-color-scheme: dark) {
+      h2 { border-top-color: #444; }
+    }
+    .mission {
+      margin: 0.75rem 0 1rem;
+      padding: 0.75rem 0.85rem;
+      border-left: 3px solid #888;
+      background: rgba(127,127,127,0.08);
+      font-size: 1.02rem;
+    }
+    .meta { color: #666; font-size: 0.92rem; margin: 0 0 0.75rem; }
+    @media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
+    ul { padding-left: 1.2rem; }
+    li { margin: 0 0 0.55rem; }
+    .card {
+      margin: 0 0 1.35rem;
+      padding: 0;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+      background: #f3f3f3;
+    }
+    figcaption {
+      margin-top: 0.45rem;
+      font-size: 0.95rem;
+      color: #444;
+    }
+    @media (prefers-color-scheme: dark) {
+      figcaption { color: #bbb; }
+      .card img { background: #222; }
+    }
+    a { color: inherit; }
+    .nav { margin-top: 2rem; font-size: 0.95rem; }
+    .nav a { display: inline-block; margin-right: 1rem; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>Defensive positioning EDA</h1>
+  <p class="meta">20 matches · 8,834 phases · 18,710 possessions · 17,445 engagements</p>
+  <p class="meta">Organized-block shot rates: low block 18.5% · medium block 9.0% · high block 6.0%</p>
+
+  <div class="mission">
+    <strong>Question.</strong> How can tracking and contextual data help us understand the way players and teams defend?
+    Explore team shape, spacing, pressure, compactness, marking, and defensive decision-making.
+  </div>
+
+  <h2>Takeaways</h2>
+  <ul>
+    <li>Organized block height sets the base shot rate: low (~18.5%) ≫ medium (~9.0%) > high (~6.0%).</li><li>Shot phases sit in a smaller OOP bounding box — compactness co-moves with danger, strongest in the low block.</li><li>On-ball pressure separates outcomes (~2% no pressure → ~21% very high), but high bands are endogenous with already-dangerous moments — treat as context, not pure cause.</li><li>Keeping the block organised (~2.5% shot rate) and the ball outside the shape (~5.8% vs ~11.5% inside) are the clearest structure signals; line count barely moves.</li><li>Engagement mix matters: pressing/counter-press regain more often; beaten-by-possession/movement flags precede shots.</li><li>Team board: mean OOP box area and width profile which A-League sides concede more in organized defense — compactness alone does not rank the table.</li>
+  </ul>
+
+  <h2>Visual tour</h2>
+  
+      <figure class="card">
+        <img src="eda/figures/01_phase_mix.png" alt="Phase mix and danger — low blocks concede the most shots; transitions/quick breaks are rare but lethal." loading="lazy">
+        <figcaption>Phase mix and danger — low blocks concede the most shots; transitions/quick breaks are rare but lethal.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/02_shape_scatter.png" alt="Team shape scatter — red points (shot against) cluster toward tighter width, especially low block." loading="lazy">
+        <figcaption>Team shape scatter — red points (shot against) cluster toward tighter width, especially low block.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/03_compactness_violin.png" alt="Compactness violins — shot phases have smaller area/width; length shifts are milder." loading="lazy">
+        <figcaption>Compactness violins — shot phases have smaller area/width; length shifts are milder.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/04_pressure_ladder.png" alt="Pressure ladder — on-ball pressure is the strongest single contextual separator." loading="lazy">
+        <figcaption>Pressure ladder — on-ball pressure is the strongest single contextual separator.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/05_pressure_x_block_heatmap.png" alt="Pressure × block heatmap — pressure still climbs inside every organized block." loading="lazy">
+        <figcaption>Pressure × block heatmap — pressure still climbs inside every organized block.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/06_engagement_outcomes.png" alt="Marking actions — volume, regain rate, and shot rate by engagement subtype." loading="lazy">
+        <figcaption>Marking actions — volume, regain rate, and shot rate by engagement subtype.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/07_engagement_heatmaps.png" alt="Where defenders engage — pressing is higher up; recovery presses deeper." loading="lazy">
+        <figcaption>Where defenders engage — pressing is higher up; recovery presses deeper.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/08_structure_labels.png" alt="Structure labels — organised defense and inside-shape flags separate conceded shots." loading="lazy">
+        <figcaption>Structure labels — organised defense and inside-shape flags separate conceded shots.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/09_line_height_by_block.png" alt="Line height by block — SkillCorner block labels track last-line height as expected." loading="lazy">
+        <figcaption>Line height by block — SkillCorner block labels track last-line height as expected.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/10_decision_flags.png" alt="Decision flags — beaten-by-possession/movement engagements precede more shots." loading="lazy">
+        <figcaption>Decision flags — beaten-by-possession/movement engagements precede more shots.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/11_pressing_chains.png" alt="Pressing chains — coordinated pressure length and end types (regain vs disruption)." loading="lazy">
+        <figcaption>Pressing chains — coordinated pressure length and end types (regain vs disruption).</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/12_team_defense_board.png" alt="Team board — mean OOP box area vs shot rate against (organized blocks)." loading="lazy">
+        <figcaption>Team board — mean OOP box area vs shot rate against (organized blocks).</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/13_engagement_spacing.png" alt="Engagement spacing — start distance by subtype, and shot rate by distance bin." loading="lazy">
+        <figcaption>Engagement spacing — start distance by subtype, and shot rate by distance bin.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/14_compactness_vs_pressure_gradients.png" alt="Two axes — within-block compactness tertiles and pressure gradients." loading="lazy">
+        <figcaption>Two axes — within-block compactness tertiles and pressure gradients.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/15_third_channel_heatmap.png" alt="Pitch zones — possessions becoming shots by third × channel." loading="lazy">
+        <figcaption>Pitch zones — possessions becoming shots by third × channel.</figcaption>
+      </figure>
+
+  <div class="nav">
+    <a href="review.html">Review notes</a>
+    <a href="defend.html">Graph notebook</a>
+    <a href="eda_notebook.html">Full EDA notebook</a>
+    <a href="index.html">All notebooks</a>
+  </div>
+</body>
+</html>
