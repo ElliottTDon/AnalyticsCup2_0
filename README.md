@@ -9,6 +9,8 @@ Private working repo for Analytics Cup defense analysis.
 
 Phone-friendly HTML (GitHub Pages): https://elliotttdon.github.io/AnalyticsCup2_0/
 
+Pages is deployed from `docs/` by `.github/workflows/deploy-pages.yml` (GitHub Actions). Repo **Settings → Pages → Source** must be **GitHub Actions**.
+
 Start here on a phone:
 
 - [Visual defensive EDA](https://elliotttdon.github.io/AnalyticsCup2_0/eda.html) — 15 charts
