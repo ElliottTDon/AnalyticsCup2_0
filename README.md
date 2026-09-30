@@ -2,11 +2,28 @@
 
 Private working repo for Analytics Cup defense analysis.
 
-Notebooks below are copied from [SkillCorner open data](https://github.com/SkillCorner/opendata) tutorials with saved outputs so they render on GitHub (including mobile). Credit: SkillCorner.
+**Question:** How can tracking and contextual data help us better understand the way players and teams defend?
+(team shape, spacing, pressure, compactness, marking, defensive decision-making)
 
 ## Open on mobile
 
 Phone-friendly HTML (GitHub Pages): https://elliotttdon.github.io/AnalyticsCup2_0/
+
+Start here on a phone:
+
+- [Visual defensive EDA](https://elliotttdon.github.io/AnalyticsCup2_0/eda.html) — 15 charts
+- [Review notes / brainstorm](https://elliotttdon.github.io/AnalyticsCup2_0/review.html)
+- [Full EDA notebook](https://elliotttdon.github.io/AnalyticsCup2_0/eda_notebook.html)
+- [Graph experiment notebook](https://elliotttdon.github.io/AnalyticsCup2_0/defend.html)
+
+Local analysis lives under `analysis/`. Regenerate figures + Pages assets:
+
+```bash
+# expects SkillCorner open data at opendata/data/matches/
+python analysis/eda_visual_defense.py
+```
+
+Tutorial notebooks below are copied from [SkillCorner open data](https://github.com/SkillCorner/opendata) with saved outputs. Credit: SkillCorner.
 
 - [`notebooks/tutorials/01_Getting_Started_with_SkillCorner_Data/Part1_Visualization_with_SkillCorner_Tutorial.ipynb`](notebooks/tutorials/01_Getting_Started_with_SkillCorner_Data/Part1_Visualization_with_SkillCorner_Tutorial.ipynb)
 - [`notebooks/tutorials/01_Getting_Started_with_SkillCorner_Data/Part2_Multiple_Metrics_and_Z_Scores_Tutorial.ipynb`](notebooks/tutorials/01_Getting_Started_with_SkillCorner_Data/Part2_Multiple_Metrics_and_Z_Scores_Tutorial.ipynb)
