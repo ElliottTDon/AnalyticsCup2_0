@@ -75,70 +75,137 @@
     <li>Organized block height sets the base shot rate: low (~18.5%) ≫ medium (~9.0%) > high (~6.0%).</li><li>Shot phases sit in a smaller OOP bounding box — compactness co-moves with danger, strongest in the low block.</li><li>On-ball pressure separates outcomes (~2% no pressure → ~21% very high), but high bands are endogenous with already-dangerous moments — treat as context, not pure cause.</li><li>Keeping the block organised (~2.5% shot rate) and the ball outside the shape (~5.8% vs ~11.5% inside) are the clearest structure signals; line count barely moves.</li><li>Engagement mix matters: pressing/counter-press regain more often; beaten-by-possession/movement flags precede shots.</li><li>Team board: mean OOP box area and width profile which A-League sides concede more in organized defense — compactness alone does not rank the table.</li>
   </ul>
 
+  <h2>Plain-language glossary</h2>
+  <ul>
+    <li><strong>Compactness</strong> — how small the defending team’s shape is (width × depth of their box). Tighter is not always better in this sample.</li>
+    <li><strong>Pressure gradient</strong> — as on-ball pressure rises from none to very high, how much the shot rate climbs (same for block height).</li>
+    <li><strong>Organised block</strong> — low, medium, or high defensive block (not chaotic or transition).</li>
+  </ul>
+  <p><a href="team-zones.html"><strong>Team shot maps</strong></a> (each club — scored vs conceded). 
+  <a href="graph-tool-notes.html"><strong>Block graph tool FAQ</strong></a> (timer series, pressing, pre-fracturing).</p>
+
   <h2>Visual tour</h2>
   
       <figure class="card">
-        <img src="eda/figures/01_phase_mix.png" alt="Phase mix and danger — low blocks concede the most shots; transitions/quick breaks are rare but lethal." loading="lazy">
-        <figcaption>Phase mix and danger — low blocks concede the most shots; transitions/quick breaks are rare but lethal.</figcaption>
+        <img src="eda/figures/01_phase_mix.png" alt="How long teams spend in each defensive situation (low / mid / high block, transitions, set pieces) and how often those spells end in a shot." loading="lazy">
+        <figcaption>How long teams spend in each defensive situation (low / mid / high block, transitions, set pieces) and how often those spells end in a shot.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/02_shape_scatter.png" alt="Team shape scatter — red points (shot against) cluster toward tighter width, especially low block." loading="lazy">
-        <figcaption>Team shape scatter — red points (shot against) cluster toward tighter width, especially low block.</figcaption>
+        <img src="eda/figures/02_shape_scatter.png" alt="Width and depth of the out-of-possession box. Red dots are phases that ended in a shot — often a slightly tighter shape." loading="lazy">
+        <figcaption>Width and depth of the out-of-possession box. Red dots are phases that ended in a shot — often a slightly tighter shape.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/03_compactness_violin.png" alt="Compactness violins — shot phases have smaller area/width; length shifts are milder." loading="lazy">
-        <figcaption>Compactness violins — shot phases have smaller area/width; length shifts are milder.</figcaption>
+        <img src="eda/figures/03_compactness_violin.png" alt="Compactness = how small the defensive rectangle is. Shot phases tend to be tighter, especially in a low block." loading="lazy">
+        <figcaption>Compactness = how small the defensive rectangle is. Shot phases tend to be tighter, especially in a low block.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/04_pressure_ladder.png" alt="Pressure ladder — on-ball pressure is the strongest single contextual separator." loading="lazy">
-        <figcaption>Pressure ladder — on-ball pressure is the strongest single contextual separator.</figcaption>
+        <img src="eda/figures/04_pressure_ladder.png" alt="How hard the ball-carrier is pressed. More pressure goes with more shots — but that often means the attack was already dangerous." loading="lazy">
+        <figcaption>How hard the ball-carrier is pressed. More pressure goes with more shots — but that often means the attack was already dangerous.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/05_pressure_x_block_heatmap.png" alt="Pressure × block heatmap — pressure still climbs inside every organized block." loading="lazy">
-        <figcaption>Pressure × block heatmap — pressure still climbs inside every organized block.</figcaption>
+        <img src="eda/figures/05_pressure_x_block_heatmap.png" alt="Same story inside each block height: heavier pressure on the ball, more shots." loading="lazy">
+        <figcaption>Same story inside each block height: heavier pressure on the ball, more shots.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/06_engagement_outcomes.png" alt="Marking actions — volume, regain rate, and shot rate by engagement subtype." loading="lazy">
-        <figcaption>Marking actions — volume, regain rate, and shot rate by engagement subtype.</figcaption>
+        <img src="eda/figures/06_engagement_outcomes.png" alt="When a defender steps to the ball: how often they win it back vs how often a shot still follows." loading="lazy">
+        <figcaption>When a defender steps to the ball: how often they win it back vs how often a shot still follows.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/07_engagement_heatmaps.png" alt="Where defenders engage — pressing is higher up; recovery presses deeper." loading="lazy">
-        <figcaption>Where defenders engage — pressing is higher up; recovery presses deeper.</figcaption>
+        <img src="eda/figures/07_engagement_heatmaps.png" alt="Where on the pitch those steps happen — high press up field, recovery runs deeper." loading="lazy">
+        <figcaption>Where on the pitch those steps happen — high press up field, recovery runs deeper.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/08_structure_labels.png" alt="Structure labels — organised defense and inside-shape flags separate conceded shots." loading="lazy">
-        <figcaption>Structure labels — organised defense and inside-shape flags separate conceded shots.</figcaption>
+        <img src="eda/figures/08_structure_labels.png" alt="SkillCorner tags: organised shape, ball inside the block, number of lines — vs shot rate." loading="lazy">
+        <figcaption>SkillCorner tags: organised shape, ball inside the block, number of lines — vs shot rate.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/09_line_height_by_block.png" alt="Line height by block — SkillCorner block labels track last-line height as expected." loading="lazy">
-        <figcaption>Line height by block — SkillCorner block labels track last-line height as expected.</figcaption>
+        <img src="eda/figures/09_line_height_by_block.png" alt="How high the back line sits in each block type (validates low / mid / high labels)." loading="lazy">
+        <figcaption>How high the back line sits in each block type (validates low / mid / high labels).</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/10_decision_flags.png" alt="Decision flags — beaten-by-possession/movement engagements precede more shots." loading="lazy">
-        <figcaption>Decision flags — beaten-by-possession/movement engagements precede more shots.</figcaption>
+        <img src="eda/figures/10_decision_flags.png" alt="Did the press slow the attack or get beaten? Beaten flags line up with more shots." loading="lazy">
+        <figcaption>Did the press slow the attack or get beaten? Beaten flags line up with more shots.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/11_pressing_chains.png" alt="Pressing chains — coordinated pressure length and end types (regain vs disruption)." loading="lazy">
-        <figcaption>Pressing chains — coordinated pressure length and end types (regain vs disruption).</figcaption>
+        <img src="eda/figures/11_pressing_chains.png" alt="Linked presses: how many steps in a chain and whether it ended in a regain." loading="lazy">
+        <figcaption>Linked presses: how many steps in a chain and whether it ended in a regain.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/12_team_defense_board.png" alt="Team board — mean OOP box area vs shot rate against (organized blocks)." loading="lazy">
-        <figcaption>Team board — mean OOP box area vs shot rate against (organized blocks).</figcaption>
+        <img src="eda/figures/12_team_defense_board.png" alt="Club comparison: average box size vs shots faced in organised blocks." loading="lazy">
+        <figcaption>Club comparison: average box size vs shots faced in organised blocks.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/13_engagement_spacing.png" alt="Engagement spacing — start distance by subtype, and shot rate by distance bin." loading="lazy">
-        <figcaption>Engagement spacing — start distance by subtype, and shot rate by distance bin.</figcaption>
+        <img src="eda/figures/13_engagement_spacing.png" alt="Distance between defender and opponent when the press starts — not blank; uses inter-player distance from SkillCorner." loading="lazy">
+        <figcaption>Distance between defender and opponent when the press starts — not blank; uses inter-player distance from SkillCorner.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/14_compactness_vs_pressure_gradients.png" alt="Two axes — within-block compactness tertiles and pressure gradients." loading="lazy">
-        <figcaption>Two axes — within-block compactness tertiles and pressure gradients.</figcaption>
+        <img src="eda/figures/14_compactness_vs_pressure_gradients.png" alt="Gradients = how shot rate changes as you move from tight→open shape (left) or low→high pressure (right), within each block." loading="lazy">
+        <figcaption>Gradients = how shot rate changes as you move from tight→open shape (left) or low→high pressure (right), within each block.</figcaption>
       </figure>
       <figure class="card">
-        <img src="eda/figures/15_third_channel_heatmap.png" alt="Pitch zones — possessions becoming shots by third × channel." loading="lazy">
-        <figcaption>Pitch zones — possessions becoming shots by third × channel.</figcaption>
+        <img src="eda/figures/15_third_channel_heatmap.png" alt="League-wide shot locations (centre-heavy). See team-zones.html for each club." loading="lazy">
+        <figcaption>League-wide shot locations (centre-heavy). See team-zones.html for each club.</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/adelaide-united_zones.png" alt="teams/adelaide-united_zones.png" loading="lazy">
+        <figcaption>teams/adelaide-united_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/auckland-fc_zones.png" alt="teams/auckland-fc_zones.png" loading="lazy">
+        <figcaption>teams/auckland-fc_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/brisbane-fc_zones.png" alt="teams/brisbane-fc_zones.png" loading="lazy">
+        <figcaption>teams/brisbane-fc_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/cc-mariners_zones.png" alt="teams/cc-mariners_zones.png" loading="lazy">
+        <figcaption>teams/cc-mariners_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/macarthur-fc_zones.png" alt="teams/macarthur-fc_zones.png" loading="lazy">
+        <figcaption>teams/macarthur-fc_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/melbourne-city_zones.png" alt="teams/melbourne-city_zones.png" loading="lazy">
+        <figcaption>teams/melbourne-city_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/melbourne-v-fc_zones.png" alt="teams/melbourne-v-fc_zones.png" loading="lazy">
+        <figcaption>teams/melbourne-v-fc_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/newcastle_zones.png" alt="teams/newcastle_zones.png" loading="lazy">
+        <figcaption>teams/newcastle_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/perth-glory_zones.png" alt="teams/perth-glory_zones.png" loading="lazy">
+        <figcaption>teams/perth-glory_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/sydney-fc_zones.png" alt="teams/sydney-fc_zones.png" loading="lazy">
+        <figcaption>teams/sydney-fc_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/wellington-p-fc_zones.png" alt="teams/wellington-p-fc_zones.png" loading="lazy">
+        <figcaption>teams/wellington-p-fc_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/western-sydney_zones.png" alt="teams/western-sydney_zones.png" loading="lazy">
+        <figcaption>teams/western-sydney_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/teams/western-united_zones.png" alt="teams/western-united_zones.png" loading="lazy">
+        <figcaption>teams/western-united_zones.png</figcaption>
+      </figure>
+      <figure class="card">
+        <img src="eda/figures/16_free_attackers_by_role.png" alt="Graph tool: at goals and shots, which attacking roles were unmarked (Hungarian matching on tracking)?" loading="lazy">
+        <figcaption>Graph tool: at goals and shots, which attacking roles were unmarked (Hungarian matching on tracking)?</figcaption>
       </figure>
 
   <div class="nav">
+    <a href="team-zones.html">Team zones</a>
+    <a href="graph-tool-notes.html">Graph tool notes</a>
     <a href="review.html">Review notes</a>
     <a href="defend.html">Graph notebook</a>
     <a href="eda_notebook.html">Full EDA notebook</a>
