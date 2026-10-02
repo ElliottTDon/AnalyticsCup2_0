@@ -60,6 +60,20 @@
     "analysis/output/figures/12_team_defense_board.png",
     "analysis/output/figures/13_engagement_spacing.png",
     "analysis/output/figures/14_compactness_vs_pressure_gradients.png",
-    "analysis/output/figures/15_third_channel_heatmap.png"
+    "analysis/output/figures/15_third_channel_heatmap.png",
+    "analysis/output/figures/teams/adelaide-united_zones.png",
+    "analysis/output/figures/teams/auckland-fc_zones.png",
+    "analysis/output/figures/teams/brisbane-fc_zones.png",
+    "analysis/output/figures/teams/cc-mariners_zones.png",
+    "analysis/output/figures/teams/macarthur-fc_zones.png",
+    "analysis/output/figures/teams/melbourne-city_zones.png",
+    "analysis/output/figures/teams/melbourne-v-fc_zones.png",
+    "analysis/output/figures/teams/newcastle_zones.png",
+    "analysis/output/figures/teams/perth-glory_zones.png",
+    "analysis/output/figures/teams/sydney-fc_zones.png",
+    "analysis/output/figures/teams/wellington-p-fc_zones.png",
+    "analysis/output/figures/teams/western-sydney_zones.png",
+    "analysis/output/figures/teams/western-united_zones.png",
+    "analysis/output/figures/16_free_attackers_by_role.png"
   ]
 }

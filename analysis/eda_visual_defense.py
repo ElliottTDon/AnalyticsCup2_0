@@ -117,6 +117,9 @@ EVENT_COLS = [
     "distance_to_player_in_possession_start",
     "distance_to_player_in_possession_end",
     "interplayer_distance_start",
+    "player_in_possession_position",
+    "frame_end",
+    "phase_index",
     "interplayer_distance_min",
     "angle_of_engagement",
     "goal_side_start",
@@ -229,8 +232,8 @@ def defending_team_from_possession(
 
 
 def savefig(fig: plt.Figure, name: str) -> Path:
-    FIG_DIR.mkdir(parents=True, exist_ok=True)
     path = FIG_DIR / name
+    path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(path, bbox_inches="tight", facecolor=fig.get_facecolor())
     plt.close(fig)
     return path
@@ -671,35 +674,46 @@ def fig_team_defense_board(phases: pd.DataFrame) -> Path:
 
 
 def fig_spacing_distance(events: pd.DataFrame) -> Path:
-    eng = events.loc[
-        (events["event_type"] == "on_ball_engagement")
-        & events["distance_to_player_in_possession_start"].notna()
-    ].copy()
+    eng = events.loc[events["event_type"] == "on_ball_engagement"].copy()
+    # SkillCorner fills interplayer_distance_start for engagements; ball-carrier distance is often empty.
+    dist_col = "interplayer_distance_start"
+    if dist_col not in eng.columns or not eng[dist_col].notna().any():
+        dist_col = "interplayer_distance_min"
+    eng = eng.loc[eng[dist_col].notna()].copy()
     eng["event_subtype"] = eng["event_subtype"].fillna("unknown")
     order = [s for s in ENGAGEMENT_SUBTYPES if s in set(eng["event_subtype"])]
     fig, axes = plt.subplots(1, 2, figsize=(12, 4.8))
     sns.boxplot(
         data=eng,
         x="event_subtype",
-        y="distance_to_player_in_possession_start",
+        y=dist_col,
         order=order,
         ax=axes[0],
         color="#5dade2",
     )
-    axes[0].set_ylabel("Distance to ball-carrier at start (m)")
+    axes[0].set_ylabel("Metres between defender and opponent at press (m)")
     axes[0].set_xlabel("")
     axes[0].tick_params(axis="x", rotation=25)
-    axes[0].set_title("Closing distance by engagement type")
+    axes[0].set_title("How tight is the press?")
 
-    # Shot vs distance
-    eng["dist_bin"] = pd.cut(eng["distance_to_player_in_possession_start"], bins=[0, 2, 4, 6, 8, 12, 30])
-    g = eng.groupby("dist_bin", observed=False).agg(n=("lead_to_shot", "size"), shot_rate=("lead_to_shot", "mean"))
+    eng["dist_bin"] = pd.cut(
+        eng[dist_col],
+        bins=[0, 2, 4, 6, 8, 12, 30],
+        labels=["0–2", "2–4", "4–6", "6–8", "8–12", "12+"],
+    )
+    eng = eng.loc[eng["dist_bin"].notna()]
+    g = eng.groupby("dist_bin", observed=False).agg(
+        n=("lead_to_shot", "size"), shot_rate=("lead_to_shot", "mean")
+    )
     axes[1].bar(g.index.astype(str), g["shot_rate"] * 100, color="#e67e22")
-    axes[1].set_ylabel("Lead-to-shot %")
-    axes[1].set_xlabel("Start distance to ball-carrier (m)")
+    for i, (_, row) in enumerate(g.iterrows()):
+        if row["n"] > 0:
+            axes[1].text(i, row["shot_rate"] * 100 + 0.5, f"n={int(row['n'])}", ha="center", fontsize=8)
+    axes[1].set_ylabel("Share of presses after which a shot happens (%)")
+    axes[1].set_xlabel("Distance when the press starts (m)")
     axes[1].tick_params(axis="x", rotation=25)
-    axes[1].set_title("Does closer engagement kill shots?")
-    fig.suptitle("Spacing at the moment of defensive engagement", y=1.03)
+    axes[1].set_title("Closer is not always safer for the defense")
+    fig.suptitle("Defensive spacing when someone steps to the ball", y=1.03)
     fig.tight_layout()
     return savefig(fig, "13_engagement_spacing.png")
 
@@ -726,8 +740,8 @@ def fig_box_vs_pressure_joint(phases: pd.DataFrame, events: pd.DataFrame) -> Pat
         g = sub.groupby("area_bin", observed=False)["shot"].mean()
         axes[0].plot(labels, g.values * 100, marker="o", label=block.replace("_", " "), color=BLOCK_COLORS[block])
     axes[0].set_ylabel("Shot rate %")
-    axes[0].set_xlabel("Defensive box tertile")
-    axes[0].set_title("Compactness gradient within each block")
+    axes[0].set_xlabel("Defensive box: tight / mid / open")
+    axes[0].set_title("Compactness gradient: tighter block → more shots?")
     axes[0].legend(frameon=False, fontsize=9)
 
     for block in ORGANIZED_BLOCKS:
@@ -741,11 +755,136 @@ def fig_box_vs_pressure_joint(phases: pd.DataFrame, events: pd.DataFrame) -> Pat
             color=BLOCK_COLORS[block],
         )
     axes[1].set_ylabel("Shot rate %")
-    axes[1].set_title("Pressure gradient within each block")
+    axes[1].set_title("Pressure gradient: heavier press → more shots?")
     axes[1].legend(frameon=False, fontsize=9)
-    fig.suptitle("Two axes of defense: box compactness and ball pressure", y=1.03)
+    fig.suptitle(
+        "Two sliders inside each block height\n"
+        "(Left: defensive box split tight / mid / open. Right: pressure on the ball-carrier.)",
+        y=1.05,
+        fontsize=11,
+    )
     fig.tight_layout()
     return savefig(fig, "14_compactness_vs_pressure_gradients.png")
+
+
+def _team_slug(name: str) -> str:
+    return "".join(c if c.isalnum() else "-" for c in name.lower()).strip("-")
+
+
+def _load_phase_attackers(data_dir: Path, match_ids: list[str]) -> pd.DataFrame:
+    frames = []
+    for mid in match_ids:
+        ph = pd.read_csv(
+            data_dir / mid / f"{mid}_phases_of_play.csv",
+            usecols=["index", "team_in_possession_shortname"],
+        ).rename(columns={"index": "phase_index", "team_in_possession_shortname": "attack_team"})
+        ph["match_id"] = int(mid)
+        frames.append(ph)
+    out = pd.concat(frames, ignore_index=True)
+    out["match_id"] = out["match_id"].astype(int)
+    return out
+
+
+def fig_team_pitch_zones(
+    events: pd.DataFrame, meta: pd.DataFrame, match_ids: list[str], min_shots: int = 10
+) -> tuple[list[str], Path]:
+    """Per-team scored vs conceded shot maps (third × channel). Returns figure names + HTML path."""
+    phase_attack = _load_phase_attackers(DATA_DIR, match_ids)
+    poss = events.loc[
+        (events["event_type"] == "player_possession")
+        & (events["lead_to_shot"] == True)  # noqa: E712
+        & events["third_start"].notna()
+        & events["channel_start"].notna()
+        & events["phase_index"].notna()
+    ].copy()
+    poss["match_id"] = poss["match_id"].astype(int)
+    poss = poss.merge(phase_attack, on=["match_id", "phase_index"], how="left")
+    poss["attack_team"] = poss["team_shortname"].fillna(poss["attack_team"])
+    teams = sorted(meta["home"].tolist() + meta["away"].tolist())
+    teams = sorted(set(teams))
+
+    third_order = ["defensive_third", "middle_third", "attacking_third"]
+    channel_order = ["wide_left", "left_halfspace", "center", "right_halfspace", "wide_right"]
+    third_labels = ["Def third", "Mid third", "Att third"]
+    channel_labels = ["Wide L", "Half L", "Centre", "Half R", "Wide R"]
+
+    team_dir = DOCS_FIG / "teams"
+    team_dir.mkdir(parents=True, exist_ok=True)
+    fig_names: list[str] = []
+    cards: list[str] = []
+
+    for team in teams:
+        scored = poss.loc[poss["attack_team"] == team]
+        conceded = poss.loc[poss["attack_team"] != team]
+        # only matches this team played
+        team_matches = set(
+            meta.loc[(meta["home"] == team) | (meta["away"] == team), "match_id"].astype(int)
+        )
+        conceded = conceded.loc[conceded["match_id"].isin(team_matches)]
+        conceded = conceded.loc[
+            ~conceded["attack_team"].isin([team])  # opponent had the ball
+        ]
+        if len(scored) < min_shots and len(conceded) < min_shots:
+            continue
+
+        def _heat(df: pd.DataFrame) -> pd.DataFrame:
+            g = df.groupby(["third_start", "channel_start"]).size().reset_index(name="n")
+            p = g.pivot(index="third_start", columns="channel_start", values="n")
+            return p.reindex(index=third_order, columns=channel_order).fillna(0)
+
+        fig, axes = plt.subplots(1, 2, figsize=(11, 3.8))
+        for ax, df, title in [
+            (axes[0], scored, f"Shots scored"),
+            (axes[1], conceded, f"Shots conceded"),
+        ]:
+            p = _heat(df)
+            sns.heatmap(
+                p,
+                annot=True,
+                fmt=".0f",
+                cmap="YlOrRd",
+                ax=ax,
+                cbar_kws={"label": "Shots"},
+                linewidths=0.5,
+            )
+            ax.set_title(f"{title} (n={len(df)})")
+            ax.set_xticklabels(channel_labels, rotation=35, ha="right", fontsize=8)
+            ax.set_yticklabels(third_labels, rotation=0, fontsize=9)
+            ax.set_xlabel("")
+            ax.set_ylabel("")
+        fig.suptitle(f"{team} — where shots happen on the pitch", y=1.02, fontsize=12)
+        fig.tight_layout()
+        fname = f"teams/{_team_slug(team)}_zones.png"
+        savefig(fig, fname)
+        fig_names.append(fname)
+        rel = f"eda/figures/{fname}"
+        cards.append(
+            f'<figure class="card"><img src="{rel}" alt="{team} shot zones" loading="lazy">'
+            f"<figcaption><strong>{team}</strong> — left: where they shoot; right: where opponents shoot against them.</figcaption></figure>"
+        )
+
+    html_path = DOCS_DIR / "team-zones.html"
+    html_path.write_text(
+        f"""<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Team shot zones</title>
+<style>
+  body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 1rem; max-width: 44rem; margin: auto; line-height: 1.5; }}
+  h1 {{ font-size: 1.4rem; }}
+  .lead {{ color: #555; }}
+  .card {{ margin: 1.2rem 0; }}
+  .card img {{ width: 100%; height: auto; border-radius: 4px; }}
+  figcaption {{ font-size: 0.95rem; margin-top: 0.35rem; }}
+  a {{ color: inherit; }}
+</style></head><body>
+<h1>Shot zones by team</h1>
+<p class="lead">League averages hide shape: each club has its own shot map (scored vs conceded). Cells count where the ball was when the shot started.</p>
+{"".join(cards)}
+<p><a href="eda.html">Back to visual EDA</a> · <a href="index.html">Index</a></p>
+</body></html>"""
+    )
+    return fig_names, html_path
 
 
 def fig_third_channel_danger(events: pd.DataFrame) -> Path:
@@ -884,21 +1023,22 @@ def write_html_report(fig_names: list[str], headline: dict) -> Path:
 
     cards = []
     captions = {
-        "01_phase_mix.png": "Phase mix and danger — low blocks concede the most shots; transitions/quick breaks are rare but lethal.",
-        "02_shape_scatter.png": "Team shape scatter — red points (shot against) cluster toward tighter width, especially low block.",
-        "03_compactness_violin.png": "Compactness violins — shot phases have smaller area/width; length shifts are milder.",
-        "04_pressure_ladder.png": "Pressure ladder — on-ball pressure is the strongest single contextual separator.",
-        "05_pressure_x_block_heatmap.png": "Pressure × block heatmap — pressure still climbs inside every organized block.",
-        "06_engagement_outcomes.png": "Marking actions — volume, regain rate, and shot rate by engagement subtype.",
-        "07_engagement_heatmaps.png": "Where defenders engage — pressing is higher up; recovery presses deeper.",
-        "08_structure_labels.png": "Structure labels — organised defense and inside-shape flags separate conceded shots.",
-        "09_line_height_by_block.png": "Line height by block — SkillCorner block labels track last-line height as expected.",
-        "10_decision_flags.png": "Decision flags — beaten-by-possession/movement engagements precede more shots.",
-        "11_pressing_chains.png": "Pressing chains — coordinated pressure length and end types (regain vs disruption).",
-        "12_team_defense_board.png": "Team board — mean OOP box area vs shot rate against (organized blocks).",
-        "13_engagement_spacing.png": "Engagement spacing — start distance by subtype, and shot rate by distance bin.",
-        "14_compactness_vs_pressure_gradients.png": "Two axes — within-block compactness tertiles and pressure gradients.",
-        "15_third_channel_heatmap.png": "Pitch zones — possessions becoming shots by third × channel.",
+        "01_phase_mix.png": "How long teams spend in each defensive situation (low / mid / high block, transitions, set pieces) and how often those spells end in a shot.",
+        "02_shape_scatter.png": "Width and depth of the out-of-possession box. Red dots are phases that ended in a shot — often a slightly tighter shape.",
+        "03_compactness_violin.png": "Compactness = how small the defensive rectangle is. Shot phases tend to be tighter, especially in a low block.",
+        "04_pressure_ladder.png": "How hard the ball-carrier is pressed. More pressure goes with more shots — but that often means the attack was already dangerous.",
+        "05_pressure_x_block_heatmap.png": "Same story inside each block height: heavier pressure on the ball, more shots.",
+        "06_engagement_outcomes.png": "When a defender steps to the ball: how often they win it back vs how often a shot still follows.",
+        "07_engagement_heatmaps.png": "Where on the pitch those steps happen — high press up field, recovery runs deeper.",
+        "08_structure_labels.png": "SkillCorner tags: organised shape, ball inside the block, number of lines — vs shot rate.",
+        "09_line_height_by_block.png": "How high the back line sits in each block type (validates low / mid / high labels).",
+        "10_decision_flags.png": "Did the press slow the attack or get beaten? Beaten flags line up with more shots.",
+        "11_pressing_chains.png": "Linked presses: how many steps in a chain and whether it ended in a regain.",
+        "12_team_defense_board.png": "Club comparison: average box size vs shots faced in organised blocks.",
+        "13_engagement_spacing.png": "Distance between defender and opponent when the press starts — not blank; uses inter-player distance from SkillCorner.",
+        "14_compactness_vs_pressure_gradients.png": "Gradients = how shot rate changes as you move from tight→open shape (left) or low→high pressure (right), within each block.",
+        "15_third_channel_heatmap.png": "League-wide shot locations (centre-heavy). See team-zones.html for each club.",
+        "16_free_attackers_by_role.png": "Graph tool: at goals and shots, which attacking roles were unmarked (Hungarian matching on tracking)?",
     }
     for name in fig_names:
         cap = captions.get(name, name)
@@ -998,10 +1138,21 @@ def write_html_report(fig_names: list[str], headline: dict) -> Path:
     {takeaways}
   </ul>
 
+  <h2>Plain-language glossary</h2>
+  <ul>
+    <li><strong>Compactness</strong> — how small the defending team’s shape is (width × depth of their box). Tighter is not always better in this sample.</li>
+    <li><strong>Pressure gradient</strong> — as on-ball pressure rises from none to very high, how much the shot rate climbs (same for block height).</li>
+    <li><strong>Organised block</strong> — low, medium, or high defensive block (not chaotic or transition).</li>
+  </ul>
+  <p><a href="team-zones.html"><strong>Team shot maps</strong></a> (each club — scored vs conceded). 
+  <a href="graph-tool-notes.html"><strong>Block graph tool FAQ</strong></a> (timer series, pressing, pre-fracturing).</p>
+
   <h2>Visual tour</h2>
   {''.join(cards)}
 
   <div class="nav">
+    <a href="team-zones.html">Team zones</a>
+    <a href="graph-tool-notes.html">Graph tool notes</a>
     <a href="review.html">Review notes</a>
     <a href="defend.html">Graph notebook</a>
     <a href="eda_notebook.html">Full EDA notebook</a>
@@ -1058,7 +1209,8 @@ print('Figures:', sorted(p.name for p in FIG.glob('*.png')))
         ("12_team_defense_board.png", "## 12. Team board\nWhich sides defend in a bigger box — and how that relates to shots against."),
         ("13_engagement_spacing.png", "## 13. Spacing at engagement\nDistance to ball-carrier by subtype and shot rate by distance bin."),
         ("14_compactness_vs_pressure_gradients.png", "## 14. Two axes of defense\nWithin-block compactness tertiles vs pressure gradients."),
-        ("15_third_channel_heatmap.png", "## 15. Spatial danger map\nPossessions that become shots by pitch third × channel."),
+        ("15_third_channel_heatmap.png", "## 15. League shot map (centre-heavy)\nSee team-zones.html for each club."),
+        ("16_free_attackers_by_role.png", "## 16. Unmarked attackers by role\nHungarian matching on tracking at goals and shots."),
     ]
     for name, md in sections:
         if name in fig_names:
@@ -1121,6 +1273,36 @@ def main() -> None:
     for p in builders:
         fig_names.append(p.name)
         print(f"  wrote {p.name}")
+
+    print("Hungarian roles (tracking)…")
+    try:
+        import sys
+
+        sys.path.insert(0, str(WORKSPACE / "analysis"))
+        import hungarian_danger_roles as hdr
+
+        hdr.main()
+    except Exception as exc:
+        print(f"  hungarian skipped: {exc}")
+
+    print("Team shot zones…")
+    team_figs, tz_html = fig_team_pitch_zones(events, meta, match_ids)
+    for tf in team_figs:
+        fig_names.append(tf)
+        src = FIG_DIR / tf
+        if src.exists():
+            dest = DOCS_FIG / tf
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dest)
+    print(f"  {len(team_figs)} team maps → {tz_html.name}")
+
+    hungarian_fig = FIG_DIR / "16_free_attackers_by_role.png"
+    if hungarian_fig.is_file():
+        fig_names.append(hungarian_fig.name)
+        shutil.copy2(hungarian_fig, DOCS_FIG / hungarian_fig.name)
+        print("  included Hungarian role chart")
+    else:
+        print("  (skip chart 16 — run: python analysis/hungarian_danger_roles.py)")
 
     print("Summaries…")
     sums = build_summaries(phases, events, match_ids)
