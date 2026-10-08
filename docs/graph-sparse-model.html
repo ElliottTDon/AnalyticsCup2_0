@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sparse residual model</title><style>
+:root { color-scheme: light dark; }
+body { margin: 0 auto; max-width: 44rem; padding: 1.1rem 0.9rem 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55; font-size: 1.05rem; }
+h1 { font-size: 1.45rem; margin: 0 0 0.4rem; }
+h2 { font-size: 1.12rem; margin: 1.6rem 0 0.55rem; padding-top: 0.45rem; border-top: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { h2 { border-top-color: #444; } }
+.mission { margin: 0.7rem 0 1rem; padding: 0.75rem 0.85rem; border-left: 3px solid #888;
+  background: rgba(127,127,127,0.08); }
+.meta { color: #666; font-size: 0.92rem; }
+@media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
+figure { margin: 0 0 1.25rem; }
+img { width: 100%; height: auto; border-radius: 4px; background: #f3f3f3; display: block; }
+figcaption { margin-top: 0.4rem; font-size: 0.95rem; color: #444; }
+@media (prefers-color-scheme: dark) { figcaption { color: #bbb; } img { background: #222; } }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.75rem 0 1.25rem; }
+th, td { text-align: left; padding: 0.4rem 0.3rem; border-bottom: 1px solid #ddd; vertical-align: top; }
+@media (prefers-color-scheme: dark) { th, td { border-bottom-color: #444; } }
+.nav a { display: inline-block; margin: 0.35rem 1rem 0.35rem 0; color: inherit; }
+ul { padding-left: 1.2rem; } li { margin: 0 0 0.45rem; }
+code { font-size: 0.9em; }
+.card-link { display: block; padding: 0.85rem 0.2rem; border-bottom: 1px solid #eee;
+  text-decoration: none; color: inherit; }
+@media (prefers-color-scheme: dark) { .card-link { border-bottom-color: #333; } }
+.card-link .title { font-weight: 600; display: block; }
+.card-link .path { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+</style>
+</head><body>
+
+  <h1>Regularized sparse residual model</h1>
+  <p class="meta">Approach 6 — L2 logistic (C=0.2), match-grouped 5-fold CV. Shrinkage over cleverness.</p>
+  <div class="mission">
+    Question: after OOP box (area/width/length), mean on-ball pressure, and block height,
+    do <em>event-graph</em> debt features (press chain, far-side runner, ball inside shape)
+    still separate shot phases? Hungarian free attackers are <strong>not</strong> in this model —
+    those frames are only labeled at shots/goals.
+  </div>
+  <ul>
+    <li>Phases: <strong>5,669</strong> across <strong>20</strong> matches</li>
+    <li>Baseline AUC: <strong>0.658</strong></li>
+    <li>Baseline + event-graph AUC: <strong>0.701</strong>
+      (Δ=+0.044)</li>
+    <li>Residual <code>event_debt</code> (shot − no shot), match bootstrap mean
+      <strong>0.041</strong>
+      CI [-0.021, 0.097]
+      — excludes 0: <strong>False</strong></li>
+  </ul>
+  <figure><img src="eda/figures/graphs/06_sparse_auc.png" alt="06_sparse_auc.png" loading="lazy"></figure><figure><img src="eda/figures/graphs/06_sparse_coefs.png" alt="06_sparse_coefs.png" loading="lazy"></figure><figure><img src="eda/figures/graphs/06_debt_residual_bootstrap.png" alt="06_debt_residual_bootstrap.png" loading="lazy"></figure>
+  <h2>Largest |coefficients|</h2>
+  <table><thead><tr><th>Feature</th><th>Family</th><th>Coef</th></tr></thead>
+  <tbody><tr><td>n_off_ball_runs</td><td>graph</td><td>0.394</td></tr><tr><td>width</td><td>baseline</td><td>-0.376</td></tr><tr><td>length</td><td>baseline</td><td>-0.291</td></tr><tr><td>event_debt</td><td>graph</td><td>-0.239</td></tr><tr><td>any_inside_shape</td><td>graph</td><td>0.224</td></tr><tr><td>n_chain_presses</td><td>graph</td><td>-0.190</td></tr><tr><td>box_area</td><td>baseline</td><td>0.188</td></tr><tr><td>has_debt_event</td><td>graph</td><td>0.156</td></tr><tr><td>block_low_block</td><td>baseline</td><td>0.111</td></tr><tr><td>block_medium_block</td><td>baseline</td><td>-0.089</td></tr></tbody></table>
+  <p class="meta">AUC gains can be small under strong shrinkage — that is the point on 20 matches.
+  Prefer residual CIs and film lists over claiming a large predictive leap.</p>
+
+<p class="nav">
+  <a href="interpretable-graphs.html">Graph methods hub</a>
+  <a href="cup-ideas.html">Cup ideas</a>
+  <a href="eda.html">Visual EDA</a>
+  <a href="index.html">Index</a>
+</p>
+</body></html>
