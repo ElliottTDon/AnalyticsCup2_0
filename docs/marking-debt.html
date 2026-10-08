@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marking debt by role</title><style>
+:root { color-scheme: light dark; }
+body {
+  margin: 0 auto; max-width: 44rem; padding: 1.1rem 0.9rem 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55; font-size: 1.05rem;
+}
+h1 { font-size: 1.45rem; margin: 0 0 0.4rem; }
+h2 { font-size: 1.12rem; margin: 1.6rem 0 0.55rem; padding-top: 0.45rem; border-top: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { h2 { border-top-color: #444; } }
+.mission {
+  margin: 0.7rem 0 1rem; padding: 0.75rem 0.85rem; border-left: 3px solid #888;
+  background: rgba(127,127,127,0.08);
+}
+.meta { color: #666; font-size: 0.92rem; }
+@media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
+figure { margin: 0 0 1.25rem; }
+img { width: 100%; height: auto; border-radius: 4px; background: #f3f3f3; display: block; }
+figcaption { margin-top: 0.4rem; font-size: 0.95rem; color: #444; }
+@media (prefers-color-scheme: dark) { figcaption { color: #bbb; } img { background: #222; } }
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 0.75rem 0 1.25rem; }
+th, td { text-align: left; padding: 0.45rem 0.35rem; border-bottom: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { th, td { border-bottom-color: #444; } }
+.nav a { display: inline-block; margin: 0.35rem 1rem 0.35rem 0; color: inherit; }
+ul { padding-left: 1.2rem; }
+li { margin: 0 0 0.5rem; }
+.card-link {
+  display: block; padding: 0.85rem 0.2rem; border-bottom: 1px solid #eee;
+  text-decoration: none; color: inherit;
+}
+@media (prefers-color-scheme: dark) { .card-link { border-bottom-color: #333; } }
+.card-link:hover { background: rgba(127,127,127,0.1); }
+.card-link .title { font-weight: 600; display: block; }
+.card-link .path { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+</style>
+</head><body>
+
+  <h1>Marking debt by role</h1>
+  <p class="meta">Set pieces and cutback / cross moments — who is unmarked when the chance arrives?</p>
+  <div class="mission">
+    <strong>Cup link.</strong> Defensive positioning is not only block height. At set pieces and wide deliveries,
+    debt sits on specific roles (CF vs winger vs far-side full-back).
+  </div>
+  <ul>
+    <li>Set-piece possessions: <strong>472</strong> (181 → shot)</li>
+    <li>Cross-receiver runs: <strong>936</strong> (267 → shot)</li>
+    <li>Wide → attacking-third shot proxies (cutback-like): <strong>708</strong></li>
+  </ul>
+  <h2>Charts</h2>
+  <figure><img src="eda/figures/ideas/marking_debt_roles.png" alt="marking_debt_roles.png" loading="lazy"><figcaption>marking debt roles</figcaption></figure><figure><img src="eda/figures/ideas/marking_debt_set_vs_block.png" alt="marking_debt_set_vs_block.png" loading="lazy"><figcaption>marking debt set vs block</figcaption></figure><figure><img src="eda/figures/ideas/marking_debt_cutback_channels.png" alt="marking_debt_cutback_channels.png" loading="lazy"><figcaption>marking debt cutback channels</figcaption></figure>
+  <h2>Film list (sample)</h2>
+  <p class="meta">Match id + frame end — pull these clips in SkillCorner / your video tool.</p>
+  <table>
+    <thead><tr><th>Context</th><th>Match</th><th>Frame</th><th>Role</th><th>Channel</th><th>Team on ball</th></tr></thead>
+    <tbody><tr><td>cross_receiver_chance</td><td>1874553</td><td>153</td><td>CF</td><td>center</td><td>Brisbane FC</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>157</td><td>RW</td><td>wide_right</td><td>Brisbane FC</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>3294</td><td>RB</td><td>half_space_right</td><td>Brisbane FC</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>3299</td><td>CF</td><td>center</td><td>Brisbane FC</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>8941</td><td>LW</td><td>center</td><td>Brisbane FC</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>14186</td><td>LW</td><td>center</td><td>Brisbane FC</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>14189</td><td>CF</td><td>center</td><td>Brisbane FC</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>19339</td><td>CF</td><td>half_space_left</td><td>Adelaide United</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>19344</td><td>AM</td><td>center</td><td>Adelaide United</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>19344</td><td>RW</td><td>center</td><td>Adelaide United</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>29346</td><td>RW</td><td>wide_right</td><td>Adelaide United</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>29354</td><td>LB</td><td>center</td><td>Adelaide United</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>29355</td><td>AM</td><td>half_space_right</td><td>Adelaide United</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>30930</td><td>AM</td><td>center</td><td>Adelaide United</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>32110</td><td>CF</td><td>half_space_right</td><td>Adelaide United</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>32113</td><td>AM</td><td>center</td><td>Adelaide United</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>33228</td><td>RW</td><td>center</td><td>Brisbane FC</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>37986</td><td>LW</td><td>half_space_left</td><td>Adelaide United</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>38918</td><td>CF</td><td>center</td><td>Adelaide United</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>44131</td><td>AM</td><td>center</td><td>Brisbane FC</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>44137</td><td>CF</td><td>center</td><td>Brisbane FC</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>44138</td><td>LW</td><td>center</td><td>Brisbane FC</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>44144</td><td>RDM</td><td>half_space_right</td><td>Brisbane FC</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>47591</td><td>CF</td><td>center</td><td>Adelaide United</td></tr><tr><td>cross_receiver_chance</td><td>1874553</td><td>58248</td><td>CF</td><td>center</td><td>Adelaide United</td></tr></tbody>
+  </table>
+
+<p class="nav">
+  <a href="cup-ideas.html">Cup ideas hub</a>
+  <a href="graph-tool-notes.html">Graph FAQ</a>
+  <a href="eda.html">Visual EDA</a>
+  <a href="index.html">Index</a>
+</p>
+</body></html>
