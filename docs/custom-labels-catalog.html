@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Interpretable graphs</title><style>
+<title>Label catalog</title><style>
 :root { color-scheme: light dark; }
 body { margin: 0 auto; max-width: 44rem; padding: 1.1rem 0.9rem 3rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -31,45 +31,20 @@ code { font-size: 0.9em; }
 </style>
 </head><body>
 
-  <h1>Interpretable graphs (small-n)</h1>
-  <p class="meta">Approaches 1, 2, 6, 7 — structure you can read, not a deep GNN on 20 matches.</p>
+  <h1>Label catalog</h1>
+  <p class="meta">Definitions + lift charts. Tunable rules, not trained weights.</p>
   <div class="mission">
-    <strong>Cup goal.</strong> Use graphs to understand defensive positioning: coverage debt,
-    pressing linkage, and free attackers — with honest uncertainty under a small sample.
+    Each label is a boolean (or small enum) you can put on a phase/event and then
+    retrieve film. Prefer denser outcomes than shot/goal when the sample is small.
   </div>
-  <ul>
-    <li>Danger events in organised blocks: <strong>977</strong></li>
-    <li>Matches: <strong>20</strong></li>
-    <li>Sparse CV AUC baseline → +event-graph:
-      <strong>0.658 → 0.701</strong>
-      (leakage-safe event features only)</li>
-  </ul>
-  <a class="card-link" href="coverage-debt-graph.html">
-    <span class="title">2. Coverage-debt event graph</span>
-    <span class="path">Nodes = ball, free attackers, pressers, far runner — edges you can explain</span>
-  </a>
-  <a class="card-link" href="graph-handcrafted.html">
-    <span class="title">1. Hand-crafted graph features</span>
-    <span class="path">Debt score, free roles, chain/far-side flags — no training</span>
-  </a>
-  <a class="card-link" href="graph-sparse-model.html">
-    <span class="title">6. Regularized sparse residual model</span>
-    <span class="path">L2 logistic + match CV — event-graph debt after box &amp; pressure</span>
-  </a>
-  <a class="card-link" href="graph-case-retrieval.html">
-    <span class="title">7. Case-based retrieval</span>
-    <span class="path">Find clips with a similar coverage-debt signature</span>
-  </a>
-  <a class="card-link" href="custom-labels.html">
-    <span class="title">Custom labels (defensive positioning)</span>
-    <span class="path">Coverage debt · compact-broken · weak-side · step/hold · pose</span>
-  </a>
-
+  <figure><img src="eda/figures/labels/label_shot_lift.png" alt="label_shot_lift.png" loading="lazy"></figure><figure><img src="eda/figures/labels/phase_outcome_dense.png" alt="phase_outcome_dense.png" loading="lazy"></figure><figure><img src="eda/figures/labels/step_vs_hold.png" alt="step_vs_hold.png" loading="lazy"></figure><figure><img src="eda/figures/labels/compact_but_broken.png" alt="compact_but_broken.png" loading="lazy"></figure><figure><img src="eda/figures/labels/weak_side_press_leak.png" alt="weak_side_press_leak.png" loading="lazy"></figure>
+  <h2>Definitions</h2>
+  <ul><li><code>coverage_debt</code> — Danger graph debt_score ≥ 3 (free attackers + far runner + failed chain).</li><li><code>compact_but_broken</code> — Bottom-tercile OOP box + (ball inside shape | beaten engagement | ≥2 free attackers at danger).</li><li><code>weak_side_press_leak</code> — Pressing chain with far-side off-ball runner and chain end ≠ regain.</li><li><code>step_vs_hold</code> — Engagement push/break line (step) vs force-back / reduce-danger (hold) in organised blocks.</li><li><code>phase_outcome_dense</code> — Organised phase → regain | disruption | progression | shot | goal | other.</li><li><code>proximity_intent_debt</code> — Engagement ≤3 m and beaten_by_movement (pose-free intent proxy).</li><li><code>pose_attention</code> — Shoulder facing vs ball / far-side runner; scan lag in frames (pose matches).</li></ul>
 
 <p class="nav">
-  <a href="interpretable-graphs.html">Graph methods hub</a>
+  <a href="custom-labels.html">Custom labels hub</a>
+  <a href="interpretable-graphs.html">Interpretable graphs</a>
   <a href="cup-ideas.html">Cup ideas</a>
-  <a href="eda.html">Visual EDA</a>
   <a href="index.html">Index</a>
 </p>
 </body></html>

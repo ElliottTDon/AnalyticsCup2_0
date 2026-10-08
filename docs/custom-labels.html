@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Custom defense labels</title><style>
+:root { color-scheme: light dark; }
+body { margin: 0 auto; max-width: 44rem; padding: 1.1rem 0.9rem 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55; font-size: 1.05rem; }
+h1 { font-size: 1.45rem; margin: 0 0 0.4rem; }
+h2 { font-size: 1.12rem; margin: 1.6rem 0 0.55rem; padding-top: 0.45rem; border-top: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { h2 { border-top-color: #444; } }
+.mission { margin: 0.7rem 0 1rem; padding: 0.75rem 0.85rem; border-left: 3px solid #888;
+  background: rgba(127,127,127,0.08); }
+.meta { color: #666; font-size: 0.92rem; }
+@media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
+figure { margin: 0 0 1.25rem; }
+img { width: 100%; height: auto; border-radius: 4px; background: #f3f3f3; display: block; }
+figcaption { margin-top: 0.4rem; font-size: 0.95rem; color: #444; }
+@media (prefers-color-scheme: dark) { figcaption { color: #bbb; } img { background: #222; } }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.75rem 0 1.25rem; }
+th, td { text-align: left; padding: 0.4rem 0.3rem; border-bottom: 1px solid #ddd; vertical-align: top; }
+@media (prefers-color-scheme: dark) { th, td { border-bottom-color: #444; } }
+.nav a { display: inline-block; margin: 0.35rem 1rem 0.35rem 0; color: inherit; }
+ul { padding-left: 1.2rem; } li { margin: 0 0 0.45rem; }
+code { font-size: 0.9em; }
+.card-link { display: block; padding: 0.85rem 0.2rem; border-bottom: 1px solid #eee;
+  text-decoration: none; color: inherit; }
+@media (prefers-color-scheme: dark) { .card-link { border-bottom-color: #333; } }
+.card-link .title { font-weight: 600; display: block; }
+.card-link .path { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+</style>
+</head><body>
+
+  <h1>Custom labels — defensive positioning</h1>
+  <p class="meta">High-value labels SkillCorner does not ship: coverage, compact-broken,
+  weak-side press, step/hold, dense outcomes, proximity-intent, pose attention.</p>
+  <div class="mission">
+    <strong>Bet.</strong> Labels you can film and graph beat another residual on λ₂.
+    Event labels run on all <strong>20</strong> matches;
+    pose attention uses shoulder facing on matches with body-pose archives
+    (1925299, 1996435).
+  </div>
+  <ul>
+    <li>Organised phases scored: <strong>5,699</strong></li>
+    <li>Pose samples labeled: <strong>261</strong> — Using pose archives for [1925299].</li>
+  </ul>
+  <a class="card-link" href="custom-labels-catalog.html">
+    <span class="title">Label catalog + shot lift</span>
+    <span class="path">Rates, definitions, clip counts</span>
+  </a>
+  <a class="card-link" href="custom-labels-clips.html">
+    <span class="title">Film lists</span>
+    <span class="path">Match id + frame for each label fire</span>
+  </a>
+  <a class="card-link" href="custom-labels-pose.html">
+    <span class="title">Pose attention (ball / runner / scan lag)</span>
+    <span class="path">Head–shoulder proxy — not eye gaze</span>
+  </a>
+  <a class="card-link" href="coverage-debt-graph.html">
+    <span class="title">Coverage-debt event graph</span>
+    <span class="path">Interpretable structure feeding these labels</span>
+  </a>
+  <h2>Shot rate when label fires</h2>
+  <table><thead><tr><th>Label</th><th>State</th><th>n</th><th>Shot rate</th></tr></thead>
+  <tbody><tr><td>compact_but_broken</td><td>off</td><td>971</td><td>6.4%</td></tr><tr><td>compact_but_broken</td><td>on</td><td>919</td><td>22.3%</td></tr><tr><td>coverage_debt</td><td>off</td><td>510</td><td>100.0%</td></tr><tr><td>coverage_debt</td><td>on</td><td>467</td><td>100.0%</td></tr><tr><td>phase_outcome_dense</td><td>off</td><td>4157</td><td>0.0%</td></tr><tr><td>phase_outcome_dense</td><td>on</td><td>1542</td><td>41.1%</td></tr><tr><td>proximity_intent_debt</td><td>off</td><td>1980</td><td>12.2%</td></tr><tr><td>proximity_intent_debt</td><td>on</td><td>92</td><td>51.1%</td></tr><tr><td>step_vs_hold</td><td>off</td><td>11830</td><td>9.7%</td></tr><tr><td>step_vs_hold</td><td>on</td><td>1496</td><td>7.4%</td></tr><tr><td>weak_side_press_leak</td><td>off</td><td>879</td><td>5.7%</td></tr><tr><td>weak_side_press_leak</td><td>on</td><td>688</td><td>10.5%</td></tr></tbody></table>
+
+<p class="nav">
+  <a href="custom-labels.html">Custom labels hub</a>
+  <a href="interpretable-graphs.html">Interpretable graphs</a>
+  <a href="cup-ideas.html">Cup ideas</a>
+  <a href="index.html">Index</a>
+</p>
+</body></html>
