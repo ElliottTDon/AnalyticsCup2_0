@@ -1,0 +1,41 @@
+match_id,frame_end,player_position,channel_start,team_shortname,context
+1874553,153,CF,center,Brisbane FC,cross_receiver_chance
+1874553,157,RW,wide_right,Brisbane FC,cross_receiver_chance
+1874553,3294,RB,half_space_right,Brisbane FC,cross_receiver_chance
+1874553,3299,CF,center,Brisbane FC,cross_receiver_chance
+1874553,8941,LW,center,Brisbane FC,cross_receiver_chance
+1874553,14186,LW,center,Brisbane FC,cross_receiver_chance
+1874553,14189,CF,center,Brisbane FC,cross_receiver_chance
+1874553,19339,CF,half_space_left,Adelaide United,cross_receiver_chance
+1874553,19344,AM,center,Adelaide United,cross_receiver_chance
+1874553,19344,RW,center,Adelaide United,cross_receiver_chance
+1874553,29346,RW,wide_right,Adelaide United,cross_receiver_chance
+1874553,29354,LB,center,Adelaide United,cross_receiver_chance
+1874553,29355,AM,half_space_right,Adelaide United,cross_receiver_chance
+1874553,30930,AM,center,Adelaide United,cross_receiver_chance
+1874553,32110,CF,half_space_right,Adelaide United,cross_receiver_chance
+1874553,32113,AM,center,Adelaide United,cross_receiver_chance
+1874553,33228,RW,center,Brisbane FC,cross_receiver_chance
+1874553,37986,LW,half_space_left,Adelaide United,cross_receiver_chance
+1874553,38918,CF,center,Adelaide United,cross_receiver_chance
+1874553,44131,AM,center,Brisbane FC,cross_receiver_chance
+1874553,44137,CF,center,Brisbane FC,cross_receiver_chance
+1874553,44138,LW,center,Brisbane FC,cross_receiver_chance
+1874553,44144,RDM,half_space_right,Brisbane FC,cross_receiver_chance
+1874553,47591,CF,center,Adelaide United,cross_receiver_chance
+1874553,58248,CF,center,Adelaide United,cross_receiver_chance
+1874553,58256,AM,half_space_left,Adelaide United,cross_receiver_chance
+1874553,58704,AM,center,Adelaide United,cross_receiver_chance
+1874553,58706,CF,center,Adelaide United,cross_receiver_chance
+1886347,10375,RW,half_space_right,Auckland FC,cross_receiver_chance
+1886347,10377,CF,center,Auckland FC,cross_receiver_chance
+1886347,12771,RW,center,Auckland FC,cross_receiver_chance
+1886347,16170,LW,center,Auckland FC,cross_receiver_chance
+1886347,27352,CF,half_space_left,Newcastle,cross_receiver_chance
+1886347,27360,AM,center,Newcastle,cross_receiver_chance
+1886347,27368,RDM,center,Newcastle,cross_receiver_chance
+1886347,27372,LW,wide_left,Newcastle,cross_receiver_chance
+1886347,33020,LW,half_space_left,Newcastle,cross_receiver_chance
+1886347,38138,CF,center,Auckland FC,cross_receiver_chance
+1886347,44469,RW,half_space_left,Newcastle,cross_receiver_chance
+1886347,50580,CF,center,Auckland FC,cross_receiver_chance
