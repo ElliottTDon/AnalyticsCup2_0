@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interpretable graphs</title><style>
+:root { color-scheme: light dark; }
+body { margin: 0 auto; max-width: 44rem; padding: 1.1rem 0.9rem 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55; font-size: 1.05rem; }
+h1 { font-size: 1.45rem; margin: 0 0 0.4rem; }
+h2 { font-size: 1.12rem; margin: 1.6rem 0 0.55rem; padding-top: 0.45rem; border-top: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { h2 { border-top-color: #444; } }
+.mission { margin: 0.7rem 0 1rem; padding: 0.75rem 0.85rem; border-left: 3px solid #888;
+  background: rgba(127,127,127,0.08); }
+.meta { color: #666; font-size: 0.92rem; }
+@media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
+figure { margin: 0 0 1.25rem; }
+img { width: 100%; height: auto; border-radius: 4px; background: #f3f3f3; display: block; }
+figcaption { margin-top: 0.4rem; font-size: 0.95rem; color: #444; }
+@media (prefers-color-scheme: dark) { figcaption { color: #bbb; } img { background: #222; } }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.75rem 0 1.25rem; }
+th, td { text-align: left; padding: 0.4rem 0.3rem; border-bottom: 1px solid #ddd; vertical-align: top; }
+@media (prefers-color-scheme: dark) { th, td { border-bottom-color: #444; } }
+.nav a { display: inline-block; margin: 0.35rem 1rem 0.35rem 0; color: inherit; }
+ul { padding-left: 1.2rem; } li { margin: 0 0 0.45rem; }
+code { font-size: 0.9em; }
+.card-link { display: block; padding: 0.85rem 0.2rem; border-bottom: 1px solid #eee;
+  text-decoration: none; color: inherit; }
+@media (prefers-color-scheme: dark) { .card-link { border-bottom-color: #333; } }
+.card-link .title { font-weight: 600; display: block; }
+.card-link .path { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+</style>
+</head><body>
+
+  <h1>Interpretable graphs (small-n)</h1>
+  <p class="meta">Approaches 1, 2, 6, 7 — structure you can read, not a deep GNN on 20 matches.</p>
+  <div class="mission">
+    <strong>Cup goal.</strong> Use graphs to understand defensive positioning: coverage debt,
+    pressing linkage, and free attackers — with honest uncertainty under a small sample.
+  </div>
+  <ul>
+    <li>Danger events in organised blocks: <strong>977</strong></li>
+    <li>Matches: <strong>20</strong></li>
+    <li>Sparse CV AUC baseline → +event-graph:
+      <strong>0.658 → 0.701</strong>
+      (leakage-safe event features only)</li>
+  </ul>
+  <a class="card-link" href="coverage-debt-graph.html">
+    <span class="title">2. Coverage-debt event graph</span>
+    <span class="path">Nodes = ball, free attackers, pressers, far runner — edges you can explain</span>
+  </a>
+  <a class="card-link" href="graph-handcrafted.html">
+    <span class="title">1. Hand-crafted graph features</span>
+    <span class="path">Debt score, free roles, chain/far-side flags — no training</span>
+  </a>
+  <a class="card-link" href="graph-sparse-model.html">
+    <span class="title">6. Regularized sparse residual model</span>
+    <span class="path">L2 logistic + match CV — event-graph debt after box &amp; pressure</span>
+  </a>
+  <a class="card-link" href="graph-case-retrieval.html">
+    <span class="title">7. Case-based retrieval</span>
+    <span class="path">Find clips with a similar coverage-debt signature</span>
+  </a>
+  <a class="card-link" href="custom-labels.html">
+    <span class="title">Custom labels (defensive positioning)</span>
+    <span class="path">Coverage debt · compact-broken · weak-side · step/hold · pose</span>
+  </a>
+
+
+<p class="nav">
+  <a href="interpretable-graphs.html">Graph methods hub</a>
+  <a href="cup-ideas.html">Cup ideas</a>
+  <a href="eda.html">Visual EDA</a>
+  <a href="index.html">Index</a>
+</p>
+</body></html>

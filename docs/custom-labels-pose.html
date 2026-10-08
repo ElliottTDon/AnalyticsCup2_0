@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pose attention labels</title><style>
+:root { color-scheme: light dark; }
+body { margin: 0 auto; max-width: 44rem; padding: 1.1rem 0.9rem 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55; font-size: 1.05rem; }
+h1 { font-size: 1.45rem; margin: 0 0 0.4rem; }
+h2 { font-size: 1.12rem; margin: 1.6rem 0 0.55rem; padding-top: 0.45rem; border-top: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { h2 { border-top-color: #444; } }
+.mission { margin: 0.7rem 0 1rem; padding: 0.75rem 0.85rem; border-left: 3px solid #888;
+  background: rgba(127,127,127,0.08); }
+.meta { color: #666; font-size: 0.92rem; }
+@media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
+figure { margin: 0 0 1.25rem; }
+img { width: 100%; height: auto; border-radius: 4px; background: #f3f3f3; display: block; }
+figcaption { margin-top: 0.4rem; font-size: 0.95rem; color: #444; }
+@media (prefers-color-scheme: dark) { figcaption { color: #bbb; } img { background: #222; } }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.75rem 0 1.25rem; }
+th, td { text-align: left; padding: 0.4rem 0.3rem; border-bottom: 1px solid #ddd; vertical-align: top; }
+@media (prefers-color-scheme: dark) { th, td { border-bottom-color: #444; } }
+.nav a { display: inline-block; margin: 0.35rem 1rem 0.35rem 0; color: inherit; }
+ul { padding-left: 1.2rem; } li { margin: 0 0 0.45rem; }
+code { font-size: 0.9em; }
+.card-link { display: block; padding: 0.85rem 0.2rem; border-bottom: 1px solid #eee;
+  text-decoration: none; color: inherit; }
+@media (prefers-color-scheme: dark) { .card-link { border-bottom-color: #333; } }
+.card-link .title { font-weight: 600; display: block; }
+.card-link .path { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+</style>
+</head><body>
+
+  <h1>Pose attention labels</h1>
+  <p class="meta">Ball-aware · runner-aware · scan lag — shoulder / head proxy, not pupils.</p>
+  <div class="mission">
+    Using pose archives for [1925299].<br>
+    Gate: joint p90 MAE ≤ 15 cm and shoulder width
+    0.25–0.55 m (SkillCorner tutorial).
+    Ball-aware if |heading − ball bearing| ≤ 60°.
+  </div>
+  <figure><img src="eda/figures/labels/pose_attention_rates.png" alt="pose_attention_rates.png" loading="lazy"></figure><figure><img src="eda/figures/labels/pose_ball_err_hist.png" alt="pose_ball_err_hist.png" loading="lazy"></figure>
+  <h2>Samples</h2>
+  <table><thead><tr>
+    <th>Match</th><th>Frame</th><th>Ball-aware</th><th>Runner-aware</th>
+    <th>Scan lag (frames)</th><th>Ball err°</th>
+  </tr></thead>
+  <tbody><tr><td>1925299</td><td>222</td><td>1</td><td>nan</td><td>nan</td><td>32.5</td></tr><tr><td>1925299</td><td>243</td><td>1</td><td>0.0</td><td>3.0</td><td>48.3</td></tr><tr><td>1925299</td><td>257</td><td>1</td><td>0.0</td><td>15.0</td><td>29.1</td></tr><tr><td>1925299</td><td>261</td><td>0</td><td>nan</td><td>nan</td><td>152.8</td></tr><tr><td>1925299</td><td>1814</td><td>0</td><td>nan</td><td>nan</td><td>63.9</td></tr><tr><td>1925299</td><td>1831</td><td>1</td><td>nan</td><td>nan</td><td>4.8</td></tr><tr><td>1925299</td><td>1838</td><td>1</td><td>nan</td><td>nan</td><td>14.8</td></tr><tr><td>1925299</td><td>2346</td><td>1</td><td>nan</td><td>nan</td><td>20.8</td></tr><tr><td>1925299</td><td>2373</td><td>1</td><td>1.0</td><td>1.0</td><td>13.6</td></tr><tr><td>1925299</td><td>2662</td><td>1</td><td>1.0</td><td>0.0</td><td>16.9</td></tr><tr><td>1925299</td><td>2685</td><td>1</td><td>1.0</td><td>1.0</td><td>25.2</td></tr><tr><td>1925299</td><td>2715</td><td>1</td><td>1.0</td><td>1.0</td><td>39.5</td></tr><tr><td>1925299</td><td>2806</td><td>1</td><td>nan</td><td>nan</td><td>22.8</td></tr><tr><td>1925299</td><td>2843</td><td>1</td><td>nan</td><td>nan</td><td>28.8</td></tr><tr><td>1925299</td><td>3568</td><td>1</td><td>nan</td><td>nan</td><td>29.8</td></tr><tr><td>1925299</td><td>3625</td><td>0</td><td>0.0</td><td>3.0</td><td>127.3</td></tr><tr><td>1925299</td><td>3661</td><td>1</td><td>1.0</td><td>1.0</td><td>44.1</td></tr><tr><td>1925299</td><td>3683</td><td>1</td><td>1.0</td><td>1.0</td><td>39.9</td></tr><tr><td>1925299</td><td>5174</td><td>0</td><td>nan</td><td>nan</td><td>150.9</td></tr><tr><td>1925299</td><td>5243</td><td>1</td><td>nan</td><td>nan</td><td>24.9</td></tr><tr><td>1925299</td><td>5262</td><td>1</td><td>nan</td><td>nan</td><td>7.2</td></tr><tr><td>1925299</td><td>5971</td><td>0</td><td>1.0</td><td>1.0</td><td>60.6</td></tr><tr><td>1925299</td><td>6004</td><td>1</td><td>nan</td><td>nan</td><td>33.1</td></tr><tr><td>1925299</td><td>6454</td><td>1</td><td>1.0</td><td>0.0</td><td>4.8</td></tr><tr><td>1925299</td><td>6477</td><td>1</td><td>nan</td><td>nan</td><td>8.5</td></tr><tr><td>1925299</td><td>6499</td><td>1</td><td>0.0</td><td>3.0</td><td>10.4</td></tr><tr><td>1925299</td><td>6560</td><td>1</td><td>nan</td><td>nan</td><td>12.4</td></tr><tr><td>1925299</td><td>7259</td><td>0</td><td>nan</td><td>nan</td><td>174.6</td></tr><tr><td>1925299</td><td>7298</td><td>1</td><td>nan</td><td>nan</td><td>15.9</td></tr><tr><td>1925299</td><td>7509</td><td>1</td><td>nan</td><td>nan</td><td>11.5</td></tr></tbody></table>
+  <h2>How to fetch pose</h2>
+  <p><code>huggingface-cli download SkillCorner/opendata-bodypose raw/1925299.jsonl.zip
+  --repo-type dataset --local-dir data/bodypose</code></p>
+
+<p class="nav">
+  <a href="custom-labels.html">Custom labels hub</a>
+  <a href="interpretable-graphs.html">Interpretable graphs</a>
+  <a href="cup-ideas.html">Cup ideas</a>
+  <a href="index.html">Index</a>
+</p>
+</body></html>
