@@ -1,0 +1,283 @@
+{
+  "n_matches": 20,
+  "n_phases": 5555,
+  "n_shot_phases": 627,
+  "sample_note": "Twenty matches is a small sample. Phases are nested within matches; bootstrap CIs treat phases as independent and therefore overstate precision.",
+  "cluster_note": "Phases nested in matches; within-team demeaning used for one contrast layer.",
+  "laplacian": "combinatorial L = D - W; lambda2 = algebraic connectivity",
+  "shot_rate_by_block": {
+    "low_block": {
+      "n_phases": 1599,
+      "n_shot": 299,
+      "shot_rate": 0.18699186991869918
+    },
+    "medium_block": {
+      "n_phases": 2763,
+      "n_shot": 256,
+      "shot_rate": 0.09265291349981904
+    },
+    "high_block": {
+      "n_phases": 1193,
+      "n_shot": 72,
+      "shot_rate": 0.06035205364626991
+    }
+  },
+  "graph_vs_baseline": [
+    {
+      "feature": "mean_lambda2_defense",
+      "raw_auc": 0.5266818259491705,
+      "residual_auc": 0.4708584721997132,
+      "residual_diff_shot_minus_nons": -0.0035894007584448616,
+      "residual_ci_low": -0.018533349357905512,
+      "residual_ci_high": 0.011336803596922075,
+      "beats_baseline": 0,
+      "best_baseline": "mean_oop_width",
+      "best_baseline_auc": 0.36541135090060717,
+      "baseline_aucs": {
+        "mean_oop_width": 0.36541135090060717,
+        "mean_oop_length": 0.4107823174715827,
+        "mean_oop_area": 0.36583066400061337,
+        "mean_nearest_defender_to_ball": 0.445759284575074,
+        "mean_overall_pressure_score": 0.5667109578874284
+      }
+    },
+    {
+      "feature": "mean_n_free_attackers",
+      "raw_auc": 0.46559936773752564,
+      "residual_auc": 0.49452569344293573,
+      "residual_diff_shot_minus_nons": -0.0074450496946008565,
+      "residual_ci_low": -0.10184799146290925,
+      "residual_ci_high": 0.08491476503833151,
+      "beats_baseline": 0,
+      "best_baseline": "mean_oop_width",
+      "best_baseline_auc": 0.36541135090060717,
+      "baseline_aucs": {
+        "mean_oop_width": 0.36541135090060717,
+        "mean_oop_length": 0.4107823174715827,
+        "mean_oop_area": 0.36583066400061337,
+        "mean_nearest_defender_to_ball": 0.445759284575074,
+        "mean_overall_pressure_score": 0.5667109578874284
+      }
+    },
+    {
+      "feature": "mean_uncovered_danger",
+      "raw_auc": 0.4968053527413575,
+      "residual_auc": 0.5168779322978958,
+      "residual_diff_shot_minus_nons": 0.024102301923340532,
+      "residual_ci_low": -0.007880682511882182,
+      "residual_ci_high": 0.056939884269042444,
+      "beats_baseline": 0,
+      "best_baseline": "mean_oop_width",
+      "best_baseline_auc": 0.36541135090060717,
+      "baseline_aucs": {
+        "mean_oop_width": 0.36541135090060717,
+        "mean_oop_length": 0.4107823174715827,
+        "mean_oop_area": 0.36583066400061337,
+        "mean_nearest_defender_to_ball": 0.445759284575074,
+        "mean_overall_pressure_score": 0.5667109578874284
+      }
+    },
+    {
+      "feature": "mean_structural_pressure",
+      "raw_auc": 0.5207067902193501,
+      "residual_auc": 0.499504163427078,
+      "residual_diff_shot_minus_nons": 0.010390092015897358,
+      "residual_ci_low": -0.033216950387154026,
+      "residual_ci_high": 0.05163401847074373,
+      "beats_baseline": 0,
+      "best_baseline": "mean_oop_width",
+      "best_baseline_auc": 0.36541135090060717,
+      "baseline_aucs": {
+        "mean_oop_width": 0.36541135090060717,
+        "mean_oop_length": 0.4107823174715827,
+        "mean_oop_area": 0.36583066400061337,
+        "mean_nearest_defender_to_ball": 0.445759284575074,
+        "mean_overall_pressure_score": 0.5667109578874284
+      }
+    },
+    {
+      "feature": "mean_structural_pressure_frac",
+      "raw_auc": 0.4725339951117463,
+      "residual_auc": 0.49312742199856807,
+      "residual_diff_shot_minus_nons": -0.0028005716516045906,
+      "residual_ci_low": -0.009345321726311457,
+      "residual_ci_high": 0.0038535594648181266,
+      "beats_baseline": 0,
+      "best_baseline": "mean_oop_width",
+      "best_baseline_auc": 0.36541135090060717,
+      "baseline_aucs": {
+        "mean_oop_width": 0.36541135090060717,
+        "mean_oop_length": 0.4107823174715827,
+        "mean_oop_area": 0.36583066400061337,
+        "mean_nearest_defender_to_ball": 0.445759284575074,
+        "mean_overall_pressure_score": 0.5667109578874284
+      }
+    },
+    {
+      "feature": "mean_lambda2_supra",
+      "raw_auc": 0.5371159691584333,
+      "residual_auc": 0.4519432403545734,
+      "residual_diff_shot_minus_nons": -0.013080289912773211,
+      "residual_ci_low": -0.022179990633305325,
+      "residual_ci_high": -0.0036240233664989936,
+      "beats_baseline": 1,
+      "best_baseline": "mean_oop_width",
+      "best_baseline_auc": 0.36541135090060717,
+      "baseline_aucs": {
+        "mean_oop_width": 0.36541135090060717,
+        "mean_oop_length": 0.4107823174715827,
+        "mean_oop_area": 0.36583066400061337,
+        "mean_nearest_defender_to_ball": 0.445759284575074,
+        "mean_overall_pressure_score": 0.5667109578874284
+      }
+    },
+    {
+      "feature": "lambda2_drop_pre2s",
+      "raw_auc": 0.49557144349747,
+      "residual_auc": 0.5072952921334074,
+      "residual_diff_shot_minus_nons": -0.015650700178434774,
+      "residual_ci_low": -0.03918415369275975,
+      "residual_ci_high": 0.006788373705155876,
+      "beats_baseline": 0,
+      "best_baseline": "mean_oop_width",
+      "best_baseline_auc": 0.36541135090060717,
+      "baseline_aucs": {
+        "mean_oop_width": 0.36541135090060717,
+        "mean_oop_length": 0.4107823174715827,
+        "mean_oop_area": 0.36583066400061337,
+        "mean_nearest_defender_to_ball": 0.445759284575074,
+        "mean_overall_pressure_score": 0.5667109578874284
+      }
+    }
+  ],
+  "features_beating_baseline": [
+    "mean_lambda2_supra"
+  ],
+  "features_not_beating_baseline": [
+    "mean_lambda2_defense",
+    "mean_n_free_attackers",
+    "mean_uncovered_danger",
+    "mean_structural_pressure",
+    "mean_structural_pressure_frac",
+    "lambda2_drop_pre2s"
+  ],
+  "pre_shot_lambda2": {
+    "overall_diff_shot_minus_nons": -0.022219857652330872,
+    "ci_low": -0.04336074346893888,
+    "ci_high": -0.00013420307617212896,
+    "by_block": {
+      "low_block": {
+        "diff": -0.028021858925480307,
+        "ci_low": -0.07101651982210082,
+        "ci_high": 0.01614979729892047,
+        "mean_shot": -0.03591090882930163,
+        "mean_nons": -0.007889049903821325
+      },
+      "medium_block": {
+        "diff": -0.006167472397324184,
+        "ci_low": -0.025581902907386097,
+        "ci_high": 0.011192372341634007,
+        "mean_shot": 0.01694260873247175,
+        "mean_nons": 0.023110081129795935
+      },
+      "high_block": {
+        "diff": -0.0057161942619133295,
+        "ci_low": -0.02598778878837112,
+        "ci_high": 0.013268357713440294,
+        "mean_shot": 0.007224714784527064,
+        "mean_nons": 0.012940909046440394
+      }
+    },
+    "metric": "lambda2_drop_pre2s (early_mean - last_2s_mean; positive = connectivity fell)",
+    "interpretation": "Positive diff means shot phases show a larger lambda2 drop into the last 2s than non-shot phases."
+  },
+  "contrast_highlights": [
+    {
+      "block_type": "low_block",
+      "feature": "mean_n_free_attackers",
+      "diff": -0.14307985306834947,
+      "ci_low": -0.2773521135817445,
+      "ci_high": -0.012648359269593745,
+      "family": "graph"
+    },
+    {
+      "block_type": "low_block",
+      "feature": "mean_structural_pressure",
+      "diff": 0.0767678915999308,
+      "ci_low": 0.013667279537748317,
+      "ci_high": 0.14068061766668752,
+      "family": "graph"
+    },
+    {
+      "block_type": "low_block",
+      "feature": "mean_oop_width",
+      "diff": -3.0638739563461,
+      "ci_low": -3.7982240608718376,
+      "ci_high": -2.3161462022170993,
+      "family": "baseline"
+    },
+    {
+      "block_type": "low_block",
+      "feature": "mean_oop_area",
+      "diff": -148.28376222299812,
+      "ci_low": -199.78353686969385,
+      "ci_high": -99.08717051529453,
+      "family": "baseline"
+    },
+    {
+      "block_type": "low_block",
+      "feature": "mean_nearest_defender_to_ball",
+      "diff": -0.2002861105442344,
+      "ci_low": -0.396292507275129,
+      "ci_high": -0.0031222245826965913,
+      "family": "baseline"
+    },
+    {
+      "block_type": "low_block",
+      "feature": "mean_overall_pressure_score",
+      "diff": 0.2200631127974495,
+      "ci_low": 0.10946256395994838,
+      "ci_high": 0.33106703634695506,
+      "family": "baseline"
+    },
+    {
+      "block_type": "medium_block",
+      "feature": "mean_lambda2_supra",
+      "diff": 0.018575539085929904,
+      "ci_low": 0.0008785386640599401,
+      "ci_high": 0.03841078760918975,
+      "family": "graph"
+    },
+    {
+      "block_type": "medium_block",
+      "feature": "mean_oop_width",
+      "diff": -1.0406851249284017,
+      "ci_low": -1.7515474964742284,
+      "ci_high": -0.3378838272232767,
+      "family": "baseline"
+    },
+    {
+      "block_type": "medium_block",
+      "feature": "mean_oop_area",
+      "diff": -67.36684071520904,
+      "ci_low": -126.51346523234771,
+      "ci_high": -8.226099457277444,
+      "family": "baseline"
+    },
+    {
+      "block_type": "high_block",
+      "feature": "mean_uncovered_danger",
+      "diff": -0.09643346827293708,
+      "ci_low": -0.18117643984480236,
+      "ci_high": -0.011764301749509088,
+      "family": "graph"
+    }
+  ],
+  "outputs": {
+    "phase_features": "/Users/elliotttong/AnalyticsCup2_0/analysis/output/phase_features.csv",
+    "frame_features": "/Users/elliotttong/AnalyticsCup2_0/analysis/output/frame_features.csv",
+    "contrast_by_block": "/Users/elliotttong/AnalyticsCup2_0/analysis/output/contrast_by_block.csv",
+    "team_summary": "/Users/elliotttong/AnalyticsCup2_0/analysis/output/team_summary.csv",
+    "contrast_summary": "/Users/elliotttong/AnalyticsCup2_0/analysis/output/contrast_summary.json"
+  }
+}
