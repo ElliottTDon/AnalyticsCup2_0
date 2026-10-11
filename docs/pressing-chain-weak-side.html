@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pressing chains vs far-side runners</title><style>
+:root { color-scheme: light dark; }
+body {
+  margin: 0 auto; max-width: 44rem; padding: 1.1rem 0.9rem 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55; font-size: 1.05rem;
+}
+h1 { font-size: 1.45rem; margin: 0 0 0.4rem; }
+h2 { font-size: 1.12rem; margin: 1.6rem 0 0.55rem; padding-top: 0.45rem; border-top: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { h2 { border-top-color: #444; } }
+.mission {
+  margin: 0.7rem 0 1rem; padding: 0.75rem 0.85rem; border-left: 3px solid #888;
+  background: rgba(127,127,127,0.08);
+}
+.meta { color: #666; font-size: 0.92rem; }
+@media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
+figure { margin: 0 0 1.25rem; }
+img { width: 100%; height: auto; border-radius: 4px; background: #f3f3f3; display: block; }
+figcaption { margin-top: 0.4rem; font-size: 0.95rem; color: #444; }
+@media (prefers-color-scheme: dark) { figcaption { color: #bbb; } img { background: #222; } }
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 0.75rem 0 1.25rem; }
+th, td { text-align: left; padding: 0.45rem 0.35rem; border-bottom: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { th, td { border-bottom-color: #444; } }
+.nav a { display: inline-block; margin: 0.35rem 1rem 0.35rem 0; color: inherit; }
+ul { padding-left: 1.2rem; }
+li { margin: 0 0 0.5rem; }
+.card-link {
+  display: block; padding: 0.85rem 0.2rem; border-bottom: 1px solid #eee;
+  text-decoration: none; color: inherit;
+}
+@media (prefers-color-scheme: dark) { .card-link { border-bottom-color: #333; } }
+.card-link:hover { background: rgba(127,127,127,0.1); }
+.card-link .title { font-weight: 600; display: block; }
+.card-link .path { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+</style>
+</head><body>
+
+  <h1>Pressing chains vs far-side runners</h1>
+  <p class="meta">Does the chain win the ball — or open the weak side?</p>
+  <div class="mission">
+    <strong>Cup link.</strong> On-ball pressure is only half the story. A pressing chain that recovers the ball
+    is good defending; a chain that leaves a free runner on the opposite flank is a positioning decision.
+  </div>
+  <ul>
+    <li>Chains analysed: <strong>1,567</strong></li>
+    <li>End in regain: <strong>31.7%</strong></li>
+    <li>Far-side off-ball runner during chain: <strong>62.2%</strong></li>
+    <li>Shot rate after regain: <strong>0.0%</strong></li>
+    <li>Shot rate when no regain + far-side runner: <strong>3.8%</strong></li>
+  </ul>
+  <h2>Charts</h2>
+  <figure><img src="eda/figures/ideas/pressing_chain_outcomes.png" alt="pressing_chain_outcomes.png" loading="lazy"></figure><figure><img src="eda/figures/ideas/pressing_chain_far_roles.png" alt="pressing_chain_far_roles.png" loading="lazy"></figure>
+  <h2>Film list — no regain, far-side runner, chance</h2>
+  <table>
+    <thead><tr><th>Match</th><th>Frames</th><th>Length</th><th>End</th><th>Far role</th><th>Far channel</th><th>Press side</th><th>End</th></tr></thead>
+    <tbody><tr><td>2011166</td><td>7973–8133</td><td>7.0</td><td>unknown</td><td>RM</td><td>wide_right</td><td>half_space_left,half_space_right,wide_left,wide_right</td><td>goal</td></tr><tr><td>1959846</td><td>48195–48299</td><td>5.0</td><td>unknown</td><td>LB</td><td>wide_left</td><td>center,half_space_right,wide_left</td><td>goal</td></tr><tr><td>1996435</td><td>28159–28199</td><td>3.0</td><td>unknown</td><td>RW</td><td>wide_right</td><td>center,half_space_left,wide_left</td><td>goal</td></tr><tr><td>1874553</td><td>31833–32059</td><td>7.0</td><td>unknown</td><td>LW</td><td>half_space_left</td><td>center,half_space_left,half_space_right</td><td>shot</td></tr><tr><td>1996435</td><td>16646–16792</td><td>6.0</td><td>unknown</td><td>RB</td><td>wide_right</td><td>center,half_space_left,half_space_right,wide_right</td><td>shot</td></tr><tr><td>2006363</td><td>48462–48605</td><td>6.0</td><td>unknown</td><td>RW</td><td>half_space_left</td><td>half_space_right,wide_right</td><td>shot</td></tr><tr><td>2006363</td><td>50862–50960</td><td>6.0</td><td>unknown</td><td>LDM</td><td>half_space_left</td><td>half_space_right,wide_right</td><td>shot</td></tr><tr><td>1996436</td><td>37229–37259</td><td>4.0</td><td>unknown</td><td>AM</td><td>half_space_left</td><td>center,half_space_right,wide_right</td><td>shot</td></tr><tr><td>1959846</td><td>12600–12662</td><td>3.0</td><td>unknown</td><td>LB</td><td>wide_left</td><td>center,half_space_left,half_space_right</td><td>shot</td></tr><tr><td>1996436</td><td>54012–54091</td><td>3.0</td><td>unknown</td><td>CF</td><td>half_space_right</td><td>center,half_space_left,half_space_right</td><td>shot</td></tr><tr><td>2006363</td><td>19480–19513</td><td>3.0</td><td>disruption</td><td>AM</td><td>wide_right</td><td>half_space_left,wide_left</td><td>shot</td></tr><tr><td>2007721</td><td>38480–38534</td><td>3.0</td><td>unknown</td><td>CF</td><td>half_space_left</td><td>center,half_space_right</td><td>shot</td></tr><tr><td>2011166</td><td>10332–10387</td><td>3.0</td><td>unknown</td><td>LDM</td><td>wide_left</td><td>half_space_right,wide_right</td><td>shot</td></tr><tr><td>2013725</td><td>26214–26277</td><td>3.0</td><td>unknown</td><td>CF</td><td>wide_right</td><td>half_space_left,wide_left</td><td>shot</td></tr><tr><td>2016236</td><td>4185–4231</td><td>3.0</td><td>unknown</td><td>CF</td><td>wide_left</td><td>half_space_right,wide_right</td><td>shot</td></tr><tr><td>2017461</td><td>15198–15304</td><td>3.0</td><td>unknown</td><td>CF</td><td>wide_left</td><td>half_space_right,wide_right</td><td>shot</td></tr><tr><td>1874553</td><td>17956–18015</td><td>2.0</td><td>unknown</td><td>CF</td><td>half_space_right</td><td>wide_left</td><td>shot</td></tr><tr><td>1886347</td><td>44343–44391</td><td>2.0</td><td>unknown</td><td>CF</td><td>half_space_left</td><td>center,half_space_right,wide_right</td><td>shot</td></tr><tr><td>1886347</td><td>52701–52752</td><td>2.0</td><td>unknown</td><td>CF</td><td>wide_left</td><td>center,half_space_right</td><td>shot</td></tr><tr><td>1899585</td><td>59758–59798</td><td>2.0</td><td>unknown</td><td>LM</td><td>half_space_left</td><td>half_space_right,wide_right</td><td>shot</td></tr><tr><td>1927964</td><td>15695–15741</td><td>2.0</td><td>unknown</td><td>CF</td><td>half_space_left</td><td>center,half_space_right,wide_right</td><td>shot</td></tr><tr><td>1996435</td><td>56842–56878</td><td>2.0</td><td>unknown</td><td>LDM</td><td>wide_right</td><td>half_space_left,wide_left</td><td>shot</td></tr><tr><td>1996436</td><td>35992–36045</td><td>2.0</td><td>unknown</td><td>LW</td><td>half_space_right</td><td>half_space_left</td><td>shot</td></tr><tr><td>2006229</td><td>24163–24261</td><td>2.0</td><td>unknown</td><td>CF</td><td>half_space_left</td><td>half_space_right,wide_right</td><td>shot</td></tr><tr><td>2011166</td><td>41829–41859</td><td>2.0</td><td>unknown</td><td>AM</td><td>half_space_left</td><td>half_space_right,wide_right</td><td>shot</td></tr><tr><td>2017461</td><td>52337–52367</td><td>2.0</td><td>unknown</td><td>LM</td><td>wide_left</td><td>half_space_right</td><td>shot</td></tr></tbody>
+  </table>
+
+<p class="nav">
+  <a href="cup-ideas.html">Cup ideas hub</a>
+  <a href="graph-tool-notes.html">Graph FAQ</a>
+  <a href="eda.html">Visual EDA</a>
+  <a href="index.html">Index</a>
+</p>
+</body></html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compact box, weak coverage</title><style>
+:root { color-scheme: light dark; }
+body {
+  margin: 0 auto; max-width: 44rem; padding: 1.1rem 0.9rem 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55; font-size: 1.05rem;
+}
+h1 { font-size: 1.45rem; margin: 0 0 0.4rem; }
+h2 { font-size: 1.12rem; margin: 1.6rem 0 0.55rem; padding-top: 0.45rem; border-top: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { h2 { border-top-color: #444; } }
+.mission {
+  margin: 0.7rem 0 1rem; padding: 0.75rem 0.85rem; border-left: 3px solid #888;
+  background: rgba(127,127,127,0.08);
+}
+.meta { color: #666; font-size: 0.92rem; }
+@media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
+figure { margin: 0 0 1.25rem; }
+img { width: 100%; height: auto; border-radius: 4px; background: #f3f3f3; display: block; }
+figcaption { margin-top: 0.4rem; font-size: 0.95rem; color: #444; }
+@media (prefers-color-scheme: dark) { figcaption { color: #bbb; } img { background: #222; } }
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 0.75rem 0 1.25rem; }
+th, td { text-align: left; padding: 0.45rem 0.35rem; border-bottom: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { th, td { border-bottom-color: #444; } }
+.nav a { display: inline-block; margin: 0.35rem 1rem 0.35rem 0; color: inherit; }
+ul { padding-left: 1.2rem; }
+li { margin: 0 0 0.5rem; }
+.card-link {
+  display: block; padding: 0.85rem 0.2rem; border-bottom: 1px solid #eee;
+  text-decoration: none; color: inherit;
+}
+@media (prefers-color-scheme: dark) { .card-link { border-bottom-color: #333; } }
+.card-link:hover { background: rgba(127,127,127,0.1); }
+.card-link .title { font-weight: 600; display: block; }
+.card-link .path { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+</style>
+</head><body>
+
+  <h1>Compact box, weak coverage</h1>
+  <p class="meta">Coach clip list — the block looks tight, but marking / coupling still fails.</p>
+  <div class="mission">
+    <strong>Cup link.</strong> Bounding-box compactness is a baseline. The interesting film is when the
+    box is <em>small</em> and attackers are still free (Hungarian free roles ≥ 2) or the ball is inside the shape.
+  </div>
+  <p>267 organised-block phases with a <strong>tight</strong> box that still ended in a shot/goal.</p>
+  <h2>Charts</h2>
+  <figure><img src="eda/figures/ideas/compact_vs_open_shot_rate.png" alt="compact_vs_open_shot_rate.png" loading="lazy"></figure><figure><img src="eda/figures/ideas/compact_free_attacker_hist.png" alt="compact_free_attacker_hist.png" loading="lazy"></figure>
+  <h2>Clip list</h2>
+  <p class="meta">Prioritised by free attackers + goals. Open match + frame range in your video tool.</p>
+  <table>
+    <thead><tr><th>Match</th><th>Frames</th><th>Block</th><th>Box m²</th><th>Free</th><th>Roles</th><th>End</th><th>Why</th></tr></thead>
+    <tbody><tr><td>2016236</td><td>2470–2545</td><td>low_block</td><td>466.5</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>goal</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>2011166</td><td>4113–4166</td><td>low_block</td><td>741.1</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>goal</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1996435</td><td>28118–28212</td><td>high_block</td><td>1429.4</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>goal</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1874553</td><td>38678–38890</td><td>medium_block</td><td>1574.4</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>goal</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1925299</td><td>50594–50633</td><td>low_block</td><td>481.9</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW)</td></tr><tr><td>2016236</td><td>31260–31357</td><td>low_block</td><td>545.6</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW)</td></tr><tr><td>2011166</td><td>24006–24219</td><td>low_block</td><td>651.0</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1874553</td><td>28777–28850</td><td>low_block</td><td>666.4</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW)</td></tr><tr><td>2016236</td><td>11828–12064</td><td>low_block</td><td>688.1</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>2017461</td><td>6862–7079</td><td>low_block</td><td>737.7</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>2016236</td><td>69897–69953</td><td>low_block</td><td>828.6</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1925299</td><td>17583–17981</td><td>low_block</td><td>861.7</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1874553</td><td>41139–41247</td><td>low_block</td><td>886.3</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW)</td></tr><tr><td>1874553</td><td>52728–52846</td><td>low_block</td><td>893.4</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1874553</td><td>37816–38059</td><td>low_block</td><td>895.4</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>2017461</td><td>2590–2679</td><td>low_block</td><td>902.1</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1925299</td><td>30046–30135</td><td>low_block</td><td>942.8</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1925299</td><td>37339–37538</td><td>low_block</td><td>946.1</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>2017461</td><td>6507–6799</td><td>low_block</td><td>952.3</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1925299</td><td>14433–14855</td><td>low_block</td><td>957.2</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1874553</td><td>16145–16723</td><td>low_block</td><td>998.1</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1996435</td><td>56507–56575</td><td>low_block</td><td>1079.7</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1925299</td><td>32965–33075</td><td>low_block</td><td>1105.8</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>2017461</td><td>69651–69868</td><td>low_block</td><td>1121.1</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>2017461</td><td>68566–68824</td><td>low_block</td><td>1133.7</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1874553</td><td>14102–14224</td><td>low_block</td><td>1135.4</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1874553</td><td>47545–47627</td><td>low_block</td><td>1137.7</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1996436</td><td>29168–29218</td><td>low_block</td><td>1140.1</td><td>6</td><td>AM,CF,LM,LW,RM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LM,LW,RM,RW); ball inside defensive shape</td></tr><tr><td>2011166</td><td>2623–2724</td><td>low_block</td><td>1155.9</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr><tr><td>1996435</td><td>9993–10074</td><td>low_block</td><td>1156.7</td><td>6</td><td>AM,CF,LDM,LW,RDM,RW</td><td>shot</td><td>6 free attackers (AM,CF,LDM,LW,RDM,RW); ball inside defensive shape</td></tr></tbody>
+  </table>
+
+<p class="nav">
+  <a href="cup-ideas.html">Cup ideas hub</a>
+  <a href="graph-tool-notes.html">Graph FAQ</a>
+  <a href="eda.html">Visual EDA</a>
+  <a href="index.html">Index</a>
+</p>
+</body></html>

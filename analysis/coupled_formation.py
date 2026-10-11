@@ -14,6 +14,11 @@ Laplacian convention
 Defense connectivity uses the *combinatorial* Laplacian L = D - W.  Algebraic
 connectivity is lambda2 = second-smallest eigenvalue of L.  The Fiedler vector
 is the corresponding eigenvector; its sign split names the two subgroups.
+
+A second caller, hungarian_danger_roles, asks a narrower question on one exact
+frame: who is unmarked under Hungarian assignment. That entry point is
+``load_frame_geometry(data_dir, meta, frame, defending_team_id=...)``.
+The contrast plots keep ``load_frame_geometry(match_id, frame)``.
 """
 
 from __future__ import annotations
@@ -81,9 +86,33 @@ class MatchMeta:
             return self.away_team_id
         return None
 
+    @property
+    def home_id(self) -> int:
+        return self.home_team_id
+
+    @property
+    def away_id(self) -> int:
+        return self.away_team_id
+
+    @property
+    def player_team(self) -> dict[int, int]:
+        return {pid: int(info["team_id"]) for pid, info in self.players.items()}
+
+    @property
+    def player_acronym(self) -> dict[int, str]:
+        return {pid: str(info.get("acronym") or "") for pid, info in self.players.items()}
+
 
 def load_match_meta(match_dir: Path, match_id: str) -> MatchMeta:
-    with open(match_dir / f"{match_id}_match.json") as f:
+    """Load roster metadata.
+
+    ``match_dir`` is either the match folder (contrast notebook) or the
+    matches root that contains ``{match_id}/`` (hungarian_danger_roles).
+    """
+    direct = match_dir / f"{match_id}_match.json"
+    nested = match_dir / match_id / f"{match_id}_match.json"
+    json_path = direct if direct.is_file() or not nested.is_file() else nested
+    with open(json_path) as f:
         raw = json.load(f)
     players: dict[int, dict[str, Any]] = {}
     gk_ids: set[int] = set()
@@ -97,6 +126,7 @@ def load_match_meta(match_dir: Path, match_id: str) -> MatchMeta:
             "team_player_id": p.get("team_player_id"),
             "short_name": p.get("short_name") or f"p{pid}",
             "role_name": role_name,
+            "acronym": role.get("acronym") or "",
             "position_group": role.get("position_group"),
             "is_gk": role_name == "Goalkeeper",
         }
@@ -847,14 +877,153 @@ def process_all_matches(
     return frame_df, phase_df
 
 
-def load_frame_geometry(
+def _tracking_path(data_dir: Path, match_id: str) -> Path:
+    return data_dir / match_id / f"{match_id}_tracking_extrapolated.jsonl"
+
+
+def load_frame_players(data_dir: Path, match_id: str, frame: int) -> dict | None:
+    """Return one tracking frame with a player_data list, or None."""
+    path = _tracking_path(data_dir, match_id)
+    if not path.is_file() or path.stat().st_size < 1000:
+        return None
+    target = int(frame)
+    with path.open() as f:
+        for line in f:
+            row = json.loads(line)
+            if row.get("frame") == target:
+                return row
+            if row.get("frame", -1) > target:
+                break
+    return None
+
+
+def _proximity_weights(xy: np.ndarray, sigma: float = SIGMA_M) -> np.ndarray:
+    """All-pairs kernel exp(-(d/sigma)^2), with no support-radius cutoff.
+
+    The contrast pipeline uses gaussian_weights instead. This kernel is the
+    one behind the free-attacker snapshot's lambda2.
+    """
+    n = len(xy)
+    if n == 0:
+        return np.zeros((0, 0))
+    dist = cdist(xy, xy)
+    w = np.exp(-((dist / sigma) ** 2))
+    np.fill_diagonal(w, 0.0)
+    return w
+
+
+def _marker_is_goal_side(attacker: np.ndarray, defender: np.ndarray, defending_left: bool) -> bool:
+    """Defender stands between the attacker and the goal that side is protecting."""
+    if defending_left:
+        return bool(defender[0] <= attacker[0])
+    return bool(defender[0] >= attacker[0])
+
+
+def _free_attacker_assignment(
+    def_xy: np.ndarray,
+    att_xy: np.ndarray,
+    *,
+    defending_left: bool,
+) -> dict[str, Any]:
+    """Hungarian marking for one frame, without the contrast cost penalty.
+
+    An attacker is free when unmatched, farther than FREE_ASSIGN_M from the
+    assigned marker, or the marker is not goal-side. ``hungarian_marking``
+    remains the contrast pipeline's assignment (goal-side penalty in the cost).
+    """
+    n_def, n_att = len(def_xy), len(att_xy)
+    if n_def == 0 or n_att == 0:
+        return {
+            "assign_att_to_def": {},
+            "distances": {},
+            "free_idx": list(range(n_att)),
+        }
+    cost = np.linalg.norm(def_xy[:, None, :] - att_xy[None, :, :], axis=2)
+    if n_def >= n_att:
+        r_def, c_att = linear_sum_assignment(cost)
+        pairs = list(zip(c_att.tolist(), r_def.tolist()))
+    else:
+        r_att, c_def = linear_sum_assignment(cost.T)
+        pairs = list(zip(r_att.tolist(), c_def.tolist()))
+
+    assign: dict[int, int] = {}
+    dists: dict[int, float] = {}
+    free: list[int] = []
+    matched_att: set[int] = set()
+    for a_idx, d_idx in pairs:
+        matched_att.add(int(a_idx))
+        dist = float(cost[int(d_idx), int(a_idx)])
+        assign[int(a_idx)] = int(d_idx)
+        dists[int(a_idx)] = dist
+        if dist > FREE_ASSIGN_M or not _marker_is_goal_side(
+            att_xy[int(a_idx)], def_xy[int(d_idx)], defending_left
+        ):
+            free.append(int(a_idx))
+    for a_idx in range(n_att):
+        if a_idx not in matched_att:
+            free.append(a_idx)
+    return {"assign_att_to_def": assign, "distances": dists, "free_idx": free}
+
+
+def _load_marking_frame_geometry(
+    data_dir: Path,
+    meta: MatchMeta,
+    frame: int,
+    *,
+    defending_team_id: int,
+) -> dict[str, Any] | None:
+    """Exact-frame free attackers and defense lambda2 for hungarian_danger_roles."""
+    row = load_frame_players(data_dir, meta.match_id, frame)
+    if not row or not row.get("player_data"):
+        return None
+    att_id = int(meta.away_id if int(defending_team_id) == meta.home_id else meta.home_id)
+    def_xy: list[np.ndarray] = []
+    att_xy: list[np.ndarray] = []
+    att_pids: list[int] = []
+    for pl in row["player_data"]:
+        if pl.get("x") is None or pl.get("y") is None:
+            continue
+        pid = int(pl["player_id"])
+        team = meta.player_team.get(pid)
+        if team is None:
+            continue
+        xy = np.array([float(pl["x"]), float(pl["y"])], dtype=float)
+        if team == int(defending_team_id):
+            def_xy.append(xy)
+        elif team == att_id:
+            att_xy.append(xy)
+            att_pids.append(pid)
+    if len(att_xy) < 2 or len(def_xy) < 2:
+        return None
+    def_xy_a = np.asarray(def_xy)
+    att_xy_a = np.asarray(att_xy)
+    defending_left = float(att_xy_a[:, 0].mean()) > 0.0
+    lambda2, _fiedler = algebraic_connectivity(_proximity_weights(def_xy_a))
+    marking = _free_attacker_assignment(def_xy_a, att_xy_a, defending_left=defending_left)
+    free_roles = [
+        meta.player_acronym.get(att_pids[i]) or "?"
+        for i in marking["free_idx"]
+        if i < len(att_pids)
+    ]
+    return {
+        "frame": int(frame),
+        "lambda2_defense": lambda2,
+        "n_free_attackers": len(marking["free_idx"]),
+        "free_roles": free_roles,
+        "marking": marking,
+        "_def_xy": def_xy_a,
+        "_att_xy": att_xy_a,
+        "_att_pids": att_pids,
+    }
+
+
+def _load_contrast_frame_geometry(
     match_id: str,
     frame: int,
-    data_dir: Path = DATA_DIR,
+    data_dir: Path,
 ) -> dict[str, Any] | None:
-    """Recompute one frame with geometry for plotting."""
+    """Recompute one sampled frame with geometry for plotting."""
     target = int(frame)
-    # Snap to sample grid
     if target % SAMPLE_STRIDE != 0:
         target = target - (target % SAMPLE_STRIDE)
     for row in iter_match_frame_rows(match_id, data_dir=data_dir, keep_geometry=True):
@@ -864,6 +1033,44 @@ def load_frame_geometry(
         if fr > target + SAMPLE_STRIDE * 2:
             break
     return None
+
+
+def load_frame_geometry(
+    match_id: str | Path,
+    frame: int | MatchMeta,
+    data_dir: Path | int | None = None,
+    *,
+    defending_team_id: int | None = None,
+) -> dict[str, Any] | None:
+    """Recompute one frame.
+
+    Contrast plots call ``load_frame_geometry(match_id, frame, data_dir=...)``
+    and receive the 2 Hz feature row (snapped onto the sample grid).
+
+    ``hungarian_danger_roles`` calls
+    ``load_frame_geometry(data_dir, meta, frame, defending_team_id=...)``
+    and receives free-attacker role acronyms plus defense lambda2 for that
+    exact tracking frame.
+    """
+    if isinstance(frame, MatchMeta) or defending_team_id is not None:
+        if not isinstance(match_id, Path) or not isinstance(frame, MatchMeta):
+            raise TypeError(
+                "marking geometry expects (data_dir: Path, meta: MatchMeta, frame: int)"
+            )
+        if isinstance(data_dir, bool) or not isinstance(data_dir, (int, np.integer)):
+            raise TypeError("marking geometry expects the frame index as the third argument")
+        if defending_team_id is None:
+            raise TypeError("marking geometry requires defending_team_id")
+        return _load_marking_frame_geometry(
+            match_id,
+            frame,
+            int(data_dir),
+            defending_team_id=int(defending_team_id),
+        )
+    root = DATA_DIR if data_dir is None else data_dir
+    if not isinstance(root, Path):
+        raise TypeError("contrast geometry expects data_dir to be a Path")
+    return _load_contrast_frame_geometry(str(match_id), int(frame), root)
 
 
 def possession_timeseries(
