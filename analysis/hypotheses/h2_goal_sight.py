@@ -562,6 +562,10 @@ def analyze_match(match_id: int) -> tuple[list[dict], dict]:
     # above used itertuples, which also exposes the columns. Keep it.
     measurable = [frame for frame in preferred if frame is not None]
     pose_frames = needed_pose_frames(measurable)
+    print(
+        f"  measurable frames {len(measurable)}, pose frames {len(pose_frames)}",
+        flush=True,
+    )
     shoulders = load_shoulders(match_id, pose_frames)
     by_player = _shoulder_index(shoulders)
 
@@ -743,8 +747,33 @@ def build_summary(rows: list[dict], coverage: list[dict]) -> dict:
         if item["separates"]
     ]
     supported = bool(primary["excludes_zero"])
+    forward_big = float(frame.loc[frame["big_chance"], "forward_fraction"].mean())
+    forward_other = float(frame.loc[~frame["big_chance"], "forward_fraction"].mean())
+    unoccluded_big = float(frame.loc[frame["big_chance"], "unoccluded_fraction"].mean())
+    unoccluded_other = float(frame.loc[~frame["big_chance"], "unoccluded_fraction"].mean())
     phases = frame.dropna(subset=["phase_index"])
     n_phases = int(phases.groupby(["match_id", "phase_index"]).ngroups) if len(phases) else 0
+    by_match = []
+    for match_id, part in frame.groupby("match_id"):
+        part_visible = part["visible_fraction"].to_numpy(dtype=float)
+        part_outcome = part["big_chance"].to_numpy(dtype=float)
+        part_sampled = bootstrap(part_visible, part_outcome)
+        part_primary = next(
+            item for item in part_sampled["thresholds"] if item["threshold"] == PRIMARY_THRESHOLD
+        )
+        by_match.append(
+            {
+                "match_id": int(match_id),
+                "n": int(len(part)),
+                "n_big_chances": int(part_outcome.sum()),
+                "mean_visible_fraction": float(part_visible.mean()),
+                "mean_visible_big_chance": part_sampled["mean_visible_big_chance"],
+                "mean_visible_other": part_sampled["mean_visible_other"],
+                "effect": part_primary["estimate"],
+                "ci95": part_primary["ci95"],
+                "excludes_zero": part_primary["excludes_zero"],
+            }
+        )
     return {
         "hypothesis_id": "h2",
         "hypothesis": (
@@ -753,6 +782,27 @@ def build_summary(rows: list[dict], coverage: list[dict]) -> dict:
         ),
         "verdict": "supported" if supported else "not_supported",
         "supported": supported,
+        "note": (
+            (
+                "In both matches the big-chance rate is higher when at least "
+                "half the goal mouth is visible, and each match interval "
+                "excludes zero. "
+                if by_match
+                and all(item["excludes_zero"] and (item["effect"] or 0) > 0 for item in by_match)
+                else "The match-level splits do not all exclude zero. "
+            )
+            + "The pooled gap is carried by shoulder heading "
+            f"(forward fraction {forward_big:.2f} on big chances vs "
+            f"{forward_other:.2f} otherwise) more than by the "
+            f"{OCCLUSION_RADIUS_M:.2f} m opponent circles "
+            f"(unoccluded fraction {unoccluded_big:.2f} vs {unoccluded_other:.2f}). "
+            + (
+                "The pooled possession-level interval excludes zero. "
+                if supported
+                else "The pooled possession-level interval includes zero. "
+            )
+            + "Two matches still leave the result underpowered."
+        ),
         "underpowered": True,
         "underpowered_reason": (
             "Only two matches have body pose (1925299 and 1996435). "
@@ -809,8 +859,13 @@ def build_summary(rows: list[dict], coverage: list[dict]) -> dict:
             "difference_excludes_zero": sampled["mean_difference_excludes_zero"],
             "mean_forward_fraction": float(frame["forward_fraction"].mean()),
             "mean_unoccluded_fraction": float(frame["unoccluded_fraction"].mean()),
+            "mean_forward_big_chance": forward_big,
+            "mean_forward_other": forward_other,
+            "mean_unoccluded_big_chance": unoccluded_big,
+            "mean_unoccluded_other": unoccluded_other,
             "median_abs_heading_gap_deg": float(frame["abs_heading_gap_deg"].median()),
         },
+        "by_match": by_match,
         "big_chance_definition": (
             "An on-ball player possession is a big chance when lead_to_shot "
             f"is true OR xshot_player_possession_max >= {HIGH_XSHOT:.2f}. "
