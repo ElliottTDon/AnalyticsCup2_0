@@ -3,194 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Defensive positioning review</title>
+  <title>Finished analysis</title>
   <style>
     :root { color-scheme: light dark; }
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 1.125rem;
-      line-height: 1.55;
-      padding: 1.5rem 1.15rem 3rem;
+      margin: 0 auto;
       max-width: 40rem;
+      padding: 1.35rem 1.15rem 3rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.45;
     }
     h1 {
-      font-size: 1.65rem;
-      line-height: 1.25;
-      margin: 0 0 0.5rem;
+      font-size: 1.85rem;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
     }
-    h2 {
-      font-size: 1.2rem;
-      margin: 2rem 0 0.65rem;
-      padding-top: 0.35rem;
-      border-top: 1px solid #ddd;
-    }
-    @media (prefers-color-scheme: dark) {
-      h2 { border-top-color: #444; }
-    }
-    p, li {
-      margin: 0 0 0.85rem;
-    }
-    .purpose {
-      margin: 0 0 0.25rem;
-      color: #555;
-      font-size: 1.05rem;
-    }
-    @media (prefers-color-scheme: dark) {
-      .purpose { color: #aaa; }
-    }
-    .mission {
-      margin: 0 0 0.85rem;
-      padding: 0.85rem 0 0.85rem 0.9rem;
-      border-left: 3px solid #888;
-      font-size: 1.05rem;
-    }
-    ul {
-      margin: 0 0 0.5rem;
-      padding-left: 1.25rem;
-    }
-    li { padding-left: 0.15rem; }
-    .thread-title {
-      font-weight: 600;
+    p { margin: 0 0 1rem; }
+    nav a {
       display: block;
-      margin-bottom: 0.2rem;
-    }
-    .ideas {
-      margin-top: 2rem;
-      padding-top: 1rem;
-      border-top: 1px solid #ddd;
-      font-size: 1rem;
-      color: #444;
-    }
-    @media (prefers-color-scheme: dark) {
-      .ideas { border-top-color: #444; color: #aaa; }
-    }
-    a {
+      padding: 0.95rem 0;
+      border-bottom: 1px solid #ddd;
       color: inherit;
-      text-decoration: underline;
-      text-underline-offset: 0.15em;
-    }
-    .cta {
-      display: block;
-      margin: 1rem 0;
-      padding: 0.9rem 1rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
       text-decoration: none;
-      font-weight: 600;
     }
     @media (prefers-color-scheme: dark) {
-      .cta { border-color: #555; }
+      nav a { border-bottom-color: #444; }
     }
-    .cta:active, .cta:hover { background: rgba(127,127,127,0.12); }
-    .cta span {
-      display: block;
-      font-weight: 400;
-      font-size: 0.92rem;
-      margin-top: 0.25rem;
-      color: #666;
+    nav a:active, nav a:hover { background: rgba(127, 127, 127, 0.12); }
+    .foot {
+      margin-top: 1.75rem;
+      font-size: 1.05rem;
     }
-    @media (prefers-color-scheme: dark) {
-      .cta span { color: #999; }
-    }
+    .foot a { color: inherit; margin-right: 1rem; }
   </style>
 </head>
 <body>
-  <h1>Defensive positioning review</h1>
-  <p class="purpose">Phone-first notes for the Analytics Cup defensive question.</p>
-
-  <h2>Mission</h2>
-  <blockquote class="mission">
-    Football defensive positioning. How can tracking and contextual data help us understand how players and teams defend?
-    Team shape, spacing, pressure, compactness, marking, defensive decision-making.
-  </blockquote>
-
-  <a class="cta" href="eda.html">
-    Open visual EDA
-    <span>Shape, pressure, spacing, team shot maps, Hungarian roles</span>
-  </a>
-  <a class="cta" href="team-zones.html">
-    Team shot zones
-    <span>Each club — where they score vs where they are broken</span>
-  </a>
-  <a class="cta" href="cup-ideas.html">
-    Cup-goal idea pages
-    <span>Team zones · marking debt · compact/weak · pressing chains</span>
-  </a>
-  <a class="cta" href="graph-tool-notes.html">
-    Block graph FAQ
-    <span>Timer series, pressing, pre-fracturing — plain English</span>
-  </a>
-
-  <h2>What was tested</h2>
-  <p>
-    Twenty A-League 2024/25 matches (SkillCorner Open Data). Phases of play + dynamic events
-    (pressure, on-ball engagements, organised-defense / inside-shape labels, pressing chains).
-    Plus an earlier graph experiment: defense proximity + attack Delaunay, Hungarian marking,
-    supra-Laplacian — compared to OOP width/length/area, nearest defender, and on-ball pressure.
-  </p>
-
-  <h2>Findings (visual EDA)</h2>
-  <ul>
-    <li>Shot rate by organized block: low ~18.5%, medium ~9.0%, high ~6.0%.</li>
-    <li>Shot phases sit in a smaller defensive box (strongest in the low block, ~150–166 m² smaller).</li>
-    <li>On-ball pressure ladder: ~2.2% (none) → ~21% (very high) — but high bands often mean the ball is already dangerous.</li>
-    <li>Organised defense ~2.5% shot rate vs ~10.5% when not; ball inside shape ~11.5% vs ~5.8% outside.</li>
-    <li>Engagement types: pressing / counter-press regain more; beaten-by-possession or movement flags precede shots.</li>
-    <li>Team board: mean OOP box area alone does not rank shot prevention (e.g. Melbourne City large box, low shot rate).</li>
-  </ul>
-
-  <h2>Findings (graph notebook)</h2>
-  <ul>
-    <li>
-      After residualizing on width, length, area, nearest defender, and overall pressure, most graph features
-      do not add separation. Only supra-Laplacian λ₂ keeps a small residual (about −0.013).
-    </li>
-    <li>Uncovered danger, free attackers, defense λ₂, structural pressure, and a late λ₂ drop do not beat the box+pressure baseline.</li>
-  </ul>
-
-  <h2>How to read that</h2>
-  <p>
-    Contextual labels already carry most of the shot signal: block height, box compactness, organised shape,
-    and whether the ball is inside the block. Graph coupling did not reveal a large extra effect in this sample.
-    Twenty matches is still small.
-  </p>
-
-  <h2>Brainstorm</h2>
-  <ul>
-    <li>
-      <span class="thread-title">Compactness vs decision</span>
-      If the bounding box already measures compactness, the remaining question is who steps, who holds,
-      and when the block slides versus jumps.
-    </li>
-    <li>
-      <span class="thread-title">Pressure as context, not cause</span>
-      Very high pressure co-occurs with shots. Film the subset where pressure is high but the box is open —
-      those are the decision mistakes, not the average ladder.
-    </li>
-    <li>
-      <span class="thread-title">Marking intent versus proximity</span>
-      Body pose exists for two matches only. Beaten-by-movement engagements are the practical proxy until pose coverage grows.
-    </li>
-    <li>
-      <span class="thread-title">Box–coupling disagreements</span>
-      Cases where the box looks compact but supra-Laplacian coupling is weak: those disagreements are the film to watch.
-    </li>
-    <li>
-      <span class="thread-title">Monday coaching change</span>
-      Actionable levers so far: stay organised, keep the ball outside the shape, manage low-block width.
-      If that is all a coach would change, we still need a sharper decision metric.
-    </li>
-  </ul>
-
-  <p class="ideas">
-    Ideas: jot notes in a phone note keyed to the thread titles above.
-    No login, no backend—just this page and your notes app.
-  </p>
-
-  <p><a href="eda.html">Visual EDA gallery</a></p>
-  <p><a href="eda_notebook.html">Full EDA notebook (HTML)</a></p>
-  <p><a href="defend.html">Graph analysis notebook (HTML)</a></p>
-  <p><a href="index.html">Back to notebook index</a></p>
+  <h1>Finished analysis</h1>
+  <p>Four checks are still running and have no results.</p>
+  <nav>
+    <a href="timeline.html">Timeline and next steps, from the mission through three finished checks.</a>
+    <a href="eda.html">Event EDA: block height and on-ball pressure already separate shots.</a>
+    <a href="graphs.html">Coupled graphs mostly lost to the box and on-ball pressure.</a>
+    <a href="fullback-tracking.html">Full-back tracking changes receptions, not shots.</a>
+    <a href="overlaps.html">Overlaps: a closer defender lines up with fewer shots.</a>
+    <a href="drawn-out.html">Centre-backs are drawn out when the striker is tightly marked.</a>
+    <a href="in-progress.html">Still running: body shape, sight of goal, shadow screening, passing angle.</a>
+  </nav>
+  <p class="foot"><a href="index.html">Notebook index</a></p>
 </body>
 </html>

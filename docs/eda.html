@@ -3,21 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Defensive positioning EDA</title>
+  <title>Event EDA</title>
   <style>
     :root { color-scheme: light dark; }
     body {
-      margin: 0;
+      margin: 0 auto;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.5;
-      padding: 1.1rem 0.85rem 3rem;
-      max-width: 44rem;
-      margin-inline: auto;
+      font-size: 1.25rem;
+      line-height: 1.45;
+      padding: 1.35rem 1.15rem 3rem;
+      max-width: 40rem;
     }
-    h1 { font-size: 1.55rem; line-height: 1.25; margin: 0 0 0.4rem; }
+    h1 { font-size: 1.85rem; line-height: 1.2; margin: 0 0 0.75rem; }
     h2 {
-      font-size: 1.15rem;
-      margin: 1.75rem 0 0.6rem;
+      font-size: 1.35rem;
+      line-height: 1.25;
+      margin: 1.6rem 0 0.5rem;
       padding-top: 0.4rem;
       border-top: 1px solid #ddd;
     }
@@ -25,13 +26,11 @@
       h2 { border-top-color: #444; }
     }
     .mission {
-      margin: 0.75rem 0 1rem;
-      padding: 0.75rem 0.85rem;
+      margin: 0 0 1rem;
+      padding: 0.15rem 0 0.15rem 0.85rem;
       border-left: 3px solid #888;
-      background: rgba(127,127,127,0.08);
-      font-size: 1.02rem;
     }
-    .meta { color: #666; font-size: 0.92rem; margin: 0 0 0.75rem; }
+    .meta { color: #666; margin: 0 0 0.75rem; }
     @media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
     ul { padding-left: 1.2rem; }
     li { margin: 0 0 0.55rem; }
@@ -48,7 +47,6 @@
     }
     figcaption {
       margin-top: 0.45rem;
-      font-size: 0.95rem;
       color: #444;
     }
     @media (prefers-color-scheme: dark) {
@@ -56,35 +54,34 @@
       .card img { background: #222; }
     }
     a { color: inherit; }
-    .nav { margin-top: 2rem; font-size: 0.95rem; }
+    .nav { margin-top: 2rem; }
     .nav a { display: inline-block; margin-right: 1rem; margin-bottom: 0.5rem; }
   </style>
 </head>
 <body>
-  <h1>Defensive positioning EDA</h1>
-  <p class="meta">20 matches · 8,834 phases · 18,710 possessions · 17,445 engagements</p>
-  <p class="meta">Organized-block shot rates: low block 18.5% · medium block 9.0% · high block 6.0%</p>
+  <h1>Event EDA</h1>
+  <p>20 matches.</p>
 
-  <div class="mission">
-    <strong>Question.</strong> How can tracking and contextual data help us understand the way players and teams defend?
-    Explore team shape, spacing, pressure, compactness, marking, and defensive decision-making.
-  </div>
+  <h2>Block height</h2>
+  <p>Shot rates are about 18.5–18.7% in a low block, 9.0–9.3% in a medium block, and 6.0% in a high block.</p>
 
-  <h2>Takeaways</h2>
+  <h2>On-ball pressure</h2>
+  <p>Pressure runs from 2.2% shots with none to 21.4% with very high pressure. High pressure often means the ball is already dangerous, so read it as context.</p>
+
+  <h2>Box size</h2>
+  <p>Shot phases have a smaller box, strongest in the low block (about 148–166 m²).</p>
+
+  <h2>From the earlier review</h2>
   <ul>
-    <li>Organized block height sets the base shot rate: low (~18.5%) ≫ medium (~9.0%) > high (~6.0%).</li><li>Shot phases sit in a smaller OOP bounding box — compactness co-moves with danger, strongest in the low block.</li><li>On-ball pressure separates outcomes (~2% no pressure → ~21% very high), but high bands are endogenous with already-dangerous moments — treat as context, not pure cause.</li><li>Keeping the block organised (~2.5% shot rate) and the ball outside the shape (~5.8% vs ~11.5% inside) are the clearest structure signals; line count barely moves.</li><li>Engagement mix matters: pressing/counter-press regain more often; beaten-by-possession/movement flags precede shots.</li><li>Team board: mean OOP box area and width profile which A-League sides concede more in organized defense — compactness alone does not rank the table.</li>
+    <li>Organised defense is about a 2.5% shot rate, versus about 10.5% when it is not. The ball inside the shape is about 11.5%, versus about 5.8% outside.</li>
+    <li>Pressing and counter-press regain the ball more often. Beaten-by-possession and beaten-by-movement flags precede shots.</li>
+    <li>Mean out-of-possession box area alone does not rank shot prevention. Melbourne City is a large box with a low shot rate.</li>
+    <li>The box already measures compactness. The open question is who steps, who holds, and when the block slides versus jumps.</li>
   </ul>
+  <p>The question underneath the charts: how tracking and contextual data explain the way players and teams defend. Shape, spacing, pressure, compactness, marking, and defensive decisions.</p>
+  <p><a href="cup-ideas.html">Cup-goal idea pages</a>. <a href="graph-tool-notes.html">Block graph FAQ</a>.</p>
 
-  <h2>Plain-language glossary</h2>
-  <ul>
-    <li><strong>Compactness</strong> — how small the defending team’s shape is (width × depth of their box). Tighter is not always better in this sample.</li>
-    <li><strong>Pressure gradient</strong> — as on-ball pressure rises from none to very high, how much the shot rate climbs (same for block height).</li>
-    <li><strong>Organised block</strong> — low, medium, or high defensive block (not chaotic or transition).</li>
-  </ul>
-  <p><a href="cup-ideas.html"><strong>Cup-goal idea pages</strong></a> (team zones · marking debt · compact/weak · pressing chains).
-  <a href="graph-tool-notes.html"><strong>Block graph FAQ</strong></a> (timer series, pressing, pre-fracturing).</p>
-
-  <h2>Visual tour</h2>
+  <h2>Charts</h2>
   
       <figure class="card">
         <img src="eda/figures/01_phase_mix.png" alt="How long teams spend in each defensive situation (low / mid / high block, transitions, set pieces) and how often those spells end in a shot." loading="lazy">
@@ -207,7 +204,8 @@
     <a href="cup-ideas.html">Cup ideas</a>
     <a href="team-zones.html">Team zones</a>
     <a href="graph-tool-notes.html">Graph tool notes</a>
-    <a href="review.html">Review notes</a>
+    <a href="review.html">Contents</a>
+    <a href="timeline.html">Timeline</a>
     <a href="defend.html">Graph notebook</a>
     <a href="eda_notebook.html">Full EDA notebook</a>
     <a href="index.html">All notebooks</a>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Timeline and next steps</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0 auto;
+      max-width: 40rem;
+      padding: 1.35rem 1.15rem 3rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.45;
+    }
+    h1 {
+      font-size: 1.85rem;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    h2 {
+      font-size: 1.35rem;
+      line-height: 1.25;
+      margin: 1.6rem 0 0.5rem;
+    }
+    p, li { margin: 0 0 0.75rem; }
+    ol, ul { margin: 0 0 0.75rem; padding-left: 1.3rem; }
+    a { color: inherit; }
+    .mission {
+      margin: 0 0 1rem;
+      padding: 0.15rem 0 0.15rem 0.85rem;
+      border-left: 3px solid #888;
+    }
+    .foot { margin-top: 1.75rem; }
+    .foot a { margin-right: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Timeline and next steps</h1>
+  <p class="mission">Football defensive positioning. How can tracking and contextual data help us understand how players and teams defend? Team shape, spacing, pressure, compactness, marking, defensive decision-making.</p>
+  <p>20 matches in total. Pose is available on two.</p>
+
+  <h2>Order</h2>
+  <ol>
+    <li>The mission was how tracking explains defending.</li>
+    <li>Event EDA on 20 A-League matches showed block height and on-ball pressure already separate shots.</li>
+    <li>A coupled two-graph method asked whether the defense covers the passing graph or only the ball, and mostly lost to the box and pressure.</li>
+    <li>Seven sharper hypotheses were split out.</li>
+    <li>Three are finished: full-back tracking, overlaps, and centre-backs drawn out.</li>
+    <li>Four are still running on cloud machines, with no results yet: body shape, sight of goal, shadow screening, and passing angle.</li>
+  </ol>
+
+  <h2>Next steps</h2>
+  <ul>
+    <li>Keep nearest-defender distance on overlaps, and the full-back tracking rule, as reception metrics, not shot models.</li>
+    <li>Film centre-backs when the striker is inside 3 m.</li>
+    <li>Do not ship coupled-graph scores as a KPI.</li>
+    <li>Do not build a body-orientation metric until those four checks return.</li>
+  </ul>
+
+  <p>The earlier review already had three coaching levers from the event labels: stay organised, keep the ball outside the shape, and manage low-block width. Those still leave the decision questions to the three finished checks and the four still running.</p>
+
+  <p class="foot">
+    <a href="review.html">Contents</a>
+    <a href="eda.html">Event EDA</a>
+    <a href="in-progress.html">Still running</a>
+  </p>
+</body>
+</html>
