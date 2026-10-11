@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case-based retrieval</title><style>
+:root { color-scheme: light dark; }
+body { margin: 0 auto; max-width: 44rem; padding: 1.1rem 0.9rem 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55; font-size: 1.05rem; }
+h1 { font-size: 1.45rem; margin: 0 0 0.4rem; }
+h2 { font-size: 1.12rem; margin: 1.6rem 0 0.55rem; padding-top: 0.45rem; border-top: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { h2 { border-top-color: #444; } }
+.mission { margin: 0.7rem 0 1rem; padding: 0.75rem 0.85rem; border-left: 3px solid #888;
+  background: rgba(127,127,127,0.08); }
+.meta { color: #666; font-size: 0.92rem; }
+@media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
+figure { margin: 0 0 1.25rem; }
+img { width: 100%; height: auto; border-radius: 4px; background: #f3f3f3; display: block; }
+figcaption { margin-top: 0.4rem; font-size: 0.95rem; color: #444; }
+@media (prefers-color-scheme: dark) { figcaption { color: #bbb; } img { background: #222; } }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.75rem 0 1.25rem; }
+th, td { text-align: left; padding: 0.4rem 0.3rem; border-bottom: 1px solid #ddd; vertical-align: top; }
+@media (prefers-color-scheme: dark) { th, td { border-bottom-color: #444; } }
+.nav a { display: inline-block; margin: 0.35rem 1rem 0.35rem 0; color: inherit; }
+ul { padding-left: 1.2rem; } li { margin: 0 0 0.45rem; }
+code { font-size: 0.9em; }
+.card-link { display: block; padding: 0.85rem 0.2rem; border-bottom: 1px solid #eee;
+  text-decoration: none; color: inherit; }
+@media (prefers-color-scheme: dark) { .card-link { border-bottom-color: #333; } }
+.card-link .title { font-weight: 600; display: block; }
+.card-link .path { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+</style>
+</head><body>
+
+  <h1>Case-based retrieval</h1>
+  <p class="meta">Approach 7 — the graph signature is a search key for film, not a leaderboard model.</p>
+  <div class="mission">
+    For each high-debt <strong>goal</strong>, retrieve the nearest coverage-debt graphs (cosine on
+    standardized features). Use the pairs as “watch these together” clips.
+  </div>
+  <figure><img src="eda/figures/graphs/07_case_space.png" alt="07_case_space.png" loading="lazy"></figure><figure><img src="eda/figures/graphs/07_retrieval_distances.png" alt="07_retrieval_distances.png" loading="lazy"></figure>
+  <h2>High-debt goals → nearest cases</h2>
+  <table>
+    <thead><tr>
+      <th>Q match</th><th>Q frame</th><th>Q debt</th><th>Q free</th>
+      <th>NN match</th><th>NN frame</th><th>NN type</th><th>NN free</th><th>Dist</th>
+    </tr></thead>
+    <tbody><tr><td>1996435</td><td>28199</td><td>10.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1996435</td><td>28188</td><td>goal</td><td>AM,CF,LDM,LW,RDM</td><td>0.012</td></tr><tr><td>1996435</td><td>28199</td><td>10.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>2017461</td><td>52367</td><td>shot</td><td>CF,LM,LW,RM,RW</td><td>0.047</td></tr><tr><td>1996435</td><td>28199</td><td>10.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1996436</td><td>36045</td><td>shot</td><td>CF,LM,LW,RM,RW</td><td>0.066</td></tr><tr><td>1874553</td><td>38874</td><td>9.5</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1996435</td><td>20952</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.021</td></tr><tr><td>1874553</td><td>38874</td><td>9.5</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1959846</td><td>20449</td><td>shot</td><td>CF,LM,LW,RM,RW</td><td>0.051</td></tr><tr><td>1874553</td><td>38874</td><td>9.5</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1886347</td><td>10829</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.084</td></tr><tr><td>1996435</td><td>28168</td><td>9.5</td><td>AM,CF,LDM,LW,RDM</td><td>2007721</td><td>38495</td><td>shot</td><td>CF,LM,LW,RM,RW</td><td>0.006</td></tr><tr><td>1996435</td><td>28168</td><td>9.5</td><td>AM,CF,LDM,LW,RDM</td><td>1996436</td><td>36045</td><td>shot</td><td>CF,LM,LW,RM,RW</td><td>0.013</td></tr><tr><td>1996435</td><td>28168</td><td>9.5</td><td>AM,CF,LDM,LW,RDM</td><td>2007721</td><td>38518</td><td>shot</td><td>CF,LM,LW,RM,RW</td><td>0.018</td></tr><tr><td>1874553</td><td>38904</td><td>9.5</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1996435</td><td>20952</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.082</td></tr><tr><td>1874553</td><td>38904</td><td>9.5</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1874553</td><td>38874</td><td>goal</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.086</td></tr><tr><td>1874553</td><td>38904</td><td>9.5</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1886347</td><td>10829</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.094</td></tr><tr><td>1874553</td><td>38856</td><td>9.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>2011166</td><td>41831</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.049</td></tr><tr><td>1874553</td><td>38856</td><td>9.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1996435</td><td>20928</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.059</td></tr><tr><td>1874553</td><td>38856</td><td>9.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1986691</td><td>33898</td><td>shot</td><td>CF,LM,LW,RM,RW</td><td>0.081</td></tr><tr><td>1996435</td><td>21272</td><td>9.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1996435</td><td>21281</td><td>goal</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.000</td></tr><tr><td>1996435</td><td>21272</td><td>9.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>2016236</td><td>61826</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.037</td></tr><tr><td>1996435</td><td>21272</td><td>9.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1874553</td><td>179</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.074</td></tr><tr><td>1996435</td><td>28188</td><td>9.0</td><td>AM,CF,LDM,LW,RDM</td><td>1996435</td><td>28199</td><td>goal</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.012</td></tr><tr><td>1996435</td><td>28188</td><td>9.0</td><td>AM,CF,LDM,LW,RDM</td><td>1996436</td><td>37259</td><td>shot</td><td>AM,CF,LW,RM</td><td>0.025</td></tr><tr><td>1996435</td><td>28188</td><td>9.0</td><td>AM,CF,LDM,LW,RDM</td><td>2017461</td><td>52367</td><td>shot</td><td>CF,LM,LW,RM,RW</td><td>0.029</td></tr><tr><td>1996435</td><td>21281</td><td>9.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1996435</td><td>21281</td><td>goal</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.000</td></tr><tr><td>1996435</td><td>21281</td><td>9.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>2016236</td><td>61826</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.037</td></tr><tr><td>1996435</td><td>21281</td><td>9.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1874553</td><td>179</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.074</td></tr><tr><td>2006363</td><td>4871</td><td>9.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1996435</td><td>18957</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.048</td></tr><tr><td>2006363</td><td>4871</td><td>9.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>2006363</td><td>16269</td><td>shot</td><td>AM,CF,LDM,RDM,RW</td><td>0.072</td></tr><tr><td>2006363</td><td>4871</td><td>9.0</td><td>AM,CF,LDM,LW,RDM,RW</td><td>1959846</td><td>6083</td><td>shot</td><td>CF,LM,LW,RM,RW</td><td>0.082</td></tr><tr><td>1996436</td><td>10981</td><td>9.0</td><td>AM,CF,LM,LW,RM,RW</td><td>1925299</td><td>46497</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.002</td></tr><tr><td>1996436</td><td>10981</td><td>9.0</td><td>AM,CF,LM,LW,RM,RW</td><td>2006363</td><td>3256</td><td>shot</td><td>AM,CF,LDM,LW,RDM,RW</td><td>0.015</td></tr><tr><td>1996436</td><td>10981</td><td>9.0</td><td>AM,CF,LM,LW,RM,RW</td><td>1996436</td><td>40921</td><td>shot</td><td>AM,CF,LM,LW,RM,RW</td><td>0.020</td></tr></tbody>
+  </table>
+
+<p class="nav">
+  <a href="interpretable-graphs.html">Graph methods hub</a>
+  <a href="cup-ideas.html">Cup ideas</a>
+  <a href="eda.html">Visual EDA</a>
+  <a href="index.html">Index</a>
+</p>
+</body></html>

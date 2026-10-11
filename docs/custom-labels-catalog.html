@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Label catalog</title><style>
+:root { color-scheme: light dark; }
+body { margin: 0 auto; max-width: 44rem; padding: 1.1rem 0.9rem 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55; font-size: 1.05rem; }
+h1 { font-size: 1.45rem; margin: 0 0 0.4rem; }
+h2 { font-size: 1.12rem; margin: 1.6rem 0 0.55rem; padding-top: 0.45rem; border-top: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { h2 { border-top-color: #444; } }
+.mission { margin: 0.7rem 0 1rem; padding: 0.75rem 0.85rem; border-left: 3px solid #888;
+  background: rgba(127,127,127,0.08); }
+.meta { color: #666; font-size: 0.92rem; }
+@media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
+figure { margin: 0 0 1.25rem; }
+img { width: 100%; height: auto; border-radius: 4px; background: #f3f3f3; display: block; }
+figcaption { margin-top: 0.4rem; font-size: 0.95rem; color: #444; }
+@media (prefers-color-scheme: dark) { figcaption { color: #bbb; } img { background: #222; } }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.75rem 0 1.25rem; }
+th, td { text-align: left; padding: 0.4rem 0.3rem; border-bottom: 1px solid #ddd; vertical-align: top; }
+@media (prefers-color-scheme: dark) { th, td { border-bottom-color: #444; } }
+.nav a { display: inline-block; margin: 0.35rem 1rem 0.35rem 0; color: inherit; }
+ul { padding-left: 1.2rem; } li { margin: 0 0 0.45rem; }
+code { font-size: 0.9em; }
+.card-link { display: block; padding: 0.85rem 0.2rem; border-bottom: 1px solid #eee;
+  text-decoration: none; color: inherit; }
+@media (prefers-color-scheme: dark) { .card-link { border-bottom-color: #333; } }
+.card-link .title { font-weight: 600; display: block; }
+.card-link .path { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+</style>
+</head><body>
+
+  <h1>Label catalog</h1>
+  <p class="meta">Definitions + lift charts. Tunable rules, not trained weights.</p>
+  <div class="mission">
+    Each label is a boolean (or small enum) you can put on a phase/event and then
+    retrieve film. Prefer denser outcomes than shot/goal when the sample is small.
+  </div>
+  <figure><img src="eda/figures/labels/label_shot_lift.png" alt="label_shot_lift.png" loading="lazy"></figure><figure><img src="eda/figures/labels/phase_outcome_dense.png" alt="phase_outcome_dense.png" loading="lazy"></figure><figure><img src="eda/figures/labels/step_vs_hold.png" alt="step_vs_hold.png" loading="lazy"></figure><figure><img src="eda/figures/labels/compact_but_broken.png" alt="compact_but_broken.png" loading="lazy"></figure><figure><img src="eda/figures/labels/weak_side_press_leak.png" alt="weak_side_press_leak.png" loading="lazy"></figure>
+  <h2>Definitions</h2>
+  <ul><li><code>coverage_debt</code> — Danger graph debt_score ≥ 3 (free attackers + far runner + failed chain).</li><li><code>compact_but_broken</code> — Bottom-tercile OOP box + (ball inside shape | beaten engagement | ≥2 free attackers at danger).</li><li><code>weak_side_press_leak</code> — Pressing chain with far-side off-ball runner and chain end ≠ regain.</li><li><code>step_vs_hold</code> — Engagement push/break line (step) vs force-back / reduce-danger (hold) in organised blocks.</li><li><code>phase_outcome_dense</code> — Organised phase → regain | disruption | progression | shot | goal | other.</li><li><code>proximity_intent_debt</code> — Engagement ≤3 m and beaten_by_movement (pose-free intent proxy).</li><li><code>pose_attention</code> — Shoulder facing vs ball / far-side runner; scan lag in frames (pose matches).</li></ul>
+
+<p class="nav">
+  <a href="custom-labels.html">Custom labels hub</a>
+  <a href="interpretable-graphs.html">Interpretable graphs</a>
+  <a href="cup-ideas.html">Cup ideas</a>
+  <a href="index.html">Index</a>
+</p>
+</body></html>

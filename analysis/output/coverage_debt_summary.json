@@ -1,0 +1,14 @@
+{
+  "n_events": 977,
+  "n_matches": 20,
+  "base_auc": 0.6575611650806351,
+  "full_auc": 0.70114958972196,
+  "residual": {
+    "mean_diff_shot_minus_nons": 0.04080752029161712,
+    "ci_low": -0.02134553051336819,
+    "ci_high": 0.09709659480313843,
+    "excludes_zero": false
+  },
+  "leakage_safe": true,
+  "graph_feature_note": "event-only (press chain, far runner, inside shape); no Hungarian"
+}

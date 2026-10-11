@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coverage-debt event graph</title><style>
+:root { color-scheme: light dark; }
+body { margin: 0 auto; max-width: 44rem; padding: 1.1rem 0.9rem 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55; font-size: 1.05rem; }
+h1 { font-size: 1.45rem; margin: 0 0 0.4rem; }
+h2 { font-size: 1.12rem; margin: 1.6rem 0 0.55rem; padding-top: 0.45rem; border-top: 1px solid #ddd; }
+@media (prefers-color-scheme: dark) { h2 { border-top-color: #444; } }
+.mission { margin: 0.7rem 0 1rem; padding: 0.75rem 0.85rem; border-left: 3px solid #888;
+  background: rgba(127,127,127,0.08); }
+.meta { color: #666; font-size: 0.92rem; }
+@media (prefers-color-scheme: dark) { .meta { color: #aaa; } }
+figure { margin: 0 0 1.25rem; }
+img { width: 100%; height: auto; border-radius: 4px; background: #f3f3f3; display: block; }
+figcaption { margin-top: 0.4rem; font-size: 0.95rem; color: #444; }
+@media (prefers-color-scheme: dark) { figcaption { color: #bbb; } img { background: #222; } }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.75rem 0 1.25rem; }
+th, td { text-align: left; padding: 0.4rem 0.3rem; border-bottom: 1px solid #ddd; vertical-align: top; }
+@media (prefers-color-scheme: dark) { th, td { border-bottom-color: #444; } }
+.nav a { display: inline-block; margin: 0.35rem 1rem 0.35rem 0; color: inherit; }
+ul { padding-left: 1.2rem; } li { margin: 0 0 0.45rem; }
+code { font-size: 0.9em; }
+.card-link { display: block; padding: 0.85rem 0.2rem; border-bottom: 1px solid #eee;
+  text-decoration: none; color: inherit; }
+@media (prefers-color-scheme: dark) { .card-link { border-bottom-color: #333; } }
+.card-link .title { font-weight: 600; display: block; }
+.card-link .path { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+</style>
+</head><body>
+
+  <h1>Coverage-debt event graph</h1>
+  <p class="meta">Approach 2 — event-level graphs at shots and goals in organised blocks.</p>
+  <div class="mission">
+    <strong>Nodes.</strong> Ball-carrier · free attackers (Hungarian, &gt;8 m or not goal-side) ·
+    concurrent pressing-chain defenders · far-side off-ball runner.<br>
+    <strong>Edges.</strong> Unmarked (debt) · press-to-ball · weak-side leak.<br>
+    No learned weights — the graph <em>is</em> the insight.
+  </div>
+  <ul>
+    <li>Events graphed: <strong>977</strong> (122 goals)</li>
+    <li>Mean free attackers at event: <strong>4.8</strong></li>
+    <li>Share with far-side runner: <strong>4.6%</strong></li>
+    <li>Mean debt score: <strong>7.52</strong></li>
+  </ul>
+  <h2>Example graphs</h2>
+  <figure><img src="eda/figures/graphs/02_debt_graph_example_1.png" alt="02_debt_graph_example_1.png" loading="lazy"><figcaption>Example coverage-debt graph (interpretable structure).</figcaption></figure><figure><img src="eda/figures/graphs/02_debt_graph_example_2.png" alt="02_debt_graph_example_2.png" loading="lazy"><figcaption>Example coverage-debt graph (interpretable structure).</figcaption></figure><figure><img src="eda/figures/graphs/02_debt_graph_example_3.png" alt="02_debt_graph_example_3.png" loading="lazy"><figcaption>Example coverage-debt graph (interpretable structure).</figcaption></figure><figure><img src="eda/figures/graphs/02_debt_graph_example_4.png" alt="02_debt_graph_example_4.png" loading="lazy"><figcaption>Example coverage-debt graph (interpretable structure).</figcaption></figure>
+  <h2>Why this fits small n</h2>
+  <p>Hundreds of danger events give structure to inspect; we do not train a message-passing GNN
+  on 20 matches. Hand-crafted scores and case retrieval use these danger graphs directly.
+  The sparse residual model uses a parallel <em>event-only</em> debt signature at every phase end
+  (press chain / far runner / inside shape) so Hungarian free-attacker rows — which exist only at
+  shots and goals — cannot leak outcome into the AUC.</p>
+
+<p class="nav">
+  <a href="interpretable-graphs.html">Graph methods hub</a>
+  <a href="cup-ideas.html">Cup ideas</a>
+  <a href="eda.html">Visual EDA</a>
+  <a href="index.html">Index</a>
+</p>
+</body></html>

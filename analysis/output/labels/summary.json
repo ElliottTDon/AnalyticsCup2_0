@@ -1,0 +1,35 @@
+{
+  "n_matches": 20,
+  "n_phases": 5699,
+  "n_pose": 261,
+  "pose_note": "Using pose archives for [1925299].",
+  "pose_archives": [
+    1925299
+  ],
+  "label_counts": {
+    "coverage_debt": {
+      "n": 977,
+      "fire": 467
+    },
+    "compact_but_broken": {
+      "n": 1890,
+      "fire": 919
+    },
+    "weak_side_press_leak": {
+      "n": 1567,
+      "fire": 688
+    },
+    "step_vs_hold": {
+      "n": 13326,
+      "fire": 1496
+    },
+    "phase_outcome_dense": {
+      "n": 5699,
+      "fire": 1542
+    },
+    "proximity_intent_debt": {
+      "n": 2072,
+      "fire": 92
+    }
+  }
+}
