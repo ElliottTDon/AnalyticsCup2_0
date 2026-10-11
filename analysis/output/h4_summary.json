@@ -1,0 +1,573 @@
+{
+  "id": 4,
+  "title": "Wide-to-central angle that breaks the press",
+  "verdict": "not_supported",
+  "supported": false,
+  "hypothesis": "When is the passing angle between a wide player and a central midfielder large enough to break the press?",
+  "angle": {
+    "name": "escape_angle",
+    "unit": "degrees",
+    "definition": "Interior angle at the ball carrier between the other player in the wide-CM pair and the nearest outfield opponent, excluding goalkeepers. Zero means the receiver is in the same direction as that opponent. Larger means the pass points farther away from that opponent. Positions are taken from the tracking frame at the pass (frame_end) or at the passing option (frame_start).",
+    "bins_deg": [
+      "0-30",
+      "30-60",
+      "60-90",
+      "90-180"
+    ],
+    "threshold_deg": null,
+    "examined_boundary_deg": null,
+    "bin_jump": -0.21069182389937105,
+    "threshold_reason": "no_positive_step"
+  },
+  "population": "Wide-to-CM and CM-to-wide player_possession passes. Passing options with the same role pair are a separate sample and are not pooled.",
+  "roles": "player_role.acronym on the match json. Wide: LB, RB, LWB, RWB, LW, RW, LM, RM. Central midfield: LDM, RDM, CDM, DM, CM, LCM, RCM, AM, CAM.",
+  "n": 590,
+  "n_with_angle": 1635,
+  "n_matches": 14,
+  "n_treat": null,
+  "n_control": null,
+  "effect_name": "no escape-angle cut separated first_line_break",
+  "effect": null,
+  "ci_low": null,
+  "ci_high": null,
+  "ci_excludes_zero": false,
+  "inference": "match_cluster_bootstrap",
+  "n_boot": 2000,
+  "coverage": {
+    "n_matches_read": 20,
+    "pass_pairs": 1640,
+    "option_pairs": 5314,
+    "missing_frame": 0,
+    "missing_xy": 1,
+    "missing_opponent": 0,
+    "angle_undefined": 46,
+    "n_pass_pairs": 1640,
+    "n_option_pairs": 5314,
+    "n_passes_wide_to_cm": 757,
+    "n_passes_cm_to_wide": 878,
+    "share_high_pressure_passes": 0.28618421052631576,
+    "share_high_block_passes": 0.08868501529051988
+  },
+  "bins": {
+    "passes_first_line_break": [
+      {
+        "bin": "0-30",
+        "lo": 0,
+        "hi": 30,
+        "outcome": "first_line_break",
+        "mean": 0.36792452830188677,
+        "ci_low": 0.29,
+        "ci_high": 0.4545679567956794,
+        "n": 106,
+        "n_matches": 13
+      },
+      {
+        "bin": "30-60",
+        "lo": 30,
+        "hi": 60,
+        "outcome": "first_line_break",
+        "mean": 0.15723270440251572,
+        "ci_low": 0.1,
+        "ci_high": 0.2203684831581204,
+        "n": 159,
+        "n_matches": 13
+      },
+      {
+        "bin": "60-90",
+        "lo": 60,
+        "hi": 90,
+        "outcome": "first_line_break",
+        "mean": 0.12371134020618557,
+        "ci_low": 0.057454937304075235,
+        "ci_high": 0.20619397131331235,
+        "n": 97,
+        "n_matches": 14
+      },
+      {
+        "bin": "90-180",
+        "lo": 90,
+        "hi": 180,
+        "outcome": "first_line_break",
+        "mean": 0.05263157894736842,
+        "ci_low": 0.029939480014330312,
+        "ci_high": 0.07258431085043987,
+        "n": 228,
+        "n_matches": 14
+      }
+    ],
+    "passes_high_pressure": [
+      {
+        "bin": "0-30",
+        "lo": 0,
+        "hi": 30,
+        "outcome": "high_pressure",
+        "mean": 0.3835125448028674,
+        "ci_low": 0.27754439829028954,
+        "ci_high": 0.4958871817627155,
+        "n": 279,
+        "n_matches": 13
+      },
+      {
+        "bin": "30-60",
+        "lo": 30,
+        "hi": 60,
+        "outcome": "high_pressure",
+        "mean": 0.2613333333333333,
+        "ci_low": 0.20833333333333334,
+        "ci_high": 0.31250460914454276,
+        "n": 375,
+        "n_matches": 13
+      },
+      {
+        "bin": "60-90",
+        "lo": 60,
+        "hi": 90,
+        "outcome": "high_pressure",
+        "mean": 0.24475524475524477,
+        "ci_low": 0.17359983766233766,
+        "ci_high": 0.30678466076696165,
+        "n": 286,
+        "n_matches": 14
+      },
+      {
+        "bin": "90-180",
+        "lo": 90,
+        "hi": 180,
+        "outcome": "high_pressure",
+        "mean": 0.27586206896551724,
+        "ci_low": 0.20928054027558413,
+        "ci_high": 0.34432249079776267,
+        "n": 580,
+        "n_matches": 14
+      }
+    ],
+    "passes_pass_epv": [
+      {
+        "bin": "0-30",
+        "lo": 0,
+        "hi": 30,
+        "outcome": "pass_epv",
+        "mean": 0.003103103448275862,
+        "ci_low": 0.0004893732660640775,
+        "ci_high": 0.005148385387811634,
+        "n": 290,
+        "n_matches": 13
+      },
+      {
+        "bin": "30-60",
+        "lo": 30,
+        "hi": 60,
+        "outcome": "pass_epv",
+        "mean": 0.003802798982188295,
+        "ci_low": 0.0024675573627355426,
+        "ci_high": 0.005104664991949431,
+        "n": 393,
+        "n_matches": 13
+      },
+      {
+        "bin": "60-90",
+        "lo": 60,
+        "hi": 90,
+        "outcome": "pass_epv",
+        "mean": 0.002455743243243244,
+        "ci_low": 0.0005979912444970104,
+        "ci_high": 0.004443244382022472,
+        "n": 296,
+        "n_matches": 14
+      },
+      {
+        "bin": "90-180",
+        "lo": 90,
+        "hi": 180,
+        "outcome": "pass_epv",
+        "mean": 0.0005971947194719473,
+        "ci_low": -0.0006890180430714078,
+        "ci_high": 0.0016038218259740462,
+        "n": 606,
+        "n_matches": 14
+      }
+    ],
+    "options_first_line_break": [
+      {
+        "bin": "0-30",
+        "lo": 0,
+        "hi": 30,
+        "outcome": "first_line_break",
+        "mean": 0.3032967032967033,
+        "ci_low": 0.2661487850954335,
+        "ci_high": 0.3510822478929686,
+        "n": 455,
+        "n_matches": 14
+      },
+      {
+        "bin": "30-60",
+        "lo": 30,
+        "hi": 60,
+        "outcome": "first_line_break",
+        "mean": 0.23373493975903614,
+        "ci_low": 0.19523702273702273,
+        "ci_high": 0.27913416697618754,
+        "n": 415,
+        "n_matches": 14
+      },
+      {
+        "bin": "60-90",
+        "lo": 60,
+        "hi": 90,
+        "outcome": "first_line_break",
+        "mean": 0.178125,
+        "ci_low": 0.14723475279682427,
+        "ci_high": 0.20571583290355852,
+        "n": 320,
+        "n_matches": 13
+      },
+      {
+        "bin": "90-180",
+        "lo": 90,
+        "hi": 180,
+        "outcome": "first_line_break",
+        "mean": 0.08484848484848485,
+        "ci_low": 0.06871522464876896,
+        "ci_high": 0.10124350577264654,
+        "n": 660,
+        "n_matches": 14
+      }
+    ],
+    "options_high_pressure": [
+      {
+        "bin": "0-30",
+        "lo": 0,
+        "hi": 30,
+        "outcome": "high_pressure",
+        "mean": null,
+        "ci_low": null,
+        "ci_high": null,
+        "n": 0,
+        "n_matches": 0
+      },
+      {
+        "bin": "30-60",
+        "lo": 30,
+        "hi": 60,
+        "outcome": "high_pressure",
+        "mean": null,
+        "ci_low": null,
+        "ci_high": null,
+        "n": 0,
+        "n_matches": 0
+      },
+      {
+        "bin": "60-90",
+        "lo": 60,
+        "hi": 90,
+        "outcome": "high_pressure",
+        "mean": null,
+        "ci_low": null,
+        "ci_high": null,
+        "n": 0,
+        "n_matches": 0
+      },
+      {
+        "bin": "90-180",
+        "lo": 90,
+        "hi": 180,
+        "outcome": "high_pressure",
+        "mean": null,
+        "ci_low": null,
+        "ci_high": null,
+        "n": 0,
+        "n_matches": 0
+      }
+    ],
+    "passes_shape_angle_first_line_break": [
+      {
+        "bin": "0-30",
+        "lo": 0,
+        "hi": 30,
+        "outcome": "first_line_break",
+        "mean": 0.4875,
+        "ci_low": 0.42857142857142855,
+        "ci_high": 0.5267857142857143,
+        "n": 80,
+        "n_matches": 13
+      },
+      {
+        "bin": "30-60",
+        "lo": 30,
+        "hi": 60,
+        "outcome": "first_line_break",
+        "mean": 0.3233082706766917,
+        "ci_low": 0.24111413491670788,
+        "ci_high": 0.42105263157894735,
+        "n": 133,
+        "n_matches": 13
+      },
+      {
+        "bin": "60-90",
+        "lo": 60,
+        "hi": 90,
+        "outcome": "first_line_break",
+        "mean": 0.040268456375838924,
+        "ci_low": 0.014705882352941176,
+        "ci_high": 0.0638328797624938,
+        "n": 149,
+        "n_matches": 14
+      },
+      {
+        "bin": "90-180",
+        "lo": 90,
+        "hi": 180,
+        "outcome": "first_line_break",
+        "mean": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "n": 228,
+        "n_matches": 14
+      }
+    ]
+  },
+  "scans": {
+    "passes_escape_angle_line_break": [
+      {
+        "cut": 30,
+        "outcome": "first_line_break",
+        "supported": false,
+        "effect": -0.26668485888039917,
+        "ci_low": -0.36414213323701783,
+        "ci_high": -0.17842766559751302,
+        "mean_treat": 0.1012396694214876,
+        "mean_control": 0.36792452830188677,
+        "n_treat": 484,
+        "n_control": 106,
+        "n_matches": 14,
+        "n_matches_both": 13,
+        "ci_excludes_zero": true
+      },
+      {
+        "cut": 45,
+        "outcome": "first_line_break",
+        "supported": false,
+        "effect": -0.18921578783797782,
+        "ci_low": -0.25731658692185005,
+        "ci_high": -0.1452106300945659,
+        "mean_treat": 0.08629441624365482,
+        "mean_control": 0.2755102040816326,
+        "n_treat": 394,
+        "n_control": 196,
+        "n_matches": 14,
+        "n_matches_both": 13,
+        "ci_excludes_zero": true
+      },
+      {
+        "cut": 60,
+        "outcome": "first_line_break",
+        "supported": false,
+        "effect": -0.1676632801161103,
+        "ci_low": -0.22755734401175018,
+        "ci_high": -0.11372195083706377,
+        "mean_treat": 0.07384615384615385,
+        "mean_control": 0.24150943396226415,
+        "n_treat": 325,
+        "n_control": 265,
+        "n_matches": 14,
+        "n_matches_both": 13,
+        "ci_excludes_zero": true
+      },
+      {
+        "cut": 90,
+        "outcome": "first_line_break",
+        "supported": false,
+        "effect": -0.15731317243384704,
+        "ci_low": -0.19644929234455066,
+        "ci_high": -0.11810580988418712,
+        "mean_treat": 0.05263157894736842,
+        "mean_control": 0.20994475138121546,
+        "n_treat": 228,
+        "n_control": 362,
+        "n_matches": 14,
+        "n_matches_both": 14,
+        "ci_excludes_zero": true
+      }
+    ],
+    "options_escape_angle_line_break": [
+      {
+        "cut": 30,
+        "outcome": "first_line_break",
+        "supported": false,
+        "effect": -0.15275906888810112,
+        "ci_low": -0.1893039490640977,
+        "ci_high": -0.12623948924249492,
+        "mean_treat": 0.15053763440860216,
+        "mean_control": 0.3032967032967033,
+        "n_treat": 1395,
+        "n_control": 455,
+        "n_matches": 14,
+        "n_matches_both": 14,
+        "ci_excludes_zero": true
+      },
+      {
+        "cut": 45,
+        "outcome": "first_line_break",
+        "supported": false,
+        "effect": -0.15460192420095095,
+        "ci_low": -0.1989600422979764,
+        "ci_high": -0.11597862431091988,
+        "mean_treat": 0.13069647463456577,
+        "mean_control": 0.2852983988355167,
+        "n_treat": 1163,
+        "n_control": 687,
+        "n_matches": 14,
+        "n_matches_both": 14,
+        "ci_excludes_zero": true
+      },
+      {
+        "cut": 60,
+        "outcome": "first_line_break",
+        "supported": false,
+        "effect": -0.15480882007975605,
+        "ci_low": -0.19578111380800128,
+        "ci_high": -0.12473827930475177,
+        "mean_treat": 0.11530612244897959,
+        "mean_control": 0.27011494252873564,
+        "n_treat": 980,
+        "n_control": 870,
+        "n_matches": 14,
+        "n_matches_both": 14,
+        "ci_excludes_zero": true
+      },
+      {
+        "cut": 90,
+        "outcome": "first_line_break",
+        "supported": false,
+        "effect": -0.16052966641201932,
+        "ci_low": -0.1890995552151349,
+        "ci_high": -0.13835100203434847,
+        "mean_treat": 0.08484848484848485,
+        "mean_control": 0.2453781512605042,
+        "n_treat": 660,
+        "n_control": 1190,
+        "n_matches": 14,
+        "n_matches_both": 14,
+        "ci_excludes_zero": true
+      }
+    ]
+  },
+  "at_threshold": null,
+  "options": {
+    "n": 1850,
+    "n_with_angle": 5272,
+    "n_matches": 14,
+    "supported": false,
+    "threshold_deg": null,
+    "threshold_reason": "no_positive_step",
+    "examined_boundary_deg": null,
+    "bin_jump": -0.09327651515151515,
+    "effect": null,
+    "ci_low": null,
+    "ci_high": null,
+    "n_treat": null,
+    "n_control": null
+  },
+  "matches": [
+    {
+      "match_id": "1874553",
+      "n_pass_angle": 198,
+      "n_pass_line_break": 77,
+      "n_option_angle": 666,
+      "n_option_line_break": 226
+    },
+    {
+      "match_id": "1886347",
+      "n_pass_angle": 189,
+      "n_pass_line_break": 62,
+      "n_option_angle": 598,
+      "n_option_line_break": 218
+    },
+    {
+      "match_id": "1925299",
+      "n_pass_angle": 148,
+      "n_pass_line_break": 59,
+      "n_option_angle": 486,
+      "n_option_line_break": 208
+    },
+    {
+      "match_id": "1927964",
+      "n_pass_angle": 40,
+      "n_pass_line_break": 25,
+      "n_option_angle": 139,
+      "n_option_line_break": 88
+    },
+    {
+      "match_id": "1953632",
+      "n_pass_angle": 37,
+      "n_pass_line_break": 16,
+      "n_option_angle": 123,
+      "n_option_line_break": 47
+    },
+    {
+      "match_id": "1996435",
+      "n_pass_angle": 256,
+      "n_pass_line_break": 88,
+      "n_option_angle": 763,
+      "n_option_line_break": 223
+    },
+    {
+      "match_id": "1996436",
+      "n_pass_angle": 68,
+      "n_pass_line_break": 27,
+      "n_option_angle": 177,
+      "n_option_line_break": 77
+    },
+    {
+      "match_id": "2006229",
+      "n_pass_angle": 32,
+      "n_pass_line_break": 11,
+      "n_option_angle": 97,
+      "n_option_line_break": 49
+    },
+    {
+      "match_id": "2006363",
+      "n_pass_angle": 146,
+      "n_pass_line_break": 52,
+      "n_option_angle": 503,
+      "n_option_line_break": 165
+    },
+    {
+      "match_id": "2010085",
+      "n_pass_angle": 76,
+      "n_pass_line_break": 27,
+      "n_option_angle": 207,
+      "n_option_line_break": 67
+    },
+    {
+      "match_id": "2011166",
+      "n_pass_angle": 194,
+      "n_pass_line_break": 37,
+      "n_option_angle": 666,
+      "n_option_line_break": 129
+    },
+    {
+      "match_id": "2013725",
+      "n_pass_angle": 4,
+      "n_pass_line_break": 2,
+      "n_option_angle": 27,
+      "n_option_line_break": 15
+    },
+    {
+      "match_id": "2016236",
+      "n_pass_angle": 109,
+      "n_pass_line_break": 55,
+      "n_option_angle": 365,
+      "n_option_line_break": 192
+    },
+    {
+      "match_id": "2017461",
+      "n_pass_angle": 138,
+      "n_pass_line_break": 52,
+      "n_option_angle": 455,
+      "n_option_line_break": 146
+    }
+  ],
+  "definition": "A threshold is proposed only when the four line-break bins (0-30, 30-60, 60-90, 90-180 degrees) show a single positive step at 30, 60, or 90 degrees: the largest adjacent jump is positive, at least twice the next jump, and later bins stay in the upper half of that jump. The contrast is the pooled line-break rate at or above that cut minus the rate below it. The interval resamples matches. Supported only when that interval excludes zero, the effect is positive, and both arms have at least 20 events. A smooth gradient, a spike that reverses, or an interval that includes zero does not produce a threshold. 45 degrees is reported in the scans and is not eligible as the threshold. Shape angle is the pass direction from the attacking axis and is not used for the verdict. Pass value is pass_epv_total. Pressure is high or very high. Line break is first_line_break. No xG.",
+  "notes": "Passes are the sample for the verdict because pass EPV is defined on the pass. Passing options are not pooled with passes: a received option is the same action. Option pressure is the parent possession's start or end pressure, whichever frame is closer. The cut is chosen from the same line-break bins it is tested on, so a proposed interval is the clustered interval at that cut, not a pre-registered contrast."
+}

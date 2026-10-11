@@ -1,0 +1,113 @@
+{
+  "id": 5,
+  "title": "Attacking full back being tracked",
+  "metric_definition": "Full back roles are LB, RB, LWB, and RWB from the match json, not from the event position. The run is an off_ball_run with subtype overlap or underlap. Candidate frames are every 0.5 s from frame_start through frame_end, plus the temporal midpoint. The measurement frame is the candidate in the attacking half (attack-normalized tracking x > 0) closest to that midpoint, among candidates with a velocity window. Tracked means all three at that frame: the nearest outfield opponent is within 6 m, that opponent is goal-side (closer to the goal being attacked), and the two velocities are similar over the previous 1.0 s. Similar velocity: cosine of the displacements >= 0.60 and speed difference <= 2.0 m/s. If both players move under 1 m in the window, similar means the speeds differ by at most 1.5 m/s. A missing velocity window excludes the run. It is not labelled untracked. Runs that never enter the attacking half are excluded. Outcomes on the same event are received, lead_to_shot, and xthreat. xG is not used. The effect is the pooled mean for tracked runs minus untracked runs. The interval resamples matches (2000 draws, percentile 2.5 to 97.5). A contrast is supported only when that interval excludes zero.",
+  "population": "full-back overlap and underlap off_ball_run while in the attacking half",
+  "separates_tracked_from_untracked": true,
+  "outcomes_that_separate": [
+    "received"
+  ],
+  "supported": true,
+  "n": 260,
+  "n_tracked": 50,
+  "n_untracked": 210,
+  "n_matches": 20,
+  "tracked_rate": 0.19230769230769232,
+  "effect_name": "overlap/underlap received, tracked minus untracked",
+  "effect": -0.12857142857142856,
+  "ci_low": -0.25035234665483824,
+  "ci_high": -0.01467549017476751,
+  "inference": "match_cluster_bootstrap",
+  "n_boot": 2000,
+  "counts": {
+    "overlap_underlap": 534,
+    "not_full_back": 266,
+    "bad_side": 0,
+    "no_attacking_half": 8,
+    "missing_velocity": 0,
+    "eligible": 260
+  },
+  "measurement_rates": {
+    "close_rate": 0.6,
+    "goal_side_rate": 0.6076923076923076,
+    "similar_velocity_rate": 0.5884615384615385,
+    "mean_nearest_defender_m": 5.894491443813271
+  },
+  "by_subtype": [
+    {
+      "subtype": "overlap",
+      "n": 184,
+      "n_tracked": 28,
+      "tracked_rate": 0.15217391304347827,
+      "received_rate": 0.3532608695652174,
+      "lead_to_shot_rate": 0.19021739130434784,
+      "mean_xthreat": 0.017908152173913044
+    },
+    {
+      "subtype": "underlap",
+      "n": 76,
+      "n_tracked": 22,
+      "tracked_rate": 0.2894736842105263,
+      "received_rate": 0.18421052631578946,
+      "lead_to_shot_rate": 0.13157894736842105,
+      "mean_xthreat": 0.020622368421052632
+    }
+  ],
+  "contrasts": [
+    {
+      "name": "overlap/underlap received, tracked minus untracked",
+      "outcome": "received",
+      "unit": "rate",
+      "predicted_if_prevention": "negative",
+      "supported": true,
+      "n": 260,
+      "n_tracked": 50,
+      "n_untracked": 210,
+      "n_matches": 20,
+      "n_matches_both": 17,
+      "mean_tracked": 0.2,
+      "mean_untracked": 0.32857142857142857,
+      "effect": -0.12857142857142856,
+      "ci_low": -0.25035234665483824,
+      "ci_high": -0.01467549017476751,
+      "ci_excludes_zero": true
+    },
+    {
+      "name": "overlap/underlap lead_to_shot, tracked minus untracked",
+      "outcome": "lead_to_shot",
+      "unit": "rate",
+      "predicted_if_prevention": "negative",
+      "supported": false,
+      "n": 260,
+      "n_tracked": 50,
+      "n_untracked": 210,
+      "n_matches": 20,
+      "n_matches_both": 17,
+      "mean_tracked": 0.16,
+      "mean_untracked": 0.1761904761904762,
+      "effect": -0.0161904761904762,
+      "ci_low": -0.10886763050647323,
+      "ci_high": 0.07802580004103384,
+      "ci_excludes_zero": false
+    },
+    {
+      "name": "overlap/underlap xthreat, tracked minus untracked",
+      "outcome": "xthreat",
+      "unit": "xthreat",
+      "predicted_if_prevention": "negative",
+      "supported": false,
+      "n": 260,
+      "n_tracked": 50,
+      "n_untracked": 210,
+      "n_matches": 20,
+      "n_matches_both": 17,
+      "mean_tracked": 0.015864,
+      "mean_untracked": 0.019377142857142853,
+      "effect": -0.0035131428571428536,
+      "ci_low": -0.007599804791154789,
+      "ci_high": 0.0004427115542875566,
+      "ci_excludes_zero": false
+    }
+  ],
+  "notes": "Prevention would show a negative effect: tracked runs received less often, lead to a shot less often, and carry lower xthreat. An interval above zero is still a separation. It means the tracked runs are the more dangerous ones. Support uses only whether the match-clustered interval excludes zero."
+}

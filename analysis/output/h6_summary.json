@@ -1,0 +1,317 @@
+{
+  "id": 6,
+  "title": "Overlaps and underlaps versus defensive state",
+  "definition": "off_ball_run events with subtype overlap or underlap. Success is measured by three outcomes already on the run or joined to it: lead_to_shot, xthreat, and beaten_by_movement. A run fails a binary outcome when that outcome is false. xthreat stays continuous. Defensive state is measured from tracking at the midpoint frame of the run, not from the hypothesis-5 tracked flag. Nearest defender distance is the distance to the nearest outfield opponent. Goal-side means that opponent is closer to the goal being attacked than the runner is. The lane is occupied when any outfield opponent is within 1.5 m of the segment from the ball carrier to the runner, with segment parameter t in [0.10, 0.90]. The 6 m split is only a distance band for the xthreat contrast. It is not a tracking rule and it is not a prevention system. beaten_by_movement comes from an on_ball_engagement whose targeted player is the runner and whose frame window meets the run within 1.0 s. Runs with no such engagement are left missing on that outcome.",
+  "population": "overlap and underlap off_ball_run",
+  "n_events": 534,
+  "n_matches": 20,
+  "n_overlap": 301,
+  "n_underlap": 233,
+  "n_with_nearest_defender": 534,
+  "n_with_lane": 534,
+  "beaten_by_movement_true": 11,
+  "beaten_by_movement_joined_engagements": 223,
+  "inference": "match_cluster_bootstrap",
+  "n_boot": 2000,
+  "support_rule": "An association is supported only when the match-clustered 95% interval excludes zero, both arms have at least 20 events, and both arms appear in at least two matches. A supported association is not a prevention system.",
+  "prevention_claim": false,
+  "rates": {
+    "lead_to_shot": {
+      "mean": 0.17228464419475656,
+      "ci_low": 0.1395749445311858,
+      "ci_high": 0.20571583290355852,
+      "n": 534,
+      "n_matches": 20,
+      "ci_excludes_zero": true
+    },
+    "xthreat": {
+      "mean": 0.019488389513108616,
+      "ci_low": 0.017316440238788477,
+      "ci_high": 0.02183981125548749,
+      "n": 534,
+      "n_matches": 20,
+      "ci_excludes_zero": true
+    },
+    "beaten_by_movement_among_joined_engagements": {
+      "mean": 0.04932735426008968,
+      "ci_low": 0.023253122308354867,
+      "ci_high": 0.07906976744186046,
+      "n": 223,
+      "n_matches": 20,
+      "ci_excludes_zero": true
+    },
+    "failed_shot": {
+      "mean": 0.8277153558052435,
+      "ci_low": 0.7911877394636015,
+      "ci_high": 0.8609164151576123,
+      "n": 534,
+      "n_matches": 20,
+      "ci_excludes_zero": true
+    },
+    "failed_movement_among_joined_engagements": {
+      "mean": 0.9506726457399103,
+      "ci_low": 0.92,
+      "ci_high": 0.9776810515873016,
+      "n": 223,
+      "n_matches": 20,
+      "ci_excludes_zero": true
+    }
+  },
+  "by_subtype": [
+    {
+      "subtype": "overlap",
+      "n": 301,
+      "n_matches": 20,
+      "lead_to_shot": {
+        "mean": 0.19269102990033224,
+        "ci_low": 0.15275900900900902,
+        "ci_high": 0.23367796342378638,
+        "n": 301,
+        "n_matches": 20,
+        "ci_excludes_zero": true
+      },
+      "xthreat": {
+        "mean": 0.019566112956810627,
+        "ci_low": 0.01671564317616463,
+        "ci_high": 0.02294838838531264,
+        "n": 301,
+        "n_matches": 20,
+        "ci_excludes_zero": true
+      },
+      "beaten_by_movement_among_joined_engagements": {
+        "mean": 0.05,
+        "ci_low": 0.015384615384615385,
+        "ci_high": 0.09302818289318089,
+        "n": 120,
+        "n_matches": 20,
+        "ci_excludes_zero": true
+      },
+      "n_beaten_joined": 120
+    },
+    {
+      "subtype": "underlap",
+      "n": 233,
+      "n_matches": 20,
+      "lead_to_shot": {
+        "mean": 0.1459227467811159,
+        "ci_low": 0.09999003984063745,
+        "ci_high": 0.19166823308270678,
+        "n": 233,
+        "n_matches": 20,
+        "ci_excludes_zero": true
+      },
+      "xthreat": {
+        "mean": 0.019387982832618028,
+        "ci_low": 0.017635148520237922,
+        "ci_high": 0.021088164225373945,
+        "n": 233,
+        "n_matches": 20,
+        "ci_excludes_zero": true
+      },
+      "beaten_by_movement_among_joined_engagements": {
+        "mean": 0.04854368932038835,
+        "ci_low": 0.010101010101010102,
+        "ci_high": 0.09782608695652174,
+        "n": 103,
+        "n_matches": 20,
+        "ci_excludes_zero": true
+      },
+      "n_beaten_joined": 103
+    }
+  ],
+  "defensive_state_rates": {
+    "nearest_defender_distance_m": {
+      "mean": 5.072591640702965,
+      "ci_low": 4.67385378111969,
+      "ci_high": 5.456480546082761,
+      "n": 534,
+      "n_matches": 20,
+      "ci_excludes_zero": true
+    },
+    "goal_side": {
+      "mean": 0.5692883895131086,
+      "ci_low": 0.5338641565266978,
+      "ci_high": 0.6029120493406208,
+      "n": 534,
+      "n_matches": 20,
+      "ci_excludes_zero": true
+    },
+    "lane_occupied": {
+      "mean": 0.299625468164794,
+      "ci_low": 0.25973846595393557,
+      "ci_high": 0.3396617012320603,
+      "n": 534,
+      "n_matches": 20,
+      "ci_excludes_zero": true
+    },
+    "nearest_defender_within_6m": {
+      "mean": 0.7059925093632958,
+      "ci_low": 0.6495324087131078,
+      "ci_high": 0.7575757575757576,
+      "n": 534,
+      "n_matches": 20,
+      "ci_excludes_zero": true
+    }
+  },
+  "contrasts": [
+    {
+      "name": "no lead_to_shot, nearest defender goal-side minus not",
+      "unit": "rate",
+      "reading_rule": "failure_rate",
+      "supported": false,
+      "effect": 0.0028604118993135197,
+      "ci_low": -0.03973103042967216,
+      "ci_high": 0.05000529157482533,
+      "mean_treat": 0.8289473684210527,
+      "mean_control": 0.8260869565217391,
+      "n_treat": 304,
+      "n_control": 230,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "ci_excludes_zero": false
+    },
+    {
+      "name": "no lead_to_shot, defender in the lane (1.5 m) minus open",
+      "unit": "rate",
+      "reading_rule": "failure_rate",
+      "supported": false,
+      "effect": 0.022894385026738018,
+      "ci_low": -0.04297836546528132,
+      "ci_high": 0.08223705417936276,
+      "mean_treat": 0.84375,
+      "mean_control": 0.820855614973262,
+      "n_treat": 160,
+      "n_control": 374,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "ci_excludes_zero": false
+    },
+    {
+      "name": "nearest defender distance (m), no lead_to_shot minus lead_to_shot",
+      "unit": "metres",
+      "reading_rule": "distance_on_failure",
+      "supported": true,
+      "effect": -1.3289230247138955,
+      "ci_low": -2.3104400637757667,
+      "ci_high": -0.47182902376833,
+      "mean_treat": 4.843638610227912,
+      "mean_control": 6.1725616349418075,
+      "n_treat": 442,
+      "n_control": 92,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "ci_excludes_zero": true
+    },
+    {
+      "name": "xthreat, nearest defender goal-side minus not",
+      "unit": "xthreat",
+      "reading_rule": "xthreat",
+      "supported": false,
+      "effect": -0.00147224542334096,
+      "ci_low": -0.004575953637865979,
+      "ci_high": 0.001200391026944907,
+      "mean_treat": 0.018854276315789474,
+      "mean_control": 0.020326521739130434,
+      "n_treat": 304,
+      "n_control": 230,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "ci_excludes_zero": false
+    },
+    {
+      "name": "xthreat, defender in the lane (1.5 m) minus open",
+      "unit": "xthreat",
+      "reading_rule": "xthreat",
+      "supported": false,
+      "effect": 0.0022216477272727214,
+      "ci_low": -0.0003825525864579466,
+      "ci_high": 0.004891917461277856,
+      "mean_treat": 0.021044374999999997,
+      "mean_control": 0.018822727272727276,
+      "n_treat": 160,
+      "n_control": 374,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "ci_excludes_zero": false
+    },
+    {
+      "name": "xthreat, nearest defender within 6 m minus farther",
+      "unit": "xthreat",
+      "reading_rule": "xthreat",
+      "supported": false,
+      "effect": -0.00207525384784335,
+      "ci_low": -0.006759200300726242,
+      "ci_high": 0.0016184523022820102,
+      "mean_treat": 0.018878249336870025,
+      "mean_control": 0.020953503184713375,
+      "n_treat": 377,
+      "n_control": 157,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "ci_excludes_zero": false
+    },
+    {
+      "name": "not beaten_by_movement, nearest defender goal-side minus not",
+      "unit": "rate",
+      "reading_rule": "failure_rate",
+      "supported": false,
+      "effect": 0.04890428617466969,
+      "ci_low": -0.022802693054688773,
+      "ci_high": 0.1216177003563575,
+      "mean_treat": 0.9741379310344828,
+      "mean_control": 0.9252336448598131,
+      "n_treat": 116,
+      "n_control": 107,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "ci_excludes_zero": false
+    },
+    {
+      "name": "not beaten_by_movement, defender in the lane (1.5 m) minus open",
+      "unit": "rate",
+      "reading_rule": "failure_rate",
+      "supported": false,
+      "effect": -0.05219826854523857,
+      "ci_low": -0.13865359779807782,
+      "ci_high": 0.028093552608108925,
+      "mean_treat": 0.9186046511627907,
+      "mean_control": 0.9708029197080292,
+      "n_treat": 86,
+      "n_control": 137,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "ci_excludes_zero": false
+    },
+    {
+      "name": "nearest defender distance (m), not beaten_by_movement minus beaten_by_movement",
+      "unit": "metres",
+      "reading_rule": "distance_on_failure",
+      "supported": false,
+      "effect": -0.6412296018246009,
+      "ci_low": -3.3925264140567126,
+      "ci_high": 2.4621113654410807,
+      "mean_treat": 4.2290010021066475,
+      "mean_control": 4.870230603931248,
+      "n_treat": 212,
+      "n_control": 11,
+      "n_matches": 20,
+      "n_matches_both": 8,
+      "ci_excludes_zero": false
+    }
+  ],
+  "associations_that_hold": [
+    {
+      "name": "nearest defender distance (m), no lead_to_shot minus lead_to_shot",
+      "effect": -1.3289230247138955,
+      "ci_low": -2.3104400637757667,
+      "ci_high": -0.47182902376833,
+      "unit": "metres",
+      "n_treat": 442,
+      "n_control": 92,
+      "n_matches_both": 20,
+      "reading": "Failed runs have a nearer defender than runs that succeeded on this outcome."
+    }
+  ],
+  "supported": true,
+  "notes": "Failure on lead_to_shot is the complement of lead_to_shot. Failure on beaten_by_movement is the complement among runs joined to an engagement. A higher failure rate, a nearer defender on failed runs, or a lower xthreat describes an association at the moment of the run. It does not show that the defensive state prevented the overlap or underlap."
+}

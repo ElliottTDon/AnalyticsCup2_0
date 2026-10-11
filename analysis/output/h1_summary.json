@@ -1,0 +1,388 @@
+{
+  "id": 1,
+  "title": "Defender body shape at pass reception",
+  "hypothesis": "At a pass reception, is the nearest defender side-on, square-on/in front, or back-to the receiver, and do those labels relate to xshot, xthreat, possession EPV, and pass EPV?",
+  "definition": "Sample is a player_possession with start_type pass_reception in matches 1925299 and 1996435. One row per reception. The nearest outfield opponent is taken from tracking x,y at frame_start (goalkeepers excluded; no distance cap). Shoulder heading is the ground-plane facing direction from the left and right shoulders (x,y only; z unused), on the pose frame pose_frame = 2.5 * tracking_frame. Odd tracking frames use the circular mean of the two neighboring pose frames when both shoulders are reliable. Reliable means shoulder width in 0.15-0.60 m and p90 error at most 15 cm. The label is the absolute angle between that heading and the tracking vector from defender to receiver: square_in_front at most 45 degrees, side_on up to 135 degrees, otherwise back_to. xshot_player_possession_max is the maximum on on_ball_engagement rows linked by associated_player_possession_event_id; receptions with no engagement have no xshot. receiver_xthreat is player_targeted_xthreat on the successful pass that targeted this receiver and ended within 40 tracking frames before the reception. possession_epv_total and pass_epv_total are the fields on the reception possession (pass EPV is the pass played from that possession). Back-to is reported, but the primary comparison is side-on minus square/in front because that is the split with events in both arms. Intervals resample the two matches. supported is true only when that interval excludes zero and both arms have at least 20 events.",
+  "population": "pass receptions in the two pose matches whose nearest outfield defender has a reliable shoulder heading",
+  "n_receptions": 1455,
+  "n_labeled": 1347,
+  "n_matches": 2,
+  "underpowered": true,
+  "label_counts": {
+    "square_in_front": 1100,
+    "side_on": 240,
+    "back_to": 7
+  },
+  "label_share": {
+    "square_in_front": 0.8166295471417966,
+    "side_on": 0.17817371937639198,
+    "back_to": 0.005196733481811433
+  },
+  "n_by_match": {
+    "1925299": {
+      "n_receptions": 743,
+      "n_labeled": 687,
+      "square_in_front": 554,
+      "side_on": 130,
+      "back_to": 3
+    },
+    "1996435": {
+      "n_receptions": 712,
+      "n_labeled": 660,
+      "square_in_front": 546,
+      "side_on": 110,
+      "back_to": 4
+    }
+  },
+  "unlabeled_reasons": {
+    "labeled": 1347,
+    "goalkeeper_receiver": 78,
+    "no_pose": 14,
+    "unreliable_shoulders": 13,
+    "undefined_vector": 3
+  },
+  "median_defender_distance_m_labeled": 6.414429047078156,
+  "bearing_deg": {
+    "n": 1347,
+    "median": 22.497571706241132,
+    "p25": 10.28129131327546,
+    "p75": 39.28650461979849,
+    "bins": {
+      "0_45": 1100,
+      "45_90": 212,
+      "90_135": 28,
+      "135_180": 7
+    }
+  },
+  "by_label": {
+    "square_in_front": {
+      "n": 1100,
+      "xshot_player_possession_max": {
+        "n": 848,
+        "mean": 0.04527594339622641
+      },
+      "receiver_xthreat": {
+        "n": 1054,
+        "mean": 0.005056641366223909
+      },
+      "possession_epv_total": {
+        "n": 1091,
+        "mean": 0.0001761686526122823
+      },
+      "pass_epv_total": {
+        "n": 955,
+        "mean": 0.001673612565445026
+      }
+    },
+    "side_on": {
+      "n": 240,
+      "xshot_player_possession_max": {
+        "n": 146,
+        "mean": 0.08195205479452054
+      },
+      "receiver_xthreat": {
+        "n": 228,
+        "mean": 0.008321491228070176
+      },
+      "possession_epv_total": {
+        "n": 237,
+        "mean": 0.0016147679324894518
+      },
+      "pass_epv_total": {
+        "n": 206,
+        "mean": 0.003375242718446602
+      }
+    },
+    "back_to": {
+      "n": 7,
+      "xshot_player_possession_max": {
+        "n": 6,
+        "mean": 0.01416666666666667
+      },
+      "receiver_xthreat": {
+        "n": 7,
+        "mean": 0.0045
+      },
+      "possession_epv_total": {
+        "n": 7,
+        "mean": -7.142857142857143e-05
+      },
+      "pass_epv_total": {
+        "n": 6,
+        "mean": 0.0062499999999999995
+      }
+    }
+  },
+  "primary_contrast": "xshot_player_possession_max, side-on minus square/in front",
+  "effect": 0.036676111398294124,
+  "ci_low": 0.028798587196467988,
+  "ci_high": 0.0450739525762168,
+  "mean_side_on": 0.08195205479452054,
+  "mean_square_in_front": 0.04527594339622642,
+  "n_side_on": 146,
+  "n_square_in_front": 848,
+  "supported": true,
+  "inference": "match_cluster_bootstrap",
+  "n_boot": 2000,
+  "boot_seed": 11,
+  "contrasts": [
+    {
+      "name": "xshot_player_possession_max, back-to minus square/in front",
+      "outcome": "xshot_player_possession_max",
+      "comparison": "back_to minus square_in_front",
+      "predicted": "positive",
+      "unit": "xshot_player_possession_max",
+      "supported": false,
+      "by_match": [
+        {
+          "match_id": "1925299",
+          "n_treat": 3,
+          "n_control": 395,
+          "effect": -0.01897299578059072
+        },
+        {
+          "match_id": "1996435",
+          "n_treat": 3,
+          "n_control": 453,
+          "effect": -0.04312141280353201
+        }
+      ],
+      "effect": -0.03110927672955975,
+      "ci_low": -0.04312141280353201,
+      "ci_high": -0.01897299578059072,
+      "mean_treat": 0.01416666666666667,
+      "mean_control": 0.04527594339622642,
+      "n_treat": 6,
+      "n_control": 848,
+      "n_matches": 2,
+      "n_matches_both": 2,
+      "ci_excludes_zero": true
+    },
+    {
+      "name": "receiver_xthreat, back-to minus square/in front",
+      "outcome": "receiver_xthreat",
+      "comparison": "back_to minus square_in_front",
+      "predicted": "positive",
+      "unit": "receiver_xthreat",
+      "supported": false,
+      "by_match": [
+        {
+          "match_id": "1925299",
+          "n_treat": 3,
+          "n_control": 533,
+          "effect": 0.004586991869918701
+        },
+        {
+          "match_id": "1996435",
+          "n_treat": 4,
+          "n_control": 521,
+          "effect": -0.004526391554702495
+        }
+      ],
+      "effect": -0.0005566413662239089,
+      "ci_low": -0.004526391554702495,
+      "ci_high": 0.004586991869918701,
+      "mean_treat": 0.0045,
+      "mean_control": 0.005056641366223909,
+      "n_treat": 7,
+      "n_control": 1054,
+      "n_matches": 2,
+      "n_matches_both": 2,
+      "ci_excludes_zero": false
+    },
+    {
+      "name": "possession_epv_total, back-to minus square/in front",
+      "outcome": "possession_epv_total",
+      "comparison": "back_to minus square_in_front",
+      "predicted": "positive",
+      "unit": "possession_epv_total",
+      "supported": false,
+      "by_match": [
+        {
+          "match_id": "1925299",
+          "n_treat": 3,
+          "n_control": 550,
+          "effect": -0.0002194545454545457
+        },
+        {
+          "match_id": "1996435",
+          "n_treat": 4,
+          "n_control": 541,
+          "effect": -0.00036381700554528656
+        }
+      ],
+      "effect": -0.0002475972240408539,
+      "ci_low": -0.00036381700554528656,
+      "ci_high": -0.0002194545454545457,
+      "mean_treat": -7.142857142857156e-05,
+      "mean_control": 0.00017616865261228234,
+      "n_treat": 7,
+      "n_control": 1091,
+      "n_matches": 2,
+      "n_matches_both": 2,
+      "ci_excludes_zero": true
+    },
+    {
+      "name": "pass_epv_total, back-to minus square/in front",
+      "outcome": "pass_epv_total",
+      "comparison": "back_to minus square_in_front",
+      "predicted": "positive",
+      "unit": "pass_epv_total",
+      "supported": false,
+      "by_match": [
+        {
+          "match_id": "1925299",
+          "n_treat": 3,
+          "n_control": 482,
+          "effect": 0.012013070539419086
+        },
+        {
+          "match_id": "1996435",
+          "n_treat": 3,
+          "n_control": 473,
+          "effect": -0.002875264270613108
+        }
+      ],
+      "effect": 0.004576387434554973,
+      "ci_low": -0.002875264270613108,
+      "ci_high": 0.012013070539419086,
+      "mean_treat": 0.0062499999999999995,
+      "mean_control": 0.0016736125654450262,
+      "n_treat": 6,
+      "n_control": 955,
+      "n_matches": 2,
+      "n_matches_both": 2,
+      "ci_excludes_zero": false
+    },
+    {
+      "name": "xshot_player_possession_max, side-on minus square/in front",
+      "outcome": "xshot_player_possession_max",
+      "comparison": "side_on minus square_in_front",
+      "predicted": "positive",
+      "unit": "xshot_player_possession_max",
+      "supported": true,
+      "by_match": [
+        {
+          "match_id": "1925299",
+          "n_treat": 71,
+          "n_control": 395,
+          "effect": 0.0450739525762168
+        },
+        {
+          "match_id": "1996435",
+          "n_treat": 75,
+          "n_control": 453,
+          "effect": 0.028798587196467988
+        }
+      ],
+      "effect": 0.036676111398294124,
+      "ci_low": 0.028798587196467988,
+      "ci_high": 0.0450739525762168,
+      "mean_treat": 0.08195205479452054,
+      "mean_control": 0.04527594339622642,
+      "n_treat": 146,
+      "n_control": 848,
+      "n_matches": 2,
+      "n_matches_both": 2,
+      "ci_excludes_zero": true
+    },
+    {
+      "name": "receiver_xthreat, side-on minus square/in front",
+      "outcome": "receiver_xthreat",
+      "comparison": "side_on minus square_in_front",
+      "predicted": "positive",
+      "unit": "receiver_xthreat",
+      "supported": true,
+      "by_match": [
+        {
+          "match_id": "1925299",
+          "n_treat": 122,
+          "n_control": 533,
+          "effect": 0.0041134946021591364
+        },
+        {
+          "match_id": "1996435",
+          "n_treat": 106,
+          "n_control": 521,
+          "effect": 0.0023405895773729755
+        }
+      ],
+      "effect": 0.0032648498618462673,
+      "ci_low": 0.0023405895773729755,
+      "ci_high": 0.0041134946021591364,
+      "mean_treat": 0.008321491228070176,
+      "mean_control": 0.005056641366223909,
+      "n_treat": 228,
+      "n_control": 1054,
+      "n_matches": 2,
+      "n_matches_both": 2,
+      "ci_excludes_zero": true
+    },
+    {
+      "name": "possession_epv_total, side-on minus square/in front",
+      "outcome": "possession_epv_total",
+      "comparison": "side_on minus square_in_front",
+      "predicted": "positive",
+      "unit": "possession_epv_total",
+      "supported": true,
+      "by_match": [
+        {
+          "match_id": "1925299",
+          "n_treat": 128,
+          "n_control": 550,
+          "effect": 0.0004789829545454547
+        },
+        {
+          "match_id": "1996435",
+          "n_treat": 109,
+          "n_control": 541,
+          "effect": 0.0026217334531703097
+        }
+      ],
+      "effect": 0.001438599279877169,
+      "ci_low": 0.0004789829545454547,
+      "ci_high": 0.0026217334531703097,
+      "mean_treat": 0.0016147679324894513,
+      "mean_control": 0.00017616865261228234,
+      "n_treat": 237,
+      "n_control": 1091,
+      "n_matches": 2,
+      "n_matches_both": 2,
+      "ci_excludes_zero": true
+    },
+    {
+      "name": "pass_epv_total, side-on minus square/in front",
+      "outcome": "pass_epv_total",
+      "comparison": "side_on minus square_in_front",
+      "predicted": "positive",
+      "unit": "pass_epv_total",
+      "supported": true,
+      "by_match": [
+        {
+          "match_id": "1925299",
+          "n_treat": 110,
+          "n_control": 482,
+          "effect": 0.0009694341757827237
+        },
+        {
+          "match_id": "1996435",
+          "n_treat": 96,
+          "n_control": 473,
+          "effect": 0.0026403607293868933
+        }
+      ],
+      "effect": 0.0017016301530015765,
+      "ci_low": 0.0009694341757827237,
+      "ci_high": 0.0026403607293868933,
+      "mean_treat": 0.0033752427184466026,
+      "mean_control": 0.0016736125654450262,
+      "n_treat": 206,
+      "n_control": 955,
+      "n_matches": 2,
+      "n_matches_both": 2,
+      "ci_excludes_zero": true
+    }
+  ],
+  "verdict": "Underpowered: pose covers 2 matches and each interval resamples those matches. Of 1347 labeled receptions, the nearest defender was square/in front in 1100 (82%), side-on in 240 (18%), and back-to in 7 (1%). Side-on minus square/in front: xshot_player_possession_max: effect 0.0367 (interval 0.0288 to 0.0451, n_side=146, n_square=848, supported=true); receiver_xthreat: effect 0.0033 (interval 0.0023 to 0.0041, n_side=228, n_square=1054, supported=true); possession_epv_total: effect 0.0014 (interval 0.0005 to 0.0026, n_side=237, n_square=1091, supported=true); pass_epv_total: effect 0.0017 (interval 0.0010 to 0.0026, n_side=206, n_square=955, supported=true). Back-to has n=7, below 20, so those intervals are not used for support. supported=true because the side-on minus square/in front interval excludes zero for: xshot_player_possession_max, receiver_xthreat, possession_epv_total, pass_epv_total. Unlabeled receptions: goalkeeper_receiver=78, labeled=1347, no_pose=14, undefined_vector=3, unreliable_shoulders=13.",
+  "notes": "Two matches only, so every interval is underpowered and this is not a practical metric. A narrow interval means the two matches agree, not that the league-wide effect is precise. Back-to has too few events to support a contrast. Outcomes are xshot_player_possession_max, player_targeted_xthreat on the received pass, possession_epv_total, and pass_epv_total."
+}

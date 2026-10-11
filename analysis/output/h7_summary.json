@@ -1,0 +1,179 @@
+{
+  "id": 7,
+  "title": "Tight mark on the striker and departure from the block",
+  "population": "CF or ST player possession in a low, medium, or high block",
+  "n_events": 1171,
+  "n_matches": 20,
+  "tight_mark_m": 3.0,
+  "tight_rate": 0.4560204953031597,
+  "tight_hungarian_rate": 0.28095644748078563,
+  "mean_nearest_dist": 3.7428565817299075,
+  "n_by_block": {
+    "low_block": 596,
+    "medium_block": 536,
+    "high_block": 39
+  },
+  "definition": "Tight mark: nearest outfield opponent within 3.0 m at frame_start. Goalkeepers are excluded. Drawn out: mean Euclidean distance, in metres, of the centre-backs, central midfielders, or full backs from that role acronym's median position for the same defending team and the same block in the match. The median uses a 2 Hz sample of organized-block frames in attack-normalized coordinates and needs at least 8 samples. Role acronyms come from the match json, with the modal event position used only when the squad role is missing or SUB. The interval resamples matches. A role is supported only when that interval lies entirely above zero. For lead_to_shot, xthreat, and line_break, supported means the interval excludes zero in either direction. xthreat is player_targeted_xthreat on the possession. line_break is first_line_break. Hungarian sensitivity: goal-side assignment from coupled_formation.hungarian_marking within 3.0 m. It does not decide drawn_out_roles.",
+  "inference": "match_cluster_bootstrap",
+  "roles": [
+    {
+      "n": 1171,
+      "n_tight": 534,
+      "n_not": 637,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "effect": 1.5993399762208043,
+      "ci_low": 0.49109536532874043,
+      "ci_high": 2.670534274216371,
+      "mean_tight": 13.953242650929269,
+      "mean_not": 12.353902674708465,
+      "supported": true,
+      "role": "CB",
+      "roles": [
+        "CB",
+        "CCB",
+        "LCB",
+        "RCB"
+      ],
+      "unit": "metres"
+    },
+    {
+      "n": 445,
+      "n_tight": 206,
+      "n_not": 239,
+      "n_matches": 14,
+      "n_matches_both": 14,
+      "effect": 1.713737059776932,
+      "ci_low": -0.021750193800824207,
+      "ci_high": 3.619408048764972,
+      "mean_tight": 19.2561205171939,
+      "mean_not": 17.542383457416967,
+      "supported": false,
+      "role": "CM",
+      "roles": [
+        "AM",
+        "CAM",
+        "CDM",
+        "CM",
+        "DM",
+        "LCM",
+        "LDM",
+        "RCM",
+        "RDM"
+      ],
+      "unit": "metres"
+    },
+    {
+      "n": 1171,
+      "n_tight": 534,
+      "n_not": 637,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "effect": 1.0205626989673764,
+      "ci_low": -0.2073973507001002,
+      "ci_high": 2.255741009448173,
+      "mean_tight": 14.848872193389104,
+      "mean_not": 13.828309494421728,
+      "supported": false,
+      "role": "FB",
+      "roles": [
+        "LB",
+        "LWB",
+        "RB",
+        "RWB"
+      ],
+      "unit": "metres"
+    }
+  ],
+  "drawn_out_roles": [
+    "CB"
+  ],
+  "outcomes": {
+    "lead_to_shot": {
+      "n": 1171,
+      "n_tight": 534,
+      "n_not": 637,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "effect": 0.08500167569188435,
+      "ci_low": 0.04200772509416991,
+      "ci_high": 0.12873606062328177,
+      "mean_tight": 0.2247191011235955,
+      "mean_not": 0.13971742543171115,
+      "supported": true
+    },
+    "xthreat": {
+      "n": 844,
+      "n_tight": 372,
+      "n_not": 472,
+      "n_matches": 20,
+      "n_matches_both": 19,
+      "effect": 0.0014499316566429742,
+      "ci_low": -0.004628847570888445,
+      "ci_high": 0.007512231336909336,
+      "mean_tight": 0.019909677419354836,
+      "mean_not": 0.018459745762711862,
+      "supported": false
+    },
+    "line_break": {
+      "n": 246,
+      "n_tight": 84,
+      "n_not": 162,
+      "n_matches": 18,
+      "n_matches_both": 17,
+      "effect": -0.031746031746031744,
+      "ci_low": -0.07832786792330614,
+      "ci_high": 0.018133505214297865,
+      "mean_tight": 0.023809523809523808,
+      "mean_not": 0.05555555555555555,
+      "supported": false
+    }
+  },
+  "hungarian_sensitivity": [
+    {
+      "n": 1171,
+      "n_tight": 329,
+      "n_not": 842,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "effect": 0.6704489652056029,
+      "ci_low": -0.053395693317840505,
+      "ci_high": 1.4485959083230262,
+      "mean_tight": 13.565316488547088,
+      "mean_not": 12.894867523341485,
+      "supported": false,
+      "role": "CB",
+      "unit": "metres"
+    },
+    {
+      "n": 445,
+      "n_tight": 129,
+      "n_not": 316,
+      "n_matches": 14,
+      "n_matches_both": 13,
+      "effect": 1.2554189311743045,
+      "ci_low": -0.17746864993148365,
+      "ci_high": 2.7316138463400104,
+      "mean_tight": 19.227197427226248,
+      "mean_not": 17.971778496051943,
+      "supported": false,
+      "role": "CM",
+      "unit": "metres"
+    },
+    {
+      "n": 1171,
+      "n_tight": 329,
+      "n_not": 842,
+      "n_matches": 20,
+      "n_matches_both": 20,
+      "effect": -0.20767459174039793,
+      "ci_low": -1.0962638749788658,
+      "ci_high": 0.732628006699416,
+      "mean_tight": 14.144379925679768,
+      "mean_not": 14.352054517420166,
+      "supported": false,
+      "role": "FB",
+      "unit": "metres"
+    }
+  ]
+}
