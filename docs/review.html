@@ -3,61 +3,68 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Defensive positioning review</title>
+  <title>Defensive checks — commute note</title>
   <style>
     :root { color-scheme: light dark; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 1.125rem;
-      line-height: 1.55;
-      padding: 1.5rem 1.15rem 3rem;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      padding: 1.35rem 1.15rem 3rem;
       max-width: 40rem;
     }
     h1 {
-      font-size: 1.65rem;
-      line-height: 1.25;
-      margin: 0 0 0.5rem;
+      font-size: 1.75rem;
+      line-height: 1.2;
+      margin: 0 0 0.45rem;
     }
     h2 {
-      font-size: 1.2rem;
-      margin: 2rem 0 0.65rem;
-      padding-top: 0.35rem;
+      font-size: 1.28rem;
+      line-height: 1.25;
+      margin: 1.85rem 0 0.55rem;
+      padding-top: 0.45rem;
       border-top: 1px solid #ddd;
     }
     @media (prefers-color-scheme: dark) {
       h2 { border-top-color: #444; }
     }
     p, li {
-      margin: 0 0 0.85rem;
+      margin: 0 0 0.8rem;
     }
     .purpose {
-      margin: 0 0 0.25rem;
+      margin: 0 0 1rem;
       color: #555;
       font-size: 1.05rem;
     }
     @media (prefers-color-scheme: dark) {
       .purpose { color: #aaa; }
     }
+    .running {
+      margin: 0 0 0.85rem;
+      padding: 0.9rem 0.95rem;
+      border: 1px solid #888;
+      border-radius: 6px;
+    }
+    ul {
+      margin: 0 0 0.5rem;
+      padding-left: 1.2rem;
+    }
+    li { padding-left: 0.15rem; }
     .mission {
       margin: 0 0 0.85rem;
       padding: 0.85rem 0 0.85rem 0.9rem;
       border-left: 3px solid #888;
       font-size: 1.05rem;
     }
-    ul {
-      margin: 0 0 0.5rem;
-      padding-left: 1.25rem;
-    }
-    li { padding-left: 0.15rem; }
     .thread-title {
       font-weight: 600;
       display: block;
       margin-bottom: 0.2rem;
     }
     .ideas {
-      margin-top: 2rem;
-      padding-top: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 0.85rem;
       border-top: 1px solid #ddd;
       font-size: 1rem;
       color: #444;
@@ -72,7 +79,7 @@
     }
     .cta {
       display: block;
-      margin: 1rem 0;
+      margin: 0.75rem 0;
       padding: 0.9rem 1rem;
       border: 1px solid #ccc;
       border-radius: 6px;
@@ -86,7 +93,7 @@
     .cta span {
       display: block;
       font-weight: 400;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       margin-top: 0.25rem;
       color: #666;
     }
@@ -96,15 +103,53 @@
   </style>
 </head>
 <body>
-  <h1>Defensive positioning review</h1>
-  <p class="purpose">Phone-first notes for the Analytics Cup defensive question.</p>
+  <h1>Defensive checks</h1>
+  <p class="purpose">Phone note for the commute. Three checks are finished. Four are still running and are not in the numbers below.</p>
 
-  <h2>Mission</h2>
-  <blockquote class="mission">
-    Football defensive positioning. How can tracking and contextual data help us understand how players and teams defend?
-    Team shape, spacing, pressure, compactness, marking, defensive decision-making.
-  </blockquote>
+  <h2>Still running</h2>
+  <div class="running">
+    <p>Four checks are still running in the cloud and are not in this note: defender body shape, sight of goal, shadow screening, and wide-to-midfield passing angle.</p>
+    <p>Body pose was not used for the three checks below.</p>
+  </div>
 
+  <h2>What the numbers are</h2>
+  <p>There is no xG, xGOT, or xT in this data. The numbers use shot rate, reception, xthreat, and distance.</p>
+
+  <h2>1. Full-back tracking</h2>
+  <p>A full back on an overlap or underlap is tracked only when the nearest outfield opponent is within 6 m, goal-side, and moving with them for 1 second (direction cosine at least 0.60, speed difference at most 2 m/s).</p>
+  <p>260 attacking-half runs, 50 tracked, 210 not, 17 matches with both. About 19% of these runs are fully tracked.</p>
+  <p>Tracked runs were received 12.9 points less often (20.0% vs 32.9%, interval −0.250 to −0.015).</p>
+  <p>Shots (16.0% vs 17.6%, interval −0.109 to +0.078) and xthreat (0.0159 vs 0.0194, interval −0.0076 to +0.0004) do not separate.</p>
+  <p>Worth keeping as a reception metric, not a shot metric.</p>
+
+  <h2>2. Overlaps and underlaps</h2>
+  <p>534 runs in 20 matches (301 overlaps, 233 underlaps). 17.2% lead to a shot.</p>
+  <p>Runs that do not lead to a shot have a defender 1.33 m closer (4.84 m vs 6.17 m, interval −2.31 to −0.47).</p>
+  <p>Goal-side position (56.9% of runs) and a defender in the lane (30.0%) do not separate shots, xthreat, or being beaten by the run. Beaten-by-movement is rare (11 runs).</p>
+  <p>This is an association, not a prevention system. The useful metric is nearest-defender distance at the run, not lane or body-side.</p>
+
+  <h2>3. Defenders drawn out</h2>
+  <p>Tight mark = nearest opponent within 3 m of the striker. Drawn out = metres from that role's own median spot in the same block.</p>
+  <p>1,171 striker possessions in organized blocks, tight on 45.6%.</p>
+  <ul>
+    <li>Centre-backs: +1.60 m (interval 0.49 to 2.67), supported.</li>
+    <li>Central midfielders: +1.71 m (interval −0.02 to 3.62), not supported, and only 445 possessions.</li>
+    <li>Full backs: +1.02 m (interval −0.21 to 2.26), not supported.</li>
+  </ul>
+  <p>Tight marks also come with more shots: +8.5 points (22.5% vs 14.0%, interval 0.042 to 0.129). xthreat and line breaks do not move.</p>
+  <p>A goal-side assignment at the same 3 m cutoff does not clear zero for any role.</p>
+
+  <h2>Already on the books</h2>
+  <p>In organized blocks, shot rate is about 19% low, 9% medium, and 6% high. On-ball pressure runs from 2.2% shots with none to 21.4% with very high pressure. Coupled formation graphs did not add a useful split after the box and the pressure on the ball.</p>
+
+  <h2>On the commute</h2>
+  <p>The tracked full back was received 12.9 points less often (20.0% vs 32.9%) while shots and xthreat did not separate — is reception the gap to keep?</p>
+  <p>Overlaps and underlaps that did not lead to a shot had a defender 1.33 m closer (4.84 m vs 6.17 m) — is nearest-defender distance the thing to watch, rather than the lane or the body-side?</p>
+  <p>Centre-backs were 1.60 m farther from their usual spot when the striker was tightly marked (interval 0.49 to 2.67) — how should that step out change the next tight mark you watch?</p>
+  <p class="ideas">Jot those three in your phone notes. This page has no account.</p>
+
+  <h2>Rest of the site</h2>
+  <p>This page stands alone. The links below are the same notebook and chart pages as the index.</p>
   <a class="cta" href="eda.html">
     Open visual EDA
     <span>Shape, pressure, spacing, team shot maps, Hungarian roles</span>
@@ -121,6 +166,16 @@
     Block graph FAQ
     <span>Timer series, pressing, pre-fracturing — plain English</span>
   </a>
+  <p><a href="eda.html">Visual EDA gallery</a></p>
+  <p><a href="eda_notebook.html">Full EDA notebook (HTML)</a></p>
+  <p><a href="defend.html">Graph analysis notebook (HTML)</a></p>
+  <p><a href="index.html">Notebook index</a></p>
+
+  <h2>Mission</h2>
+  <blockquote class="mission">
+    Football defensive positioning. How can tracking and contextual data help us understand how players and teams defend?
+    Team shape, spacing, pressure, compactness, marking, defensive decision-making.
+  </blockquote>
 
   <h2>What was tested</h2>
   <p>
@@ -131,6 +186,7 @@
   </p>
 
   <h2>Findings (visual EDA)</h2>
+  <p>Earlier page detail. The short paragraph above is the established block and pressure result. This list is not a new study.</p>
   <ul>
     <li>Shot rate by organized block: low ~18.5%, medium ~9.0%, high ~6.0%.</li>
     <li>Shot phases sit in a smaller defensive box (strongest in the low block, ~150–166 m² smaller).</li>
@@ -182,15 +238,5 @@
       If that is all a coach would change, we still need a sharper decision metric.
     </li>
   </ul>
-
-  <p class="ideas">
-    Ideas: jot notes in a phone note keyed to the thread titles above.
-    No login, no backend—just this page and your notes app.
-  </p>
-
-  <p><a href="eda.html">Visual EDA gallery</a></p>
-  <p><a href="eda_notebook.html">Full EDA notebook (HTML)</a></p>
-  <p><a href="defend.html">Graph analysis notebook (HTML)</a></p>
-  <p><a href="index.html">Back to notebook index</a></p>
 </body>
 </html>
