@@ -1,0 +1,619 @@
+{
+  "hypothesis_id": "h4",
+  "question": "When is the passing angle between a wide player and a central midfielder large enough to break the press?",
+  "verdict": "not_supported",
+  "supported": false,
+  "verdict_reason": "The interval excludes zero, but the slope is negative: a larger absolute angle lowers the first-line break rate. A larger angle is not what breaks the press.",
+  "n": 348,
+  "n_matches": 14,
+  "effect": -0.04061741,
+  "interval": [
+    -0.04966139,
+    -0.03157343
+  ],
+  "interval_level": 0.95,
+  "interval_excludes_zero": true,
+  "effect_unit": "change in P(first line break) per 10 degrees of absolute passing angle",
+  "cluster": "match_id",
+  "angle_result": {
+    "definition": "Absolute degrees between the attacking direction and the vector from the passer to the wide or central-midfield teammate at the pass frame. 0 is straight toward the opponent goal; 180 is straight back. Computed from streamed tracking.",
+    "hypothesis_sign": "positive",
+    "effect_per_10_degrees": -0.04061741,
+    "interval": [
+      -0.04966139,
+      -0.03157343
+    ],
+    "threshold_degrees": null,
+    "threshold_proposed": false,
+    "summary": "not_supported. Effect -0.0406 change in first-line-break probability per 10 degrees (95% cluster interval [-0.0497, -0.0316]), n=348 passes, 14 matches. No angle threshold is proposed."
+  },
+  "line_break": {
+    "outcome": "line_break",
+    "estimand": "change per 10 degrees of absolute passing angle",
+    "estimate": -0.04061741,
+    "std_error": 0.00418631,
+    "interval": [
+      -0.04966139,
+      -0.03157343
+    ],
+    "interval_level": 0.95,
+    "interval_excludes_zero": true,
+    "n": 348,
+    "n_matches": 14,
+    "df": 13,
+    "cluster": "match_id",
+    "se": "cluster CR1, Student-t critical value with G-1 df"
+  },
+  "pressure": {
+    "outcome": "pressure_id",
+    "estimand": "change per 10 degrees of absolute passing angle",
+    "estimate": 0.00801782,
+    "std_error": 0.01294705,
+    "interval": [
+      -0.01995258,
+      0.03598821
+    ],
+    "interval_level": 0.95,
+    "interval_excludes_zero": false,
+    "n": 340,
+    "n_matches": 14,
+    "df": 13,
+    "cluster": "match_id",
+    "se": "cluster CR1, Student-t critical value with G-1 df",
+    "field": "overall_pressure_end_id",
+    "scale": "1 least pressure to 5 most pressure, on the passer at the pass",
+    "label_to_id": {
+      "high_pressure": "4",
+      "low_pressure": "2",
+      "medium_pressure": "3",
+      "no_pressure": "1",
+      "very_high_pressure": "5"
+    }
+  },
+  "pass_epv": {
+    "outcome": "pass_epv",
+    "estimand": "change per 10 degrees of absolute passing angle",
+    "estimate": -0.00052597,
+    "std_error": 0.00010322,
+    "interval": [
+      -0.00074897,
+      -0.00030298
+    ],
+    "interval_level": 0.95,
+    "interval_excludes_zero": true,
+    "n": 340,
+    "n_matches": 14,
+    "df": 13,
+    "cluster": "match_id",
+    "se": "cluster CR1, Student-t critical value with G-1 df",
+    "field": "pass_epv_total",
+    "definition": "Net pass EPV, pass value for minus pass value against. Not xG."
+  },
+  "bins": [
+    {
+      "abs_angle_lo": 0,
+      "abs_angle_hi": 15,
+      "n": 23,
+      "n_matches": 11,
+      "line_break_rate": 0.52173913,
+      "line_break_interval": [
+        0.34570042,
+        0.69777784
+      ],
+      "mean_pressure_id": 2.68181818,
+      "pressure_interval": [
+        2.12898439,
+        3.23465197
+      ],
+      "pressure_n": 22,
+      "mean_pass_epv": 0.00479545,
+      "pass_epv_interval": [
+        0.00147426,
+        0.00811665
+      ],
+      "pass_epv_n": 22,
+      "eligible_for_cut": true
+    },
+    {
+      "abs_angle_lo": 15,
+      "abs_angle_hi": 30,
+      "n": 32,
+      "n_matches": 9,
+      "line_break_rate": 0.5,
+      "line_break_interval": [
+        0.3791473,
+        0.6208527
+      ],
+      "mean_pressure_id": 2.48387097,
+      "pressure_interval": [
+        2.09892214,
+        2.86881979
+      ],
+      "pressure_n": 31,
+      "mean_pass_epv": 0.00317419,
+      "pass_epv_interval": [
+        -0.00041485,
+        0.00676324
+      ],
+      "pass_epv_n": 31,
+      "eligible_for_cut": true
+    },
+    {
+      "abs_angle_lo": 30,
+      "abs_angle_hi": 45,
+      "n": 31,
+      "n_matches": 12,
+      "line_break_rate": 0.38709677,
+      "line_break_interval": [
+        0.19819281,
+        0.57600073
+      ],
+      "mean_pressure_id": 2.46666667,
+      "pressure_interval": [
+        2.01127063,
+        2.92206271
+      ],
+      "pressure_n": 30,
+      "mean_pass_epv": 0.00372258,
+      "pass_epv_interval": [
+        0.00026833,
+        0.00717683
+      ],
+      "pass_epv_n": 31,
+      "eligible_for_cut": true
+    },
+    {
+      "abs_angle_lo": 45,
+      "abs_angle_hi": 60,
+      "n": 50,
+      "n_matches": 13,
+      "line_break_rate": 0.28,
+      "line_break_interval": [
+        0.13481671,
+        0.42518329
+      ],
+      "mean_pressure_id": 2.44,
+      "pressure_interval": [
+        2.17295753,
+        2.70704247
+      ],
+      "pressure_n": 50,
+      "mean_pass_epv": 0.00455833,
+      "pass_epv_interval": [
+        0.00110197,
+        0.0080147
+      ],
+      "pass_epv_n": 48,
+      "eligible_for_cut": true
+    },
+    {
+      "abs_angle_lo": 60,
+      "abs_angle_hi": 75,
+      "n": 44,
+      "n_matches": 11,
+      "line_break_rate": 0.11363636,
+      "line_break_interval": [
+        0.03070778,
+        0.19656495
+      ],
+      "mean_pressure_id": 2.65909091,
+      "pressure_interval": [
+        2.27799239,
+        3.04018942
+      ],
+      "pressure_n": 44,
+      "mean_pass_epv": 0.00299767,
+      "pass_epv_interval": [
+        0.00058452,
+        0.00541083
+      ],
+      "pass_epv_n": 43,
+      "eligible_for_cut": true
+    },
+    {
+      "abs_angle_lo": 75,
+      "abs_angle_hi": 90,
+      "n": 48,
+      "n_matches": 12,
+      "line_break_rate": 0.02083333,
+      "line_break_interval": [
+        -0.02071499,
+        0.06238165
+      ],
+      "mean_pressure_id": 2.54166667,
+      "pressure_interval": [
+        2.33561399,
+        2.74771934
+      ],
+      "pressure_n": 48,
+      "mean_pass_epv": 0.00252128,
+      "pass_epv_interval": [
+        0.00045682,
+        0.00458574
+      ],
+      "pass_epv_n": 47,
+      "eligible_for_cut": true
+    },
+    {
+      "abs_angle_lo": 90,
+      "abs_angle_hi": 105,
+      "n": 33,
+      "n_matches": 12,
+      "line_break_rate": 0.0,
+      "line_break_interval": [
+        0.0,
+        0.0
+      ],
+      "mean_pressure_id": 2.61290323,
+      "pressure_interval": [
+        2.18591992,
+        3.03988653
+      ],
+      "pressure_n": 31,
+      "mean_pass_epv": 6.562e-05,
+      "pass_epv_interval": [
+        -0.00214576,
+        0.00227701
+      ],
+      "pass_epv_n": 32,
+      "eligible_for_cut": true
+    },
+    {
+      "abs_angle_lo": 105,
+      "abs_angle_hi": 120,
+      "n": 34,
+      "n_matches": 12,
+      "line_break_rate": 0.0,
+      "line_break_interval": [
+        0.0,
+        0.0
+      ],
+      "mean_pressure_id": 2.57575758,
+      "pressure_interval": [
+        2.21483605,
+        2.9366791
+      ],
+      "pressure_n": 33,
+      "mean_pass_epv": 0.00112059,
+      "pass_epv_interval": [
+        -0.00172258,
+        0.00396376
+      ],
+      "pass_epv_n": 34,
+      "eligible_for_cut": true
+    },
+    {
+      "abs_angle_lo": 120,
+      "abs_angle_hi": 135,
+      "n": 17,
+      "n_matches": 9,
+      "line_break_rate": 0.0,
+      "line_break_interval": [
+        0.0,
+        0.0
+      ],
+      "mean_pressure_id": 2.4375,
+      "pressure_interval": [
+        1.76462063,
+        3.11037937
+      ],
+      "pressure_n": 16,
+      "mean_pass_epv": -0.00300588,
+      "pass_epv_interval": [
+        -0.00411001,
+        -0.00190176
+      ],
+      "pass_epv_n": 17,
+      "eligible_for_cut": false
+    },
+    {
+      "abs_angle_lo": 135,
+      "abs_angle_hi": 150,
+      "n": 14,
+      "n_matches": 9,
+      "line_break_rate": 0.0,
+      "line_break_interval": [
+        0.0,
+        0.0
+      ],
+      "mean_pressure_id": 2.57142857,
+      "pressure_interval": [
+        2.07981243,
+        3.06304471
+      ],
+      "pressure_n": 14,
+      "mean_pass_epv": -0.00342857,
+      "pass_epv_interval": [
+        -0.0049709,
+        -0.00188625
+      ],
+      "pass_epv_n": 14,
+      "eligible_for_cut": false
+    },
+    {
+      "abs_angle_lo": 150,
+      "abs_angle_hi": 165,
+      "n": 9,
+      "n_matches": 8,
+      "line_break_rate": 0.0,
+      "line_break_interval": [
+        0.0,
+        0.0
+      ],
+      "mean_pressure_id": 2.875,
+      "pressure_interval": [
+        2.14322668,
+        3.60677332
+      ],
+      "pressure_n": 8,
+      "mean_pass_epv": -0.00223333,
+      "pass_epv_interval": [
+        -0.00466821,
+        0.00020154
+      ],
+      "pass_epv_n": 9,
+      "eligible_for_cut": false
+    },
+    {
+      "abs_angle_lo": 165,
+      "abs_angle_hi": 180,
+      "n": 13,
+      "n_matches": 7,
+      "line_break_rate": 0.0,
+      "line_break_interval": [
+        0.0,
+        0.0
+      ],
+      "mean_pressure_id": 2.69230769,
+      "pressure_interval": [
+        2.29482221,
+        3.08979318
+      ],
+      "pressure_n": 13,
+      "mean_pass_epv": -0.00305,
+      "pass_epv_interval": [
+        -0.00610096,
+        9.6e-07
+      ],
+      "pass_epv_n": 12,
+      "eligible_for_cut": false
+    }
+  ],
+  "threshold": {
+    "proposed": false,
+    "threshold_degrees": null,
+    "rule": "15-degree bins; both sides need n>=20 and >=5 matches. Propose a boundary only if the high-minus-low cluster interval excludes zero, the step is not a one-bin spike, the step is at least 2 times the median adjacent step, and it is the only such step or at least 2 times the next.",
+    "reason": "Any adjacent contrast whose interval excludes zero is no larger than a typical step along the gradient, so it is not a cut.",
+    "cut": null,
+    "adjacent_contrasts": [
+      {
+        "boundary_deg": 15,
+        "effect_high_minus_low": -0.02173913,
+        "interval": [
+          -0.23749597,
+          0.19401771
+        ],
+        "interval_excludes_zero": false,
+        "spike": false,
+        "above_typical_step": false,
+        "n": 55,
+        "n_matches": 13
+      },
+      {
+        "boundary_deg": 30,
+        "effect_high_minus_low": -0.11290323,
+        "interval": [
+          -0.34773806,
+          0.12193161
+        ],
+        "interval_excludes_zero": false,
+        "spike": false,
+        "above_typical_step": false,
+        "n": 63,
+        "n_matches": 12
+      },
+      {
+        "boundary_deg": 45,
+        "effect_high_minus_low": -0.10709677,
+        "interval": [
+          -0.30660211,
+          0.09240856
+        ],
+        "interval_excludes_zero": false,
+        "spike": false,
+        "above_typical_step": false,
+        "n": 81,
+        "n_matches": 13
+      },
+      {
+        "boundary_deg": 60,
+        "effect_high_minus_low": -0.16636364,
+        "interval": [
+          -0.35681276,
+          0.02408549
+        ],
+        "interval_excludes_zero": false,
+        "spike": false,
+        "above_typical_step": false,
+        "n": 94,
+        "n_matches": 13
+      },
+      {
+        "boundary_deg": 75,
+        "effect_high_minus_low": -0.09280303,
+        "interval": [
+          -0.18006335,
+          -0.00554271
+        ],
+        "interval_excludes_zero": true,
+        "spike": false,
+        "above_typical_step": false,
+        "n": 92,
+        "n_matches": 12
+      },
+      {
+        "boundary_deg": 90,
+        "effect_high_minus_low": -0.02083333,
+        "interval": [
+          -0.06207864,
+          0.02041197
+        ],
+        "interval_excludes_zero": false,
+        "spike": false,
+        "above_typical_step": false,
+        "n": 81,
+        "n_matches": 13
+      },
+      {
+        "boundary_deg": 105,
+        "effect_high_minus_low": 0.0,
+        "interval": [
+          0.0,
+          0.0
+        ],
+        "interval_excludes_zero": false,
+        "spike": false,
+        "above_typical_step": false,
+        "n": 67,
+        "n_matches": 14
+      }
+    ]
+  },
+  "sample": {
+    "unit": "player_possession pass between a wide player and a central midfielder",
+    "press_phases": [
+      "high_block",
+      "medium_block"
+    ],
+    "organised_defense": true,
+    "directions": {
+      "cm_to_wide": 209,
+      "wide_to_cm": 139
+    },
+    "wide_groups": {
+      "full_back": 194,
+      "wide_attacker": 123,
+      "wide_midfield": 31
+    },
+    "phases": {
+      "medium_block": 305,
+      "high_block": 43
+    },
+    "roles": {
+      "wide": [
+        "LB",
+        "LF",
+        "LM",
+        "LW",
+        "LWB",
+        "RB",
+        "RF",
+        "RM",
+        "RW",
+        "RWB"
+      ],
+      "central_midfield": [
+        "AM",
+        "DM",
+        "LDM",
+        "RDM"
+      ],
+      "note": "Match JSON has no CM acronym. Central midfield is AM, DM, LDM, and RDM. Wide is wide attackers, LM/RM, and full backs or wing backs."
+    },
+    "n_matches_scanned": 20,
+    "matches_without_central_midfield": [
+      "1899585",
+      "1959846",
+      "1986691",
+      "2007448",
+      "2007721",
+      "2015213"
+    ],
+    "n_press_passes_dropped_for_angle_mismatch": 3,
+    "tracking": {
+      "streamed": true,
+      "held_all_matches_in_memory": false,
+      "vendor_angle_median_abs_diff_deg": 0.08222637,
+      "vendor_angle_p95_abs_diff_deg": 2.08274495,
+      "max_vendor_gap_deg": 15.0,
+      "n_candidates": 2483,
+      "n_missing_tracking_position": 0
+    }
+  },
+  "sensitivity": {
+    "passes_excluding_full_backs": {
+      "outcome": "line_break",
+      "estimand": "change per 10 degrees of absolute passing angle",
+      "estimate": -0.03098905,
+      "std_error": 0.00494841,
+      "interval": [
+        -0.0417707,
+        -0.0202074
+      ],
+      "interval_level": 0.95,
+      "interval_excludes_zero": true,
+      "n": 154,
+      "n_matches": 13,
+      "df": 12,
+      "cluster": "match_id",
+      "se": "cluster CR1, Student-t critical value with G-1 df"
+    },
+    "high_block_only": {
+      "outcome": "line_break",
+      "estimand": "change per 10 degrees of absolute passing angle",
+      "estimate": -0.05511009,
+      "std_error": 0.01867409,
+      "interval": [
+        -0.09621149,
+        -0.01400869
+      ],
+      "interval_level": 0.95,
+      "interval_excludes_zero": true,
+      "n": 43,
+      "n_matches": 12,
+      "df": 11,
+      "cluster": "match_id",
+      "se": "cluster CR1, Student-t critical value with G-1 df"
+    },
+    "passing_options_same_filter": {
+      "outcome": "line_break",
+      "estimand": "change per 10 degrees of absolute passing angle",
+      "estimate": -0.04581701,
+      "std_error": 0.00374346,
+      "interval": [
+        -0.05390426,
+        -0.03772975
+      ],
+      "interval_level": 0.95,
+      "interval_excludes_zero": true,
+      "n": 1064,
+      "n_matches": 14,
+      "df": 13,
+      "cluster": "match_id",
+      "se": "cluster CR1, Student-t critical value with G-1 df"
+    },
+    "all_organised_passes": {
+      "outcome": "line_break",
+      "estimand": "change per 10 degrees of absolute passing angle",
+      "estimate": -0.03723011,
+      "std_error": 0.00225342,
+      "interval": [
+        -0.04209833,
+        -0.03236188
+      ],
+      "interval_level": 0.95,
+      "interval_excludes_zero": true,
+      "n": 594,
+      "n_matches": 14,
+      "df": 13,
+      "cluster": "match_id",
+      "se": "cluster CR1, Student-t critical value with G-1 df"
+    }
+  },
+  "notes": [
+    "Supported only if the pre-specified line-break slope interval excludes zero and is positive.",
+    "Pressure and pass EPV are reported on the same passes. They are not the verdict.",
+    "xG is not used.",
+    "The threshold search is descriptive. It is not the tested effect."
+  ]
+}
