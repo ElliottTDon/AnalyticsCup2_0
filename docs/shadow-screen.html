@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shadow screening</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0 auto;
+      max-width: 40rem;
+      padding: 1.35rem 1.15rem 3rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.45;
+    }
+    h1 {
+      font-size: 1.85rem;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    h2 {
+      font-size: 1.35rem;
+      line-height: 1.25;
+      margin: 1.6rem 0 0.5rem;
+    }
+    p { margin: 0 0 0.75rem; }
+    a { color: inherit; }
+    .keep {
+      margin: 0 0 1rem;
+      padding: 0.15rem 0 0.15rem 0.85rem;
+      border-left: 3px solid #888;
+    }
+    .foot { margin-top: 1.75rem; }
+    .foot a { margin-right: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Shadow screening</h1>
+  <p class="keep">Keep a lane-occupation flag on high-block passing options, because forward completion drops. Do not claim it lowers pass value, and do not claim the press aims at the busiest passers. The facing result is only two matches.</p>
+
+  <h2>Scope</h2>
+  <p>High block only. No xG. Intervals are match-clustered. A contrast is supported only if the interval excludes zero in the predicted direction.</p>
+  <p>Analysis branch cursor/h3-shadow-screen-349d, commit 0b46b08.</p>
+
+  <h2>Pose, two matches</h2>
+  <p>Matches 1925299 and 1996435 only. Underpowered.</p>
+  <p>A shadow-screen is the outfield opponent closest to the passer-teammate segment, within 1.5 m, segment parameter t in [0.10, 0.90], shoulders facing the passer within 45 degrees.</p>
+  <p>97 of 609 passing options (16.2%).</p>
+  <p>When the lane is occupied and shoulders are reliable, the defender faces the passer 78.9% of the time (97/123).</p>
+  <p>Completed forward passes: 73.9% screened vs 88.5% not, difference -14.6 points, interval [-18.6, -11.8], supported. The interval is only the range of two match effects (9 and 14 screened passes).</p>
+  <p>Pass EPV is higher, not lower (+0.005), so the predicted EPV drop is not supported.</p>
+  <p>Screened options have slightly higher xthreat (+0.00020), so that contrast is supported.</p>
+  <p>Players above the match-median pass count are screened less often (-8.1 points), so targeting influential passers is not supported.</p>
+
+  <h2>Twenty-match tracking proxy</h2>
+  <p>This proxy is lane occupation, not body orientation. Lane occupation means any outfield opponent within 1.5 m of the segment.</p>
+  <p>20.8% of high-block passing options are occupied, interval [19.6%, 21.9%].</p>
+  <p>Completed forward passes: 63.7% occupied vs 90.7% not, difference -27.0 points, interval [-32.4, -21.6], supported on all 20 matches.</p>
+  <p>Pass EPV -0.00093, interval [-0.00208, +0.00018], includes zero, not supported.</p>
+  <p>Occupied options have higher xthreat inside the possession (+0.00075).</p>
+  <p>Higher-volume passers are occupied less often.</p>
+
+  <p class="foot">
+    <a href="review.html">Review</a>
+    <a href="index.html">Index</a>
+  </p>
+</body>
+</html>

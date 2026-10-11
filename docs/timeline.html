@@ -39,7 +39,7 @@
 <body>
   <h1>Timeline and next steps</h1>
   <p class="mission">Football defensive positioning. How can tracking and contextual data help us understand how players and teams defend? Team shape, spacing, pressure, compactness, marking, defensive decision-making.</p>
-  <p>20 matches in total. Pose is available on two. Body pose was not used for the three finished checks.</p>
+  <p>20 matches in total. Pose is available on two. Body pose was not used for full-back tracking, overlaps, or centre-backs drawn out.</p>
 
   <h2>Order</h2>
   <ol>
@@ -48,23 +48,31 @@
     <li>A coupled two-graph method asked whether the defense covers the passing graph or only the ball, and mostly lost to the box and pressure.</li>
     <li>Seven sharper hypotheses were split out.</li>
     <li>Three are finished: full-back tracking, overlaps, and centre-backs drawn out.</li>
-    <li>Four are still running on cloud machines, with no results yet: body shape, sight of goal, shadow screening, and passing angle.</li>
+    <li>Four have since finished: body shape, sight of goal, shadow screening, and the wide-to-midfield passing angle.</li>
   </ol>
+
+  <h2>What those four found</h2>
+  <ul>
+    <li><a href="body-shape.html">Body shape</a>: defenders are usually square to the receiver. Two matches only. Do not ship it as a KPI yet.</li>
+    <li><a href="goal-sight.html">Sight of goal</a>: at least half the goal mouth is supported on two matches. A film label, not a league KPI yet.</li>
+    <li><a href="shadow-screen.html">Shadow screening</a>: keep a lane-occupation flag on high-block passing options, because forward completion drops. Do not claim it lowers pass value.</li>
+    <li><a href="pass-angle.html">Passing angle</a>: a larger angle is less likely to break the first line.</li>
+  </ul>
 
   <h2>Next steps</h2>
   <ul>
     <li>Keep nearest-defender distance on overlaps, and the full-back tracking rule, as reception metrics, not shot models.</li>
     <li>Film centre-backs when the striker is inside 3 m.</li>
     <li>Do not ship coupled-graph scores as a KPI.</li>
-    <li>Do not build a body-orientation metric until those four checks return.</li>
+    <li>Do not ship the body-shape result as a KPI yet.</li>
   </ul>
 
-  <p>The earlier review already had three coaching levers from the event labels: stay organised, keep the ball outside the shape, and manage low-block width. Those still leave the decision questions to the three finished checks and the four still running.</p>
+  <p>The earlier review already had three coaching levers from the event labels: stay organised, keep the ball outside the shape, and manage low-block width.</p>
 
   <p class="foot">
     <a href="review.html">Contents</a>
     <a href="eda.html">Event EDA</a>
-    <a href="in-progress.html">Still running</a>
+    <a href="in-progress.html">Four later checks</a>
   </p>
 </body>
 </html>

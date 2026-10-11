@@ -1,0 +1,210 @@
+{
+  "hypothesis_id": "h2",
+  "hypothesis": "What fraction of the goal mouth is visible to the on-ball attacker, and does a visibility threshold separate big chances?",
+  "verdict": "supported",
+  "supported": true,
+  "note": "In both matches the big-chance rate is higher when at least half the goal mouth is visible, and each match interval excludes zero. The pooled gap is carried by shoulder heading (forward fraction 0.85 on big chances vs 0.63 otherwise) more than by the 0.25 m opponent circles (unoccluded fraction 0.75 vs 0.73). The pooled possession-level interval excludes zero. Two matches still leave the result underpowered.",
+  "underpowered": true,
+  "underpowered_reason": "Only two matches have body pose (1925299 and 1996435). n = 536 on-ball possessions, not matches, and those possessions cluster inside team possessions (213 phase indexes). The 95% interval resamples possessions and does not recover match-level variation. Two matches cannot pin down the association.",
+  "support_rule": "Supported only if the 95% bootstrap interval for the risk difference at visible fraction 0.50 excludes zero. The grid 0.25 and 0.75 is reported and does not decide the verdict.",
+  "n": 536,
+  "n_big_chances": 164,
+  "n_other": 372,
+  "n_matches": 2,
+  "matches": [
+    1925299,
+    1996435
+  ],
+  "effect": {
+    "name": "risk_difference",
+    "description": "P(big chance | visible fraction >= 0.50) - P(big chance | visible fraction < 0.50)",
+    "estimate": 0.1883166906495734,
+    "ci95": [
+      0.11379227379730839,
+      0.262234876865524
+    ],
+    "ci_level": 0.95,
+    "interval_method": "percentile bootstrap of possessions, 4000 draws, seed 20261011",
+    "excludes_zero": true,
+    "n_at_or_above": 323,
+    "n_below": 213,
+    "n_big_at_or_above": 123,
+    "n_big_below": 41,
+    "rate_at_or_above": 0.38080495356037153,
+    "rate_below": 0.19248826291079812,
+    "undefined_split": false
+  },
+  "primary_visibility_threshold": 0.5,
+  "thresholds": [
+    {
+      "threshold": 0.25,
+      "estimate": 0.2367442222395144,
+      "n_at_or_above": 355,
+      "n_below": 181,
+      "n_big_at_or_above": 137,
+      "n_big_below": 27,
+      "rate_at_or_above": 0.38591549295774646,
+      "rate_below": 0.14917127071823205,
+      "undefined_split": false,
+      "ci95": [
+        0.16538730216751749,
+        0.3096503993502099
+      ],
+      "n_boot_valid": 4000,
+      "excludes_zero": true,
+      "separates": true
+    },
+    {
+      "threshold": 0.5,
+      "estimate": 0.1883166906495734,
+      "n_at_or_above": 323,
+      "n_below": 213,
+      "n_big_at_or_above": 123,
+      "n_big_below": 41,
+      "rate_at_or_above": 0.38080495356037153,
+      "rate_below": 0.19248826291079812,
+      "undefined_split": false,
+      "ci95": [
+        0.11379227379730839,
+        0.262234876865524
+      ],
+      "n_boot_valid": 4000,
+      "excludes_zero": true,
+      "separates": true
+    },
+    {
+      "threshold": 0.75,
+      "estimate": 0.13916395480383803,
+      "n_at_or_above": 253,
+      "n_below": 283,
+      "n_big_at_or_above": 96,
+      "n_big_below": 68,
+      "rate_at_or_above": 0.3794466403162055,
+      "rate_below": 0.24028268551236748,
+      "undefined_split": false,
+      "ci95": [
+        0.06295252391953196,
+        0.2169767590449149
+      ],
+      "n_boot_valid": 4000,
+      "excludes_zero": true,
+      "separates": true
+    }
+  ],
+  "thresholds_that_separate": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "visible_fraction": {
+    "mean": 0.5352950459163934,
+    "median": 0.6950886766712142,
+    "p25": 0.0,
+    "p75": 0.891200545702592,
+    "mean_big_chance": 0.657879413036968,
+    "mean_other": 0.48125247546538746,
+    "difference_big_minus_other": 0.1766269375715805,
+    "difference_ci95": [
+      0.11468492531059293,
+      0.2421282799059579
+    ],
+    "difference_excludes_zero": true,
+    "mean_forward_fraction": 0.7006449675225509,
+    "mean_unoccluded_fraction": 0.7354335077681171,
+    "mean_forward_big_chance": 0.8509716168103018,
+    "mean_forward_other": 0.6343719285892414,
+    "mean_unoccluded_big_chance": 0.7533690480151731,
+    "mean_unoccluded_other": 0.7275264416376944,
+    "median_abs_heading_gap_deg": 60.53674351514138
+  },
+  "by_match": [
+    {
+      "match_id": 1925299,
+      "n": 261,
+      "n_big_chances": 88,
+      "mean_visible_fraction": 0.5047539895354732,
+      "mean_visible_big_chance": 0.6047997023440406,
+      "mean_visible_other": 0.45386368475423666,
+      "effect": 0.1985705777248362,
+      "ci95": [
+        0.08306095457159285,
+        0.3088011769124828
+      ],
+      "excludes_zero": true
+    },
+    {
+      "match_id": 1996435,
+      "n": 275,
+      "n_big_chances": 76,
+      "mean_visible_fraction": 0.5642812848815577,
+      "mean_visible_big_chance": 0.7193401306814102,
+      "mean_visible_other": 0.5050628312092522,
+      "effect": 0.191571543871786,
+      "ci95": [
+        0.08773884678021554,
+        0.2892461543828257
+      ],
+      "excludes_zero": true
+    }
+  ],
+  "big_chance_definition": "An on-ball player possession is a big chance when lead_to_shot is true OR xshot_player_possession_max >= 0.20. xshot is the maximum xshot_player_possession_max across on-ball engagements whose associated_player_possession_event_id is that possession. xshot is SkillCorner's shot probability for the possession, not xG, xGOT, or xT. Possessions with no linked engagement can still be big chances through lead_to_shot.",
+  "high_xshot_threshold": 0.2,
+  "big_chance_composition": {
+    "n_lead_to_shot": 128,
+    "n_high_xshot": 99,
+    "n_both": 63,
+    "n_end_type_shot": 57
+  },
+  "visibility_definition": "Fraction of the 7.32 m goal mouth (posts at y = \u00b13.66 m on the goal line) for which the ground-plane segment from the attacker's tracking location lies within \u00b190\u00b0 of the shoulder heading and passes no closer than the opponent occlusion radius to an opponent. Shoulder heading is src.features.pose_orientation.shoulder_orientation_deg, kept only when shoulder_table marks the row reliable (max shoulder error 15 cm, plausible shoulder width). Heading may come from a pose frame within \u00b12 tracking frames (0.2 s) of the last attacking-third frame of the possession. The shoulder midpoint must lie within 2 m of that tracking location. Pose z is not used.",
+  "opponent_occlusion_radius_m": 0.25,
+  "opponent_occlusion_radius_basis": "0.25 m is half of a 0.50 m shoulder width, inside the pose helper's plausible shoulder-width band of 0.15\u20130.60 m. The circle is placed on each opponent's extrapolated tracking coordinate. An opponent whose center is within 0.25 m of the attacker blocks the whole mouth. Teammates are not occluders.",
+  "goal_width_m": 7.32,
+  "forward_half_angle_deg": 90.0,
+  "goal_line_rule": "Pitch origin is the center. Goal x is +pitch_length/2 when attacking_side is left_to_right and -pitch_length/2 when it is right_to_left. The attacking third is the third of the pitch nearest that goal (boundary at pitch_length/6).",
+  "pitch": [
+    {
+      "match_id": 1925299,
+      "fixture": "Brisbane Roar FC vs Perth Glory Football Club",
+      "pitch_length_m": 105.0,
+      "pitch_width_m": 68.0,
+      "pitch_origin": "center",
+      "home_team_side_by_period": [
+        "right_to_left",
+        "left_to_right"
+      ],
+      "candidate_possessions": 280,
+      "candidate_big_chances": 97,
+      "dropped_not_in_attacking_third_at_a_tracked_frame": 3,
+      "dropped_no_reliable_shoulder": 16,
+      "n": 261,
+      "n_big_chances": 88
+    },
+    {
+      "match_id": 1996435,
+      "fixture": "Sydney Football Club vs Adelaide United Football Club",
+      "pitch_length_m": 105.0,
+      "pitch_width_m": 68.0,
+      "pitch_origin": "center",
+      "home_team_side_by_period": [
+        "left_to_right",
+        "right_to_left"
+      ],
+      "candidate_possessions": 288,
+      "candidate_big_chances": 79,
+      "dropped_not_in_attacking_third_at_a_tracked_frame": 0,
+      "dropped_no_reliable_shoulder": 13,
+      "n": 275,
+      "n_big_chances": 76
+    }
+  ],
+  "coordinate_sources": {
+    "positions": "tracking_extrapolated.jsonl at 10 fps, including extrapolated players",
+    "heading": "body pose shoulders at 25 fps via src.features.pose_orientation",
+    "events": "dynamic_events player_possession and on_ball_engagement"
+  },
+  "not_used": [
+    "xG",
+    "xGOT",
+    "xT"
+  ]
+}

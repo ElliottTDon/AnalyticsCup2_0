@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sight of goal</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0 auto;
+      max-width: 40rem;
+      padding: 1.35rem 1.15rem 3rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.45;
+    }
+    h1 {
+      font-size: 1.85rem;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    h2 {
+      font-size: 1.35rem;
+      line-height: 1.25;
+      margin: 1.6rem 0 0.5rem;
+    }
+    p { margin: 0 0 0.75rem; }
+    a { color: inherit; }
+    .keep {
+      margin: 0 0 1rem;
+      padding: 0.15rem 0 0.15rem 0.85rem;
+      border-left: 3px solid #888;
+    }
+    .foot { margin-top: 1.75rem; }
+    .foot a { margin-right: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Sight of goal</h1>
+  <p class="keep">An attacker who can see at least half the goal mouth is about twice as likely to be in a big chance (0.38 vs 0.19). That is mostly which way they are facing, not defenders' bodies blocking the goal. Two matches only. Worth a film label, not a league KPI yet.</p>
+
+  <h2>Result</h2>
+  <p>Supported. Underpowered. Two pose matches.</p>
+  <p>Analysis branch cursor/h2-goal-sight-a5c6.</p>
+
+  <h2>Sample</h2>
+  <p>536 attacking-third possessions.</p>
+  <p>A big chance is lead_to_shot, or SkillCorner xshot_player_possession_max of at least 0.20. Not xG, xGOT, or xT.</p>
+  <p>Opponent occlusion radius 0.25 m. Goal width 7.32 m.</p>
+
+  <h2>Visible share</h2>
+  <p>Visible share of the goal averages 0.54 (0.66 on big chances, 0.48 otherwise).</p>
+  <p>At the pre-specified cut of 0.50, the big-chance rate is 0.38 above the cut and 0.19 below it. Risk difference 0.19, 95% bootstrap interval 0.11 to 0.26.</p>
+  <p>The same cut separates chances in both matches. Cuts at 0.25 and 0.75 also separate them.</p>
+  <p>The gap is mostly shoulder heading, not the 0.25 m opponent circles.</p>
+
+  <p class="foot">
+    <a href="review.html">Review</a>
+    <a href="index.html">Index</a>
+  </p>
+</body>
+</html>

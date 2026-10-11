@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Checks still running</title>
+  <title>Four checks have finished</title>
   <style>
     :root { color-scheme: light dark; }
     body {
@@ -24,26 +24,33 @@
       line-height: 1.25;
       margin: 1.6rem 0 0.5rem;
     }
-    p, li { margin: 0 0 0.75rem; }
-    ul { margin: 0 0 0.75rem; padding-left: 1.3rem; }
-    a { color: inherit; }
+    p { margin: 0 0 0.75rem; }
+    nav a {
+      display: block;
+      padding: 0.95rem 0;
+      border-bottom: 1px solid #ddd;
+      color: inherit;
+      text-decoration: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      nav a { border-bottom-color: #444; }
+    }
     .foot { margin-top: 1.75rem; }
-    .foot a { margin-right: 1rem; }
+    .foot a { color: inherit; margin-right: 1rem; }
   </style>
 </head>
 <body>
-  <h1>Checks still running</h1>
-  <p>Four checks are still running and have no results.</p>
+  <h1>Four checks have finished</h1>
+  <p>Body shape, sight of goal, shadow screening, and the wide-to-midfield passing angle are no longer running. The results are on their own pages.</p>
+  <nav>
+    <a href="body-shape.html">Defender body shape. Usually square to the receiver. Two matches. Not a KPI yet.</a>
+    <a href="goal-sight.html">Sight of goal. At least half the goal mouth. Two matches. Supported and underpowered.</a>
+    <a href="shadow-screen.html">Shadow screening. High-block lane occupation. Forward completion drops.</a>
+    <a href="pass-angle.html">Wide-to-midfield passing angle. A larger angle is less likely to break the first line.</a>
+  </nav>
 
-  <h2>Pose, two matches</h2>
-  <p>Body shape, sight of goal, and shadow screening need pose. Pose exists only for matches 1925299 and 1996435.</p>
-  <p>The earlier review used beaten-by-movement as a stand-in for marking intent until that pose coverage grows. Do not build a body-orientation metric until these checks return.</p>
-
-  <h2>Passing angle</h2>
-  <p>Passing angle, wide-to-midfield, uses all 20 matches. No results yet.</p>
-  <p>Body pose was not used for the three finished checks.</p>
-
-  <h2>What the data has</h2>
+  <h2>What they used</h2>
+  <p>Body shape, sight of goal, and the facing part of shadow screening use pose for matches 1925299 and 1996435 only. Passing angle scanned all 20 matches. Six of those matches have no central midfielder labelled.</p>
   <p>No xG, xGOT, or xT in the data. Finished pages use shot rate, reception, xthreat, and metres.</p>
 
   <p class="foot">
