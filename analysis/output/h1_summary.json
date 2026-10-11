@@ -1,0 +1,489 @@
+{
+  "hypothesis_id": "h1",
+  "question": "At a pass reception, is the nearest defender side-on, square-on/in front, or back-to the receiver, and do those labels differ on xshot, xthreat, and possession/pass EPV?",
+  "supported": true,
+  "underpowered": true,
+  "n_matches": 2,
+  "n": 1408,
+  "effect": 0.0066004,
+  "effect_name": "orientation_score_slope",
+  "effect_outcome": "possession_epv_for_start",
+  "effect_unit": "change in possession_epv_for_start per step from square_in_front toward back_to",
+  "interval": [
+    0.00352453,
+    0.0102885
+  ],
+  "interval_level": 0.95,
+  "interval_method": "percentile bootstrap of the OLS slope, 5000 resamples of receptions, seed 1925299. Receptions are treated as independent.",
+  "interval_excludes_zero": true,
+  "verdict": "Across 2 matches and 1408 labelled pass receptions, the nearest outfield defender was square_in_front 1153 (81.9%), side_on 248 (17.6%), back_to 7 (0.5%). A random heading would be about 25% square/in front, 50% side-on, and 25% back-to, so these defenders usually face the receiver. The pre-specified effect is the slope of possession_epv_for_start on orientation score (0 square_in_front, 1 side_on, 2 back_to): estimate 0.0066004 EPV per step. The 95% interval [0.00352453, 0.0102885] excludes zero, so supported is true. Group means are square/in front 0.0318419 (n=1129), side-on 0.03928843 (n=242), back-to 0.03191429 (n=7). Side-on minus square/in front is 0.00744653 with interval [0.00381404, 0.01136275]. Back-to has n=7, and back-to minus square/in front is 7.239e-05 with interval [-0.00838639, 0.00981961], which includes zero. The slope is the square/in front versus side-on association. Other outcomes whose slope interval excludes zero: pass_reception_epv_for, pass_epv_delta_for, xthreat, xshot_player_possession_start. With only 2 matches this comparison is underpowered; receptions are nested in matches, and the interval does not correct for that.",
+  "matches": [
+    {
+      "match_id": 1925299,
+      "fixture": "Brisbane Roar FC vs Perth Glory Football Club",
+      "funnel": {
+        "pass_receptions": 743,
+        "tracking_frame_found": 743,
+        "nearest_outfield_opponent": 740,
+        "reliable_shoulder": 711,
+        "labelled": 711
+      }
+    },
+    {
+      "match_id": 1996435,
+      "fixture": "Sydney Football Club vs Adelaide United Football Club",
+      "funnel": {
+        "pass_receptions": 712,
+        "tracking_frame_found": 712,
+        "nearest_outfield_opponent": 712,
+        "reliable_shoulder": 697,
+        "labelled": 697
+      }
+    }
+  ],
+  "unit": "One pass reception: a player_possession with start_type pass_reception. Not a pose frame.",
+  "label_definition": {
+    "vector": "pitch x,y from the nearest outfield opponent to the receiver at the reception tracking frame",
+    "heading": "shoulder facing from pose x,y only: left-to-right shoulder axis rotated +90 degrees. Goalkeepers are excluded. z is not used.",
+    "square_in_front": "absolute heading error in [0, 45.0)",
+    "side_on": "absolute heading error in [45.0, 135.0)",
+    "back_to": "absolute heading error in [135.0, 180]",
+    "pose_frame": "2.5 * tracking_frame. Even tracking frames use that pose frame. Odd frames use the circular mean of the two bracketing pose frames when both shoulders are reliable and agree within 45 degrees.",
+    "orientation_score": {
+      "square_in_front": 0,
+      "side_on": 1,
+      "back_to": 2
+    },
+    "null_share_if_heading_random": {
+      "square_in_front": 0.25,
+      "side_on": 0.5,
+      "back_to": 0.25
+    }
+  },
+  "labels": {
+    "n": 1408,
+    "counts": {
+      "square_in_front": 1153,
+      "side_on": 248,
+      "back_to": 7
+    },
+    "share": {
+      "square_in_front": 0.81889205,
+      "side_on": 0.17613636,
+      "back_to": 0.00497159
+    },
+    "null_share_if_heading_random": {
+      "square_in_front": 0.25,
+      "side_on": 0.5,
+      "back_to": 0.25
+    },
+    "mean_delta_deg": {
+      "square_in_front": 18.95837898,
+      "side_on": 65.24157035,
+      "back_to": 155.26691283
+    },
+    "median_defender_distance_m": 6.68000358,
+    "share_receiver_detected": 0.97869318,
+    "share_defender_detected": 0.99644886,
+    "delta_deg_quantiles": {
+      "p10": 4.10946957,
+      "p25": 10.05458665,
+      "p50": 22.3255606,
+      "p75": 38.87961906,
+      "p90": 58.1492452
+    }
+  },
+  "primary_test": {
+    "outcome": "possession_epv_for_start",
+    "estimate": 0.0066004,
+    "interval": [
+      0.00352453,
+      0.0102885
+    ],
+    "excludes_zero": true,
+    "supported": true,
+    "n": 1378,
+    "n_by_label": {
+      "square_in_front": 1129,
+      "side_on": 242,
+      "back_to": 7
+    },
+    "why_this_outcome": "possession_epv_for_start is on the reception event itself. xshot is published only on on-ball engagements and is missing when no engagement covers the reception, so it is a selected subset."
+  },
+  "outcomes": [
+    {
+      "outcome": "possession_epv_for_start",
+      "description": "Attacking-team possession EPV at the reception (player_possession.possession_epv_for_start). Not xG.",
+      "n": 1378,
+      "n_by_label": {
+        "square_in_front": 1129,
+        "side_on": 242,
+        "back_to": 7
+      },
+      "mean_by_label": {
+        "square_in_front": {
+          "n": 1129,
+          "mean": 0.0318419,
+          "std": 0.01811627
+        },
+        "side_on": {
+          "n": 242,
+          "mean": 0.03928843,
+          "std": 0.02843536
+        },
+        "back_to": {
+          "n": 7,
+          "mean": 0.03191429,
+          "std": 0.01316149
+        }
+      },
+      "orientation_score_slope": {
+        "estimate": 0.0066004,
+        "ci95": [
+          0.00352453,
+          0.0102885
+        ],
+        "excludes_zero": true,
+        "n": 1378,
+        "n_bootstrap": 5000
+      },
+      "supported": true,
+      "side_on_minus_square_in_front": {
+        "contrast": "side_on - square_in_front",
+        "estimate": 0.00744653,
+        "ci95": [
+          0.00381404,
+          0.01136275
+        ],
+        "excludes_zero": true,
+        "n_square_in_front": 1129,
+        "n_side_on": 242
+      },
+      "back_to_minus_square_in_front": {
+        "contrast": "back_to - square_in_front",
+        "estimate": 7.239e-05,
+        "ci95": [
+          -0.00838639,
+          0.00981961
+        ],
+        "excludes_zero": false,
+        "n_square_in_front": 1129,
+        "n_back_to": 7
+      },
+      "by_match": [
+        {
+          "match_id": 1925299,
+          "n": 692,
+          "slope": 0.00617279
+        },
+        {
+          "match_id": 1996435,
+          "n": 686,
+          "slope": 0.0070596
+        }
+      ]
+    },
+    {
+      "outcome": "pass_reception_epv_for",
+      "description": "Pass-reception EPV for the attacking team on the receiver possession (pass_reception_epv_for). Not xT.",
+      "n": 1229,
+      "n_by_label": {
+        "square_in_front": 1009,
+        "side_on": 214,
+        "back_to": 6
+      },
+      "mean_by_label": {
+        "square_in_front": {
+          "n": 1009,
+          "mean": 0.03153043,
+          "std": 0.01742933
+        },
+        "side_on": {
+          "n": 214,
+          "mean": 0.04070607,
+          "std": 0.02983766
+        },
+        "back_to": {
+          "n": 6,
+          "mean": 0.03976667,
+          "std": 0.01943797
+        }
+      },
+      "orientation_score_slope": {
+        "estimate": 0.00861456,
+        "ci95": [
+          0.00499262,
+          0.01253495
+        ],
+        "excludes_zero": true,
+        "n": 1229,
+        "n_bootstrap": 5000
+      },
+      "supported": true,
+      "side_on_minus_square_in_front": {
+        "contrast": "side_on - square_in_front",
+        "estimate": 0.00917565,
+        "ci95": [
+          0.00538047,
+          0.01342581
+        ],
+        "excludes_zero": true,
+        "n_square_in_front": 1009,
+        "n_side_on": 214
+      },
+      "back_to_minus_square_in_front": {
+        "contrast": "back_to - square_in_front",
+        "estimate": 0.00823624,
+        "ci95": [
+          -0.00483979,
+          0.02371986
+        ],
+        "excludes_zero": false,
+        "n_square_in_front": 1009,
+        "n_back_to": 6
+      },
+      "by_match": [
+        {
+          "match_id": 1925299,
+          "n": 621,
+          "slope": 0.00655374
+        },
+        {
+          "match_id": 1996435,
+          "n": 608,
+          "slope": 0.01094065
+        }
+      ]
+    },
+    {
+      "outcome": "pass_epv_delta_for",
+      "description": "Attacking-team EPV change of the pass that was received (pass_epv_delta_for on the passer possession). Not xT.",
+      "n": 1284,
+      "n_by_label": {
+        "square_in_front": 1054,
+        "side_on": 223,
+        "back_to": 7
+      },
+      "mean_by_label": {
+        "square_in_front": {
+          "n": 1054,
+          "mean": 0.00304763,
+          "std": 0.01248802
+        },
+        "side_on": {
+          "n": 223,
+          "mean": 0.00551435,
+          "std": 0.01620064
+        },
+        "back_to": {
+          "n": 7,
+          "mean": 0.00212857,
+          "std": 0.00374598
+        }
+      },
+      "orientation_score_slope": {
+        "estimate": 0.00210787,
+        "ci95": [
+          0.00020571,
+          0.00425281
+        ],
+        "excludes_zero": true,
+        "n": 1284,
+        "n_bootstrap": 5000
+      },
+      "supported": true,
+      "side_on_minus_square_in_front": {
+        "contrast": "side_on - square_in_front",
+        "estimate": 0.00246672,
+        "ci95": [
+          0.00038719,
+          0.00487856
+        ],
+        "excludes_zero": true,
+        "n_square_in_front": 1054,
+        "n_side_on": 223
+      },
+      "back_to_minus_square_in_front": {
+        "contrast": "back_to - square_in_front",
+        "estimate": -0.00091906,
+        "ci95": [
+          -0.00370315,
+          0.00153359
+        ],
+        "excludes_zero": false,
+        "n_square_in_front": 1054,
+        "n_back_to": 7
+      },
+      "by_match": [
+        {
+          "match_id": 1925299,
+          "n": 642,
+          "slope": 0.00188439
+        },
+        {
+          "match_id": 1996435,
+          "n": 642,
+          "slope": 0.00241429
+        }
+      ]
+    },
+    {
+      "outcome": "xthreat",
+      "description": "SkillCorner xthreat of the received passing option. Expected threat of that option, not xT.",
+      "n": 1333,
+      "n_by_label": {
+        "square_in_front": 1097,
+        "side_on": 229,
+        "back_to": 7
+      },
+      "mean_by_label": {
+        "square_in_front": {
+          "n": 1097,
+          "mean": 0.00474376,
+          "std": 0.01278179
+        },
+        "side_on": {
+          "n": 229,
+          "mean": 0.00806812,
+          "std": 0.01996276
+        },
+        "back_to": {
+          "n": 7,
+          "mean": 0.0045,
+          "std": 0.00572334
+        }
+      },
+      "orientation_score_slope": {
+        "estimate": 0.00291206,
+        "ci95": [
+          0.00069803,
+          0.005514
+        ],
+        "excludes_zero": true,
+        "n": 1333,
+        "n_bootstrap": 5000
+      },
+      "supported": true,
+      "side_on_minus_square_in_front": {
+        "contrast": "side_on - square_in_front",
+        "estimate": 0.00332437,
+        "ci95": [
+          0.00091214,
+          0.00627556
+        ],
+        "excludes_zero": true,
+        "n_square_in_front": 1097,
+        "n_side_on": 229
+      },
+      "back_to_minus_square_in_front": {
+        "contrast": "back_to - square_in_front",
+        "estimate": -0.00024376,
+        "ci95": [
+          -0.00363924,
+          0.00410352
+        ],
+        "excludes_zero": false,
+        "n_square_in_front": 1097,
+        "n_back_to": 7
+      },
+      "by_match": [
+        {
+          "match_id": 1925299,
+          "n": 676,
+          "slope": 0.00387181
+        },
+        {
+          "match_id": 1996435,
+          "n": 657,
+          "slope": 0.00190684
+        }
+      ]
+    },
+    {
+      "outcome": "xshot_player_possession_start",
+      "description": "SkillCorner xshot_player_possession_start on an on-ball engagement whose frame window contains the reception. Expected-shot value of the player possession, not xG and not xGOT. Missing when no engagement covers the reception.",
+      "n": 685,
+      "n_by_label": {
+        "square_in_front": 601,
+        "side_on": 78,
+        "back_to": 6
+      },
+      "mean_by_label": {
+        "square_in_front": {
+          "n": 601,
+          "mean": 0.02480033,
+          "std": 0.09936564
+        },
+        "side_on": {
+          "n": 78,
+          "mean": 0.07187179,
+          "std": 0.17991068
+        },
+        "back_to": {
+          "n": 6,
+          "mean": 0.00833333,
+          "std": 0.01036661
+        }
+      },
+      "orientation_score_slope": {
+        "estimate": 0.03331909,
+        "ci95": [
+          0.00509113,
+          0.06961899
+        ],
+        "excludes_zero": true,
+        "n": 685,
+        "n_bootstrap": 5000
+      },
+      "supported": true,
+      "side_on_minus_square_in_front": {
+        "contrast": "side_on - square_in_front",
+        "estimate": 0.04707146,
+        "ci95": [
+          0.01080272,
+          0.09123946
+        ],
+        "excludes_zero": true,
+        "n_square_in_front": 601,
+        "n_side_on": 78
+      },
+      "back_to_minus_square_in_front": {
+        "contrast": "back_to - square_in_front",
+        "estimate": -0.016467,
+        "ci95": [
+          -0.02744705,
+          -0.00531191
+        ],
+        "excludes_zero": true,
+        "n_square_in_front": 601,
+        "n_back_to": 6
+      },
+      "by_match": [
+        {
+          "match_id": 1925299,
+          "n": 300,
+          "slope": 0.03830948
+        },
+        {
+          "match_id": 1996435,
+          "n": 385,
+          "slope": 0.03013876
+        }
+      ]
+    }
+  ],
+  "metric_names": {
+    "xshot": "xshot_player_possession_start. Not xG. Not xGOT.",
+    "xthreat": "xthreat on the received passing option. Not xT.",
+    "possession_epv": "possession_epv_for_start. Attacking-team EPV at the reception.",
+    "pass_epv": "pass_epv_delta_for of the received pass, and pass_reception_epv_for on the receiver."
+  },
+  "caveats": [
+    "Body pose exists for two matches only (1925299 Brisbane Roar v Perth Glory, 1996435 Sydney FC v Adelaide United). The comparison is underpowered.",
+    "The bootstrap treats receptions as independent. Players and phases repeat inside a match, so the interval is narrower than a match-level interval.",
+    "Back-to has only a handful of events. The orientation-score slope is identified by square/in front versus side-on, not by back-to. The association is unadjusted for reception location, pressure, or phase.",
+    "Shoulder heading and tracking positions are generated separately and can be slightly misaligned.",
+    "xshot is observed only when an on-ball engagement window contains the reception frame.",
+    "A random heading would be side-on about half the time because that bin covers 180 degrees of the circle."
+  ]
+}
