@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Defender body shape</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0 auto;
+      max-width: 40rem;
+      padding: 1.35rem 1.15rem 3rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 1.25rem;
+      line-height: 1.45;
+    }
+    h1 {
+      font-size: 1.85rem;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    h2 {
+      font-size: 1.35rem;
+      line-height: 1.25;
+      margin: 1.6rem 0 0.5rem;
+    }
+    p, li { margin: 0 0 0.75rem; }
+    ul { margin: 0 0 0.75rem; padding-left: 1.3rem; }
+    a { color: inherit; }
+    .keep {
+      margin: 0 0 1rem;
+      padding: 0.15rem 0 0.15rem 0.85rem;
+      border-left: 3px solid #888;
+    }
+    .foot { margin-top: 1.75rem; }
+    .foot a { margin-right: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Defender body shape</h1>
+  <p class="keep">Defenders are usually square to the receiver. The few side-on receptions carry slightly higher possession value. Back-to is too rare to judge (7 events). Two matches only. Do not ship this as a KPI yet.</p>
+
+  <h2>Scope</h2>
+  <p>Two pose matches only: 1925299 and 1996435. Underpowered. supported=true for the pre-specified slope, with that caveat.</p>
+  <p>Analysis branch cursor/h1-body-shape-7aa4.</p>
+  <p>At pass reception, the nearest outfield defender's shoulder heading is compared with the vector to the receiver.</p>
+  <p>These values are not xG, xGOT, or xT.</p>
+
+  <h2>How the defender is facing</h2>
+  <p>1,408 of 1,455 receptions labelled.</p>
+  <p>Square/in front (facing within 45°): 1,153 (81.9%). Side-on: 248 (17.6%). Back-to: 7 (0.5%).</p>
+  <p>A random heading would be about 25% / 50% / 25%.</p>
+  <p>Median distance 6.7 m.</p>
+
+  <h2>Pre-specified effect</h2>
+  <p>Slope of attacking-team possession EPV at the reception (possession_epv_for_start) on orientation score 0/1/2. Score 0 is square/in front, 1 is side-on, and 2 is back-to.</p>
+  <p>Estimate 0.00660 EPV per step. 95% bootstrap interval [0.00352, 0.01029]. It excludes zero.</p>
+  <p>Means: square/in front 0.0318 (n=1,129), side-on 0.0393 (n=242), back-to 0.0319 (n=7).</p>
+  <p>Side-on minus square/in front is 0.00745, interval [0.00381, 0.01136].</p>
+  <p>Back-to minus square/in front is about 0, interval [-0.00839, 0.00982]. It includes zero.</p>
+  <p>The slope is the square versus side-on association, not a back-to effect.</p>
+
+  <h2>Same slope on other values</h2>
+  <p>The same positive slope, with an interval that excludes zero:</p>
+  <ul>
+    <li>pass_reception_epv_for 0.00861 [0.00499, 0.01253], n=1,229</li>
+    <li>pass_epv_delta_for 0.00211 [0.00021, 0.00425], n=1,284</li>
+    <li>xthreat 0.00291 [0.00070, 0.00551], n=1,333</li>
+    <li>xshot at reception 0.0333 [0.00509, 0.06962], n=685</li>
+  </ul>
+  <p>These are not xG, xGOT, or xT.</p>
+
+  <p class="foot">
+    <a href="review.html">Review</a>
+    <a href="index.html">Index</a>
+  </p>
+</body>
+</html>
