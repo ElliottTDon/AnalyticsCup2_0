@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How the checks evolved</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0 auto;
+      max-width: 40rem;
+      padding: 1.35rem 1.15rem 3rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 1.2rem;
+      line-height: 1.45;
+    }
+    h1 {
+      font-size: 1.75rem;
+      line-height: 1.2;
+      margin: 0 0 0.6rem;
+    }
+    h2 {
+      font-size: 1.22rem;
+      line-height: 1.25;
+      margin: 0 0 0.4rem;
+    }
+    p { margin: 0 0 0.7rem; }
+    a { color: inherit; }
+    .lead {
+      margin: 0 0 1.25rem;
+      color: #555;
+      font-size: 1.05rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .lead { color: #aaa; }
+    }
+    ol.steps {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    ol.steps > li {
+      margin: 0 0 1.15rem;
+      padding: 0 0 0.15rem 0;
+    }
+    .seq {
+      display: block;
+      margin: 0 0 0.2rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #666;
+    }
+    @media (prefers-color-scheme: dark) {
+      .seq { color: #999; }
+    }
+    .next {
+      margin-top: 0.4rem;
+      padding-top: 0.2rem;
+    }
+    .next ol {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+    .next li { margin: 0 0 0.7rem; }
+    .foot { margin-top: 1.5rem; }
+    .foot a { margin-right: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>How the checks evolved</h1>
+  <p class="lead">Sequence of the work, not calendar dates. All seven checks have results.</p>
+
+  <ol class="steps">
+    <li>
+      <span class="seq">Sequence 1</span>
+      <h2>Mission</h2>
+      <p>How tracking explains defending.</p>
+    </li>
+    <li>
+      <span class="seq">Sequence 2</span>
+      <h2><a href="eda.html">Event EDA</a></h2>
+      <p>Twenty A-League matches. Shot rates about 18.5–18.7% in the low block, 9.0–9.3% medium, and 6.0% high. On-ball pressure runs from 2.2% of shots with none to 21.4% with very high pressure. Shot phases have a smaller box, about 148–166 m² smaller in the low block.</p>
+    </li>
+    <li>
+      <span class="seq">Sequence 3</span>
+      <h2><a href="defend.html">Coupled two-graph test</a></h2>
+      <p>Defense proximity graph, attack Delaunay, Hungarian marking, supra-Laplacian. After width, length, area, nearest defender, and pressure, only supra-Laplacian λ₂ remained: residual −0.013, interval −0.022 to −0.004. Not a KPI.</p>
+    </li>
+    <li>
+      <span class="seq">Sequence 4</span>
+      <h2><a href="review.html">Seven sharper checks</a></h2>
+      <p>The next questions were split out of the block and graph results.</p>
+    </li>
+    <li>
+      <span class="seq">Sequence 5</span>
+      <h2>Full-back tracking</h2>
+      <p>Tracked overlaps and underlaps were received 12.9 points less often (interval −0.250 to −0.015). Shots and xthreat do not separate. Keep as a reception metric. Written on the <a href="review.html">review note</a>.</p>
+    </li>
+    <li>
+      <span class="seq">Sequence 6</span>
+      <h2>Overlaps and underlaps</h2>
+      <p>Runs that do not lead to a shot have a defender 1.33 m closer (interval −2.31 to −0.47). Goal-side and lane do not separate shots. Written on the <a href="review.html">review note</a>.</p>
+    </li>
+    <li>
+      <span class="seq">Sequence 7</span>
+      <h2>Centre-backs drawn out</h2>
+      <p>Centre-backs are +1.60 m from their usual spot when the striker is marked within 3 m (interval 0.49 to 2.67). Midfielders and full backs do not clear zero. Tight marks coincide with +8.5 points of shots. Written on the <a href="review.html">review note</a>.</p>
+    </li>
+    <li>
+      <span class="seq">Sequence 8</span>
+      <h2><a href="shadow-screen.html">Shadow screening</a></h2>
+      <p>High-block lane occupation (an opponent within 1.5 m) cuts forward completion by 27 points on 20 matches (63.7% vs 90.7%). Pass value does not drop. Busier passers are screened less. Facing is only two matches.</p>
+    </li>
+    <li>
+      <span class="seq">Sequence 9</span>
+      <h2><a href="pass-angle.html">Passing angle</a></h2>
+      <p>On 348 wide-to-central passes, first-line-break probability falls 0.041 per 10° (interval −0.050 to −0.032). Straighter lanes break the line. A larger angle does not.</p>
+    </li>
+    <li>
+      <span class="seq">Sequence 10</span>
+      <h2><a href="body-shape.html">Body shape</a></h2>
+      <p>Two pose matches: 81.9% square or in front, 17.6% side-on, 0.5% back-to (7 events). Side-on receptions are +0.007 EPV versus square (interval 0.004 to 0.011). Underpowered. Not a KPI yet.</p>
+    </li>
+    <li>
+      <span class="seq">Sequence 11</span>
+      <h2><a href="goal-sight.html">Sight of goal</a></h2>
+      <p>Two pose matches, 536 attacking-third possessions. When at least half the goal is visible, the big-chance rate is 0.38 versus 0.19, difference 0.19 (interval 0.11 to 0.26). Mostly shoulder heading, not 0.25 m opponent circles. A film label, not a league KPI.</p>
+    </li>
+  </ol>
+
+  <h2 class="next">Next</h2>
+  <ol>
+    <li>Film centre-backs when the striker is inside 3 m.</li>
+    <li>Keep nearest-defender distance on overlaps, and the full-back tracking rule, as reception metrics.</li>
+    <li>Treat a straight wide-to-midfield lane and an occupied high-block lane as the press findings that hold on 20 matches.</li>
+    <li>Do not ship body shape or sight of goal until there is pose for more than two matches.</li>
+  </ol>
+
+  <p class="foot">
+    <a href="review.html">Review</a>
+    <a href="index.html">Index</a>
+  </p>
+</body>
+</html>
