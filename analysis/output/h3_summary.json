@@ -1,0 +1,435 @@
+{
+  "id": 3,
+  "title": "High-block shadow screen of passing lanes",
+  "supported": true,
+  "proxy_supported": true,
+  "pose": {
+    "label": "body_orientation",
+    "underpowered": true,
+    "matches": [
+      "1925299",
+      "1996435"
+    ],
+    "definition": "High-block passing options and forward passes on matches 1925299 and 1996435. The screening defender is the outfield opponent closest to the segment from the ball carrier to the teammate, with segment parameter t in [0.10, 0.90]. Body between ball and teammate: that defender is within 1.5 m of the segment. Facing the lane: a reliable shoulder heading is within 45 degrees of the direction from that defender to the ball, so the chest looks back along the lane toward the passer. Shoulders are reliable when both are present, width is between 0.15 and 0.60 m, and the worse p90 error is at most 15 cm. Heading is the left-to-right shoulder axis rotated +90 degrees. Shadow-screen requires both the lane occupation and the facing. If the lane is occupied but the shoulders are missing or unreliable, the event is excluded. If nobody is in the lane window, the event is not a shadow-screen. Tracking picks the defender. Pose supplies only the heading. Forward means pass_ahead. Completion is pass_outcome successful versus any other recorded outcome. Pass value is pass_epv_total. Influential is the option xthreat, compared inside the same possession, and separately a within-match split of players above versus below the median number of passes played or received. Goalkeepers are excluded. Segments shorter than 1 m are excluded. No xG.",
+    "population": "high_block passing_option and pass_ahead player_possession passes",
+    "n_options": 609,
+    "n_forward_options": 411,
+    "n_forward_passes": 119,
+    "n_matches": 2,
+    "lane_occupation_rate_options": {
+      "effect": 0.2200328407224959,
+      "ci_low": 0.21052631578947367,
+      "ci_high": 0.2265193370165746,
+      "n": 609,
+      "n_matches": 2,
+      "ci_excludes_zero": true
+    },
+    "shadow_rate_options": {
+      "effect": 0.16220735785953178,
+      "ci_low": 0.1446280991735537,
+      "ci_high": 0.17415730337078653,
+      "n": 598,
+      "n_matches": 2,
+      "ci_excludes_zero": true
+    },
+    "facing_rate_when_lane_occupied": {
+      "effect": 0.7886178861788617,
+      "ci_low": 0.7446808510638298,
+      "ci_high": 0.8157894736842105,
+      "n": 123,
+      "n_matches": 2,
+      "ci_excludes_zero": true
+    },
+    "n_lane_occupied_options": 134,
+    "n_lane_occupied_with_reliable_shoulders": 123,
+    "n_shadow_options": 97,
+    "n_open_options": 501,
+    "effect_name": "high-block forward passes: completion, shadow-screen minus not",
+    "effect": -0.14628623188405798,
+    "ci_low": -0.18627450980392157,
+    "ci_high": -0.11751152073732718,
+    "supported": true,
+    "disruption_supported": true,
+    "targeting_supported": true,
+    "metric_worth_keeping": false,
+    "metric_name": null,
+    "inference": "match_cluster_bootstrap",
+    "by_match_forward_pass_completion": [
+      {
+        "match_id": "1925299",
+        "mean_treat": 0.6666666666666666,
+        "mean_control": 0.8529411764705882,
+        "n_treat": 9,
+        "n_control": 34,
+        "effect": -0.18627450980392157
+      },
+      {
+        "match_id": "1996435",
+        "mean_treat": 0.7857142857142857,
+        "mean_control": 0.9032258064516129,
+        "n_treat": 14,
+        "n_control": 62,
+        "effect": -0.11751152073732718
+      }
+    ],
+    "contrasts": [
+      {
+        "name": "high-block forward passes: completion, shadow-screen minus not",
+        "predicted": "negative",
+        "unit": "rate",
+        "supported": true,
+        "effect": -0.14628623188405798,
+        "ci_low": -0.18627450980392157,
+        "ci_high": -0.11751152073732718,
+        "mean_treat": 0.7391304347826086,
+        "mean_control": 0.8854166666666666,
+        "n_treat": 23,
+        "n_control": 96,
+        "n_matches": 2,
+        "n_matches_both": 2,
+        "ci_excludes_zero": true
+      },
+      {
+        "name": "high-block forward passes: pass_epv_total, shadow-screen minus not",
+        "predicted": "negative",
+        "unit": "pass_epv_total",
+        "supported": false,
+        "effect": 0.0050218326320710625,
+        "ci_low": 0.004988290398126464,
+        "ci_high": 0.0054107638888888894,
+        "mean_treat": 0.006930434782608697,
+        "mean_control": 0.0019086021505376344,
+        "n_treat": 23,
+        "n_control": 93,
+        "n_matches": 2,
+        "n_matches_both": 2,
+        "ci_excludes_zero": true
+      },
+      {
+        "name": "high-block forward passing options: received, shadow-screen minus not",
+        "predicted": "negative",
+        "unit": "rate",
+        "supported": true,
+        "effect": -0.10449861358275048,
+        "ci_low": -0.13908313908313907,
+        "ci_high": -0.042606516290726815,
+        "mean_treat": 0.1643835616438356,
+        "mean_control": 0.2688821752265861,
+        "n_treat": 73,
+        "n_control": 331,
+        "n_matches": 2,
+        "n_matches_both": 2,
+        "ci_excludes_zero": true
+      },
+      {
+        "name": "within possession, mean xthreat of shadow-screen options minus open options",
+        "predicted": "positive",
+        "unit": "xthreat",
+        "supported": true,
+        "effect": 0.0001976822916666666,
+        "ci_low": 0.0001463675213675212,
+        "ci_high": 0.00027773333333333343,
+        "mean_treat": null,
+        "mean_control": null,
+        "n_treat": 64,
+        "n_control": 64,
+        "n_matches": 2,
+        "n_matches_both": 2,
+        "ci_excludes_zero": true
+      },
+      {
+        "name": "high-block passing options: shadow-screen rate, above-median pass volume minus below",
+        "predicted": "positive",
+        "unit": "rate",
+        "supported": false,
+        "effect": -0.08149974052932019,
+        "ci_low": -0.14602876797998748,
+        "ci_high": -0.03739837398373985,
+        "mean_treat": 0.13658536585365855,
+        "mean_control": 0.21808510638297873,
+        "n_treat": 410,
+        "n_control": 188,
+        "n_matches": 2,
+        "n_matches_both": 2,
+        "ci_excludes_zero": true
+      }
+    ],
+    "notes": "Two matches. The cluster interval is reported, and the test is underpowered. supported on the primary completion contrast is true only when that interval excludes zero in the predicted direction, both arms have at least 20 events, and at least two matches contain both arms. A rate whose interval excludes zero is not itself a supported claim. The orientation metric is not worth keeping from two matches."
+  },
+  "proxy": {
+    "label": "tracking_lane_occupation_proxy",
+    "not_body_orientation": true,
+    "definition": "Same high-block events on every match. Lane occupation means any outfield opponent is within 1.5 m of the segment from the ball carrier to the teammate, with t in [0.10, 0.90]. This proxy does not use body orientation, shoulder heading, or which way the defender is facing. Forward means pass_ahead. Completion is pass_outcome. Pass value is pass_epv_total. Influential is option xthreat inside the possession, and a within-match median split of passes played or received. Goalkeepers excluded. Segments shorter than 1 m excluded. No xG.",
+    "population": "high_block passing_option and pass_ahead player_possession passes, all matches",
+    "n_options": 5106,
+    "n_forward_options": 3424,
+    "n_forward_passes": 975,
+    "n_matches": 20,
+    "lane_occupation_rate_options": {
+      "effect": 0.20822722820763956,
+      "ci_low": 0.19606781501567114,
+      "ci_high": 0.21863236561229474,
+      "n": 5105,
+      "n_matches": 20,
+      "ci_excludes_zero": true
+    },
+    "n_occupied_forward_options": 848,
+    "n_open_forward_options": 2576,
+    "effect_name": "high-block forward passes: completion, lane-occupation proxy minus not",
+    "effect": -0.2701304543409807,
+    "ci_low": -0.3240668956268567,
+    "ci_high": -0.21629314187787574,
+    "supported": true,
+    "disruption_supported": true,
+    "targeting_supported": true,
+    "metric_worth_keeping": true,
+    "metric_name": "high_block_lane_occupation",
+    "inference": "match_cluster_bootstrap",
+    "by_match_forward_pass_completion": [
+      {
+        "match_id": "1874553",
+        "mean_treat": 0.6666666666666666,
+        "mean_control": 0.90625,
+        "n_treat": 12,
+        "n_control": 32,
+        "effect": -0.23958333333333337
+      },
+      {
+        "match_id": "1886347",
+        "mean_treat": 0.75,
+        "mean_control": 0.96,
+        "n_treat": 20,
+        "n_control": 50,
+        "effect": -0.20999999999999996
+      },
+      {
+        "match_id": "1899585",
+        "mean_treat": 0.4166666666666667,
+        "mean_control": 0.9310344827586207,
+        "n_treat": 12,
+        "n_control": 29,
+        "effect": -0.514367816091954
+      },
+      {
+        "match_id": "1925299",
+        "mean_treat": 0.6,
+        "mean_control": 0.8787878787878788,
+        "n_treat": 10,
+        "n_control": 33,
+        "effect": -0.2787878787878788
+      },
+      {
+        "match_id": "1927964",
+        "mean_treat": 0.6363636363636364,
+        "mean_control": 0.875,
+        "n_treat": 11,
+        "n_control": 64,
+        "effect": -0.23863636363636365
+      },
+      {
+        "match_id": "1953632",
+        "mean_treat": 0.6666666666666666,
+        "mean_control": 0.8409090909090909,
+        "n_treat": 12,
+        "n_control": 44,
+        "effect": -0.1742424242424243
+      },
+      {
+        "match_id": "1959846",
+        "mean_treat": 0.7,
+        "mean_control": 0.7959183673469388,
+        "n_treat": 10,
+        "n_control": 49,
+        "effect": -0.09591836734693882
+      },
+      {
+        "match_id": "1986691",
+        "mean_treat": 0.5,
+        "mean_control": 0.9117647058823529,
+        "n_treat": 12,
+        "n_control": 34,
+        "effect": -0.4117647058823529
+      },
+      {
+        "match_id": "1996435",
+        "mean_treat": 0.65,
+        "mean_control": 0.9642857142857143,
+        "n_treat": 20,
+        "n_control": 56,
+        "effect": -0.3142857142857143
+      },
+      {
+        "match_id": "1996436",
+        "mean_treat": 0.5555555555555556,
+        "mean_control": 0.8823529411764706,
+        "n_treat": 9,
+        "n_control": 17,
+        "effect": -0.326797385620915
+      },
+      {
+        "match_id": "2006229",
+        "mean_treat": 0.6190476190476191,
+        "mean_control": 0.9512195121951219,
+        "n_treat": 21,
+        "n_control": 41,
+        "effect": -0.33217189314750284
+      },
+      {
+        "match_id": "2006363",
+        "mean_treat": 1.0,
+        "mean_control": 0.9615384615384616,
+        "n_treat": 7,
+        "n_control": 52,
+        "effect": 0.038461538461538436
+      },
+      {
+        "match_id": "2007448",
+        "mean_treat": 0.42857142857142855,
+        "mean_control": 0.9310344827586207,
+        "n_treat": 7,
+        "n_control": 29,
+        "effect": -0.5024630541871922
+      },
+      {
+        "match_id": "2007721",
+        "mean_treat": 0.625,
+        "mean_control": 0.9130434782608695,
+        "n_treat": 8,
+        "n_control": 23,
+        "effect": -0.2880434782608695
+      },
+      {
+        "match_id": "2010085",
+        "mean_treat": 0.5555555555555556,
+        "mean_control": 0.9142857142857143,
+        "n_treat": 9,
+        "n_control": 35,
+        "effect": -0.3587301587301587
+      },
+      {
+        "match_id": "2011166",
+        "mean_treat": 0.7272727272727273,
+        "mean_control": 0.9428571428571428,
+        "n_treat": 11,
+        "n_control": 35,
+        "effect": -0.21558441558441555
+      },
+      {
+        "match_id": "2013725",
+        "mean_treat": 0.7777777777777778,
+        "mean_control": 0.868421052631579,
+        "n_treat": 18,
+        "n_control": 38,
+        "effect": -0.09064327485380119
+      },
+      {
+        "match_id": "2015213",
+        "mean_treat": 0.6666666666666666,
+        "mean_control": 0.9459459459459459,
+        "n_treat": 9,
+        "n_control": 37,
+        "effect": -0.2792792792792793
+      },
+      {
+        "match_id": "2016236",
+        "mean_treat": 0.5454545454545454,
+        "mean_control": 0.8333333333333334,
+        "n_treat": 11,
+        "n_control": 30,
+        "effect": -0.28787878787878796
+      },
+      {
+        "match_id": "2017461",
+        "mean_treat": 0.4,
+        "mean_control": 0.9230769230769231,
+        "n_treat": 5,
+        "n_control": 13,
+        "effect": -0.5230769230769231
+      }
+    ],
+    "contrasts": [
+      {
+        "name": "high-block forward passes: completion, lane-occupation proxy minus not",
+        "predicted": "negative",
+        "unit": "rate",
+        "supported": true,
+        "effect": -0.2701304543409807,
+        "ci_low": -0.3240668956268567,
+        "ci_high": -0.21629314187787574,
+        "mean_treat": 0.6367521367521367,
+        "mean_control": 0.9068825910931174,
+        "n_treat": 234,
+        "n_control": 741,
+        "n_matches": 20,
+        "n_matches_both": 20,
+        "ci_excludes_zero": true
+      },
+      {
+        "name": "high-block forward passes: pass_epv_total, lane-occupation proxy minus not",
+        "predicted": "negative",
+        "unit": "pass_epv_total",
+        "supported": false,
+        "effect": -0.0009262272089761569,
+        "ci_low": -0.002077476249961929,
+        "ci_high": 0.0001820930988788674,
+        "mean_treat": 0.0016129032258064516,
+        "mean_control": 0.0025391304347826085,
+        "n_treat": 217,
+        "n_control": 713,
+        "n_matches": 20,
+        "n_matches_both": 20,
+        "ci_excludes_zero": false
+      },
+      {
+        "name": "high-block forward passing options: received, lane-occupation proxy minus not",
+        "predicted": "negative",
+        "unit": "rate",
+        "supported": true,
+        "effect": -0.1212132309855854,
+        "ci_low": -0.15331501000769926,
+        "ci_high": -0.09172025875062433,
+        "mean_treat": 0.14858490566037735,
+        "mean_control": 0.26979813664596275,
+        "n_treat": 848,
+        "n_control": 2576,
+        "n_matches": 20,
+        "n_matches_both": 20,
+        "ci_excludes_zero": true
+      },
+      {
+        "name": "within possession, mean xthreat of lane-occupation proxy options minus open options",
+        "predicted": "positive",
+        "unit": "xthreat",
+        "supported": true,
+        "effect": 0.0007526360778148948,
+        "ci_low": 0.000575890451574185,
+        "ci_high": 0.0009380949386681915,
+        "mean_treat": null,
+        "mean_control": null,
+        "n_treat": 727,
+        "n_control": 727,
+        "n_matches": 20,
+        "n_matches_both": 20,
+        "ci_excludes_zero": true
+      },
+      {
+        "name": "high-block passing options: lane-occupation proxy rate, above-median pass volume minus below",
+        "predicted": "positive",
+        "unit": "rate",
+        "supported": false,
+        "effect": -0.11529161140794669,
+        "ci_low": -0.1496542036822019,
+        "ci_high": -0.07906513398913033,
+        "mean_treat": 0.1672782874617737,
+        "mean_control": 0.2825698988697204,
+        "n_treat": 3270,
+        "n_control": 1681,
+        "n_matches": 20,
+        "n_matches_both": 20,
+        "ci_excludes_zero": true
+      }
+    ],
+    "notes": "This is a tracking proxy for a body in the passing lane. It is not a shadow screen and it does not measure facing. supported on the primary completion contrast is true only when the match-clustered interval excludes zero in the predicted direction."
+  },
+  "notes": "Pose supported refers only to body orientation on two matches and is underpowered. proxy_supported refers only to the tracking lane-occupation proxy on all matches. The proxy is not body orientation."
+}
