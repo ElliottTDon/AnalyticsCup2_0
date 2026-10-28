@@ -1,61 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Four checks have finished</title>
-  <style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finished — see the three views</title>
+<meta http-equiv="refresh" content="0; url=index.html">
+<link rel="canonical" href="index.html">
+<style>
     :root { color-scheme: light dark; }
-    body {
-      margin: 0 auto;
-      max-width: 40rem;
-      padding: 1.35rem 1.15rem 3rem;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 1.25rem;
-      line-height: 1.45;
-    }
-    h1 {
-      font-size: 1.85rem;
-      line-height: 1.2;
-      margin: 0 0 0.75rem;
-    }
-    h2 {
-      font-size: 1.35rem;
-      line-height: 1.25;
-      margin: 1.6rem 0 0.5rem;
-    }
-    p { margin: 0 0 0.75rem; }
-    nav a {
-      display: block;
-      padding: 0.95rem 0;
-      border-bottom: 1px solid #ddd;
-      color: inherit;
-      text-decoration: none;
-    }
-    @media (prefers-color-scheme: dark) {
-      nav a { border-bottom-color: #444; }
-    }
-    .foot { margin-top: 1.75rem; }
-    .foot a { color: inherit; margin-right: 1rem; }
-  </style>
+    body { margin:0 auto; max-width:42rem; padding:1.25rem 1rem 3rem; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.5; }
+    h1 { font-size:1.7rem; line-height:1.2; margin:0 0 .5rem; }
+    h2 { font-size:1.25rem; margin:1.8rem 0 .5rem; border-top:1px solid #ddd; padding-top:1rem; }
+    h3 { font-size:1.05rem; margin:1.2rem 0 .3rem; }
+    p,li { font-size:1rem; }
+    .lead { color:#555; } @media (prefers-color-scheme:dark){ .lead{color:#aaa} h2{border-top-color:#444} td,th{border-color:#444} }
+    nav.top a, .door { display:block; padding:1rem .25rem; min-height:2.75rem; box-sizing:border-box; color:inherit; text-decoration:none; border-bottom:1px solid #ddd; }
+    nav.top a:active,.door:active,nav.top a:hover,.door:hover { background:rgba(127,127,127,.12); }
+    .door .t { font-weight:700; font-size:1.2rem; display:block; }
+    table { border-collapse:collapse; width:100%; font-size:.92rem; display:block; overflow-x:auto; }
+    th,td { border:1px solid #ddd; padding:.45rem; text-align:left; vertical-align:top; }
+    .warn { border-left:3px solid #888; padding:.15rem 0 .15rem .85rem; }
+    a { color:inherit; }
+    .small { font-size:.9rem; color:#555; } @media (prefers-color-scheme:dark){ .small{color:#aaa} }
+</style>
 </head>
 <body>
-  <h1>Four checks have finished</h1>
-  <p>Body shape, sight of goal, shadow screening, and the wide-to-midfield passing angle are no longer running. The results are on their own pages.</p>
-  <nav>
-    <a href="body-shape.html">Defender body shape. Usually square to the receiver. Two matches. Not a KPI yet.</a>
-    <a href="goal-sight.html">Sight of goal. At least half the goal mouth. Two matches. Supported and underpowered.</a>
-    <a href="shadow-screen.html">Shadow screening. High-block lane occupation. Forward completion drops.</a>
-    <a href="pass-angle.html">Wide-to-midfield passing angle. A larger angle is less likely to break the first line.</a>
-  </nav>
-
-  <h2>What they used</h2>
-  <p>Body shape, sight of goal, and the facing part of shadow screening use pose for matches 1925299 and 1996435 only. Passing angle scanned all 20 matches. Six of those matches have no central midfielder labelled.</p>
-  <p>No xG, xGOT, or xT in the data. Finished pages use shot rate, reception, xthreat, and metres.</p>
-
-  <p class="foot">
-    <a href="review.html">Contents</a>
-    <a href="timeline.html">Timeline</a>
-  </p>
+<h1>All checks are finished</h1>
+<p>Nothing is still running. All seven hypotheses have results.</p>
+<nav>
+<a class="door" href="explored.html"><span class="t">1. What has been explored</span>Mission, data, SkillCorner tutorials, and all finished findings in order.</a>
+<a class="door" href="tools.html"><span class="t">2. Valid reusable tools and KPIs</span>What is supported on 20 matches, what is only a film trigger, and what not to ship.</a>
+<a class="door" href="next.html"><span class="t">3. Worth exploring next</span>Prioritised questions, the data each needs, and what would change the verdict.</a>
+</nav>
+<p><a href="index.html">Continue to the home page</a></p>
 </body>
 </html>

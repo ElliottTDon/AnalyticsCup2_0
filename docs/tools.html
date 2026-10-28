@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valid reusable tools and KPIs</title><style>
+    :root { color-scheme: light dark; }
+    body { margin:0 auto; max-width:42rem; padding:1.25rem 1rem 3rem; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.5; }
+    h1 { font-size:1.7rem; line-height:1.2; margin:0 0 .5rem; }
+    h2 { font-size:1.25rem; margin:1.8rem 0 .5rem; border-top:1px solid #ddd; padding-top:1rem; }
+    h3 { font-size:1.05rem; margin:1.2rem 0 .3rem; }
+    .lead,.small { color:#555; } .small{font-size:.9rem}
+    @media (prefers-color-scheme:dark){ .lead,.small{color:#aaa} h2{border-top-color:#444} td,th{border-color:#444} nav.top a{border-color:#444} }
+    nav.top a { display:block; padding:.8rem .1rem; min-height:2.75rem; box-sizing:border-box; color:inherit; text-decoration:none; border-bottom:1px solid #ddd; }
+    table { border-collapse:collapse; width:100%; font-size:.92rem; display:block; overflow-x:auto; }
+    th,td { border:1px solid #ddd; padding:.45rem; text-align:left; vertical-align:top; }
+    .warn { border-left:3px solid #888; padding:.15rem 0 .15rem .85rem; }
+    a { color:inherit; }
+</style></head>
+<body>
+<nav class="top"><a href="index.html">Home — the 3 views</a></nav>
+<h1>Valid reusable tools and KPIs</h1>
+<p class="lead">Judged by: sample size, effect with an interval excluding zero, whether it adds beyond trivial baselines (block height, OOP width/length/area, nearest defender, on-ball pressure), and reusability as code or a metric.</p>
+<p class="warn">There is <strong>no xG, xGOT or xT</strong> in this dataset. Value fields are <strong>xshot, xthreat and EPV</strong>. Nothing below should be renamed as xG.</p>
+
+<h2>A. KPIs / diagnostics supported on all 20 matches</h2>
+<table><tr><th>Metric</th><th>Evidence</th><th>Use</th></tr>
+<tr><td>Block height (low / medium / high)</td><td>Shot rates ~18.5–18.7% low, ~9.0–9.3% medium, 6.0% high</td><td>Primary context split for every defensive report.</td></tr>
+<tr><td>Defensive box area (OOP width × length), within block</td><td>Shot phases ~148–166 m² smaller in the low block; area is the baseline coupled graphs had to beat</td><td>Compactness diagnostic, always reported within block height — never as a standalone shot model (mean area alone does not rank teams).</td></tr>
+<tr><td>On-ball pressure band</td><td>Shot rate 2.2% (none) to 21.4% (very high)</td><td>Context / engagement diagnostic. Do <em>not</em> read “more pressure = worse defending”: dangerous attacks attract pressure.</td></tr></table>
+
+<h2>B. Film triggers / diagnostic labels worth reusing</h2>
+<table><tr><th>Label</th><th>Rule</th><th>Evidence</th><th>Limits</th></tr>
+<tr><td>Full-back tracking — reception suppression</td><td>Nearest outfield opponent within 6 m, goal-side, velocity-matched for 1 s (cosine ≥0.60, speed diff ≤2 m/s) on an attacking-half overlap/underlap</td><td>Tracked runs received −12.9 pts (20.0% vs 32.9%), interval excludes zero; 260 runs</td><td>Reception metric only — shots and xthreat null. Do not sell as shot prevention.</td></tr>
+<tr><td>Nearest-defender distance at overlap/underlap</td><td>Distance to nearest defender at the run midpoint</td><td>Non-shot runs 1.33 m closer (4.84 vs 6.17 m), interval [−2.31, −0.47]; 534 runs</td><td>Association, not an intervention effect.</td></tr>
+<tr><td>High-block lane-occupation flag</td><td>Any outfield opponent within 1.5 m of the passer–teammate segment</td><td>Forward completion −27 pts (63.7% vs 90.7%) on 20 matches</td><td>Pass <em>value</em> (EPV) null — a completion flag, not a value KPI. The shoulder-facing version is only 2 matches.</td></tr>
+<tr><td>Wide-CM lane straightness</td><td>Absolute angle of wide ↔ central-midfield passing lane</td><td>First-line break falls 0.041 per 10°, interval [−0.050, −0.032]; 348 passes</td><td>Gradual slope, no threshold; 6 of 20 matches have no labelled CM.</td></tr>
+<tr><td>Striker tight-mark (&lt;3 m) + CB displacement</td><td>Nearest opponent within 3 m of striker; CB distance from own role median in same block</td><td>CBs +1.60 m [0.49, 2.67]; tight mark +8.5 pts shots</td><td>Film trigger for “who steps” review. CM/FB displacement null; tight-mark/shot link is not proof marking causes shots.</td></tr>
+<tr><td>Compact box but weak coupling — clip list</td><td>Small OOP box with free attackers / weak coupled-graph coverage</td><td>Clip lists already generated (<a href="compact-weak-coupling.html">page</a>, <code>analysis/output/compact_weak_clips.csv</code>)</td><td>A film-selection heuristic, not a score.</td></tr></table>
+
+<h2>C. Promising but NOT KPIs yet</h2>
+<table><tr><th>Candidate</th><th>Why promising</th><th>Why not a KPI</th></tr>
+<tr><td>Body-shape label (square / side-on / back-to)</td><td>Side-on +0.007 EPV vs square, interval excludes zero</td><td>Only 2 pose matches; back-to n=7. Needs pose on more matches.</td></tr>
+<tr><td>Goal-visibility ≥50%</td><td>Big-chance 0.38 vs 0.19; separates in both pose matches</td><td>Only 2 pose matches; effect is mostly heading, not defender occlusion.</td></tr>
+<tr><td>Shadow-screen facing component</td><td>Screened defenders face the passer 78.9% of the time</td><td>Pose on 2 matches only; the 20-match result is lane occupation without facing.</td></tr></table>
+
+<h2>D. Rejected / do not ship</h2>
+<table><tr><th>Candidate</th><th>Reason</th></tr>
+<tr><td>Coupled-graph scores as KPIs (supra-Laplacian lambda2, defence lambda2, uncovered danger, free attackers, structural pressure, last-2s lambda2 drop)</td><td>After box/pressure baselines only supra lambda2 survived (residual −0.013 [−0.022, −0.004]) and it gave no useful reusable split; the rest were null. Keep graphs for film prompts (section B), not as KPIs.</td></tr>
+<tr><td>Goal-side / in-lane flags on overlaps as shot predictors</td><td>Do not separate shots, xthreat or being beaten (H6).</td></tr>
+<tr><td>“Screen the busiest passer” targeting rule</td><td>Busier passers are screened <em>less</em> (−8.1 pts); assumption reversed (H3).</td></tr>
+<tr><td>“Bigger passing angle breaks the press”</td><td>Sign is opposite: larger angle breaks the first line <em>less</em> (H4).</td></tr>
+<tr><td>Any xG / xGOT / xT reporting</td><td>Those fields do not exist in this dataset.</td></tr></table>
+
+<h2>Reusable code (verified in repo)</h2>
+<ul>
+<li><code>analysis/coupled_formation.py</code> — coupled formation graphs, dual pipelines.</li>
+<li><code>analysis/hungarian_danger_roles.py</code> — Hungarian danger-role matching.</li>
+<li><code>analysis/validate_defense.py</code> — validation of defensive metrics.</li>
+<li><code>analysis/hypotheses/h2_goal_sight.py</code> and the other hypothesis scripts/branches behind H1–H7.</li>
+<li><code>analysis/defend.ipynb</code> — coupled-graph experiment notebook (rendered at <a href="defend.html">defend.html</a>).</li>
+<li><code>analysis/eda_visual_defense.py</code>, <code>analysis/eda_defense.py</code> — EDA behind the charts.</li></ul>
+
+<nav class="top"><a href="index.html">Home</a><a href="explored.html">1. What has been explored</a><a href="tools.html">2. Valid reusable tools and KPIs</a><a href="next.html">3. Worth exploring next</a></nav>
+</body></html>

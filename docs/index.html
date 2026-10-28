@@ -1,271 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AnalyticsCup2_0 notebooks</title>
-  <style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnalyticsCup2_0</title>
+<style>
     :root { color-scheme: light dark; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.45;
-      padding: 1.25rem 1rem 2.5rem;
-      max-width: 42rem;
-    }
-    h1 {
-      font-size: 1.5rem;
-      margin: 0 0 0.35rem;
-    }
-    .lead {
-      margin: 0 0 1.25rem;
-      color: #555;
-      font-size: 0.95rem;
-    }
-    @media (prefers-color-scheme: dark) {
-      .lead { color: #aaa; }
-    }
-    h2 {
-      font-size: 1.05rem;
-      margin: 1.4rem 0 0.5rem;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 0.25rem;
-    }
-    @media (prefers-color-scheme: dark) {
-      h2 { border-bottom-color: #444; }
-    }
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    li { margin: 0; }
-    a {
-      display: block;
-      padding: 0.85rem 0.15rem;
-      text-decoration: none;
-      color: inherit;
-      border-bottom: 1px solid #eee;
-      min-height: 2.75rem;
-      box-sizing: border-box;
-    }
-    @media (prefers-color-scheme: dark) {
-      a { border-bottom-color: #333; }
-    }
-    a:active, a:hover { background: rgba(127, 127, 127, 0.12); }
-    .title { font-weight: 600; display: block; }
-    .path {
-      display: block;
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 0.2rem;
-      word-break: break-all;
-    }
-    @media (prefers-color-scheme: dark) {
-      .path { color: #999; }
-    }
-  </style>
+    body { margin:0 auto; max-width:42rem; padding:1.25rem 1rem 3rem; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.5; }
+    h1 { font-size:1.7rem; line-height:1.2; margin:0 0 .5rem; }
+    h2 { font-size:1.25rem; margin:1.8rem 0 .5rem; border-top:1px solid #ddd; padding-top:1rem; }
+    h3 { font-size:1.05rem; margin:1.2rem 0 .3rem; }
+    p,li { font-size:1rem; }
+    .lead { color:#555; } @media (prefers-color-scheme:dark){ .lead{color:#aaa} h2{border-top-color:#444} td,th{border-color:#444} }
+    nav.top a, .door { display:block; padding:1rem .25rem; min-height:2.75rem; box-sizing:border-box; color:inherit; text-decoration:none; border-bottom:1px solid #ddd; }
+    nav.top a:active,.door:active,nav.top a:hover,.door:hover { background:rgba(127,127,127,.12); }
+    .door .t { font-weight:700; font-size:1.2rem; display:block; }
+    table { border-collapse:collapse; width:100%; font-size:.92rem; display:block; overflow-x:auto; }
+    th,td { border:1px solid #ddd; padding:.45rem; text-align:left; vertical-align:top; }
+    .warn { border-left:3px solid #888; padding:.15rem 0 .15rem .85rem; }
+    a { color:inherit; }
+    .small { font-size:.9rem; color:#555; } @media (prefers-color-scheme:dark){ .small{color:#aaa} }
+</style>
 </head>
 <body>
-  <h1>AnalyticsCup2_0 notebooks</h1>
-  <p class="lead">Phone-friendly HTML for commute review: the defensive-checks note first, then charts and SkillCorner tutorials with saved outputs.</p>
+<h1>AnalyticsCup2_0</h1>
+<p class="lead">How tracking and contextual data help us understand the way players and teams defend. Three views only.</p>
+<nav>
+<a class="door" href="explored.html"><span class="t">1. What has been explored</span>Mission, data, SkillCorner tutorials, and all finished findings in order.</a>
+<a class="door" href="tools.html"><span class="t">2. Valid reusable tools and KPIs</span>What is supported on 20 matches, what is only a film trigger, and what not to ship.</a>
+<a class="door" href="next.html"><span class="t">3. Worth exploring next</span>Prioritised questions, the data each needs, and what would change the verdict.</a>
+</nav>
+<p class="small">All seven hypotheses are finished. Nothing is still running. Detail pages remain linked as evidence from inside these three views, not as primary navigation.</p>
 
-  <h2>Defense analysis</h2>
-  <ul>
-    <li>
-      <a href="review.html">
-        <span class="title">Finished analysis</span>
-        <span class="path">Contents: timeline, event EDA, graphs, and every finished check.</span>
-      </a>
-    </li>
-    <li>
-      <a href="shadow-screen.html">
-        <span class="title">Shadow screening</span>
-        <span class="path">High block only. Lane occupation. Forward completion drops.</span>
-      </a>
-    </li>
-    <li>
-      <a href="pass-angle.html">
-        <span class="title">Wide-to-midfield passing angle</span>
-        <span class="path">Straighter lanes break the first line. A larger angle does not.</span>
-      </a>
-    </li>
-    <li>
-      <a href="body-shape.html">
-        <span class="title">Defender body shape</span>
-        <span class="path">Usually square to the receiver. Two pose matches. Not a KPI yet.</span>
-      </a>
-    </li>
-    <li>
-      <a href="goal-sight.html">
-        <span class="title">Sight of goal</span>
-        <span class="path">At least half the goal mouth. Two pose matches. Underpowered. Supported.</span>
-      </a>
-    </li>
-    <li>
-      <a href="eda.html">
-        <span class="title">Visual defensive positioning EDA</span>
-        <span class="path">Event EDA write-up, then shape, pressure, and team-zone charts</span>
-      </a>
-    </li>
-    <li>
-      <a href="team-zones.html">
-        <span class="title">Team shot zones</span>
-        <span class="path">Per-club scored vs conceded pitch maps</span>
-      </a>
-    </li>
-    <li>
-      <a href="cup-ideas.html">
-        <span class="title">Cup-goal idea pages</span>
-        <span class="path">Team zones · marking debt · compact/weak coverage · pressing chains</span>
-      </a>
-    </li>
-    <li>
-      <a href="marking-debt.html">
-        <span class="title">Marking debt by role</span>
-        <span class="path">Set pieces and cutbacks / crosses</span>
-      </a>
-    </li>
-    <li>
-      <a href="compact-weak-coupling.html">
-        <span class="title">Compact box, weak coverage</span>
-        <span class="path">Coach clip list — tight shape, free attackers</span>
-      </a>
-    </li>
-    <li>
-      <a href="pressing-chain-weak-side.html">
-        <span class="title">Pressing chains vs far-side runners</span>
-        <span class="path">Regain the ball or leave the weak side open</span>
-      </a>
-    </li>
-    <li>
-      <a href="graph-tool-notes.html">
-        <span class="title">Block graph tool FAQ</span>
-        <span class="path">Timer series, pressing, pre-fracturing — plain English</span>
-      </a>
-    </li>
-    <li>
-      <a href="eda_notebook.html">
-        <span class="title">EDA notebook (full HTML)</span>
-        <span class="path">eda_notebook.html from analysis/eda_defensive_positioning.ipynb</span>
-      </a>
-    </li>
-    <li>
-      <a href="defend.html">
-        <span class="title">Graph defense notebook</span>
-        <span class="path">defend.html — proximity / Delaunay / supra-Laplacian experiment</span>
-      </a>
-    </li>
-  </ul>
-
-  <h2>01 Getting Started with SkillCorner Data</h2>
-  <ul>
-    <li>
-      <a href="notebooks/01_Getting_Started_with_SkillCorner_Data/Part1_Visualization_with_SkillCorner_Tutorial.html">
-        <span class="title">Part1 Visualization with SkillCorner</span>
-        <span class="path">01_Getting_Started_with_SkillCorner_Data/Part1_Visualization_with_SkillCorner_Tutorial.html</span>
-      </a>
-    </li>
-    <li>
-      <a href="notebooks/01_Getting_Started_with_SkillCorner_Data/Part2_Multiple_Metrics_and_Z_Scores_Tutorial.html">
-        <span class="title">Part2 Multiple Metrics and Z Scores</span>
-        <span class="path">01_Getting_Started_with_SkillCorner_Data/Part2_Multiple_Metrics_and_Z_Scores_Tutorial.html</span>
-      </a>
-    </li>
-    <li>
-      <a href="notebooks/01_Getting_Started_with_SkillCorner_Data/Part3_Building_Striker_Archetypes_Tutorial.html">
-        <span class="title">Part3 Building Striker Archetypes</span>
-        <span class="path">01_Getting_Started_with_SkillCorner_Data/Part3_Building_Striker_Archetypes_Tutorial.html</span>
-      </a>
-    </li>
-  </ul>
-
-  <h2>02 Game Intelligence and Dynamic Events</h2>
-  <ul>
-    <li>
-      <a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part1_Aggregating_Dynamic_Events_Tutorial.html">
-        <span class="title">Part1 Aggregating Dynamic Events</span>
-        <span class="path">02_Working_with_Game_Intelligence_and_Dynamic_Events/Part1_Aggregating_Dynamic_Events_Tutorial.html</span>
-      </a>
-    </li>
-    <li>
-      <a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part2_Data_Aggregating_Phases_of_Play_Tutorial.html">
-        <span class="title">Part2 Aggregating Phases of Play</span>
-        <span class="path">02_Working_with_Game_Intelligence_and_Dynamic_Events/Part2_Data_Aggregating_Phases_of_Play_Tutorial.html</span>
-      </a>
-    </li>
-    <li>
-      <a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part3_Offball_Runs_Pitch_visualization.html">
-        <span class="title">Part3 Offball Runs Pitch Visualization</span>
-        <span class="path">02_Working_with_Game_Intelligence_and_Dynamic_Events/Part3_Offball_Runs_Pitch_visualization.html</span>
-      </a>
-    </li>
-    <li>
-      <a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part4_Merging_Dynamic_Events_and_Tracking_Data_Tutorial.html">
-        <span class="title">Part4 Merging Dynamic Events and Tracking Data</span>
-        <span class="path">02_Working_with_Game_Intelligence_and_Dynamic_Events/Part4_Merging_Dynamic_Events_and_Tracking_Data_Tutorial.html</span>
-      </a>
-    </li>
-    <li>
-      <a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part5_Animated_2D_Video_From_Tracking_And_Events.html">
-        <span class="title">Part5 Animated 2D Video From Tracking And Events</span>
-        <span class="path">02_Working_with_Game_Intelligence_and_Dynamic_Events/Part5_Animated_2D_Video_From_Tracking_And_Events.html</span>
-      </a>
-    </li>
-    <li>
-      <a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part6_BuildYourOwnMetric_Detecting_and_Evaluating_Cutback_Opportunities.html">
-        <span class="title">Part6 Cutback Opportunities Metric</span>
-        <span class="path">02_Working_with_Game_Intelligence_and_Dynamic_Events/Part6_BuildYourOwnMetric_Detecting_and_Evaluating_Cutback_Opportunities.html</span>
-      </a>
-    </li>
-    <li>
-      <a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part7_Pitch_Maps_Tracking_by_Phase_Tutorial.html">
-        <span class="title">Part7 Pitch Maps Tracking by Phase</span>
-        <span class="path">02_Working_with_Game_Intelligence_and_Dynamic_Events/Part7_Pitch_Maps_Tracking_by_Phase_Tutorial.html</span>
-      </a>
-    </li>
-  </ul>
-
-  <h2>03 Basics of Tracking</h2>
-  <ul>
-    <li>
-      <a href="notebooks/03_Basics_of_Tracking/Open_Data_Getting_Started_with_Tracking_and_Kloppy_Tutorial.html">
-        <span class="title">Getting Started with Tracking and Kloppy</span>
-        <span class="path">03_Basics_of_Tracking/Open_Data_Getting_Started_with_Tracking_and_Kloppy_Tutorial.html</span>
-      </a>
-    </li>
-    <li>
-      <a href="notebooks/03_Basics_of_Tracking/Open_Data_Tracking_Tutorial.html">
-        <span class="title">Open Data Tracking Tutorial</span>
-        <span class="path">03_Basics_of_Tracking/Open_Data_Tracking_Tutorial.html</span>
-      </a>
-    </li>
-  </ul>
-
-  <h2>04 Visualizations</h2>
-  <ul>
-    <li>
-      <a href="notebooks/04_Visualizations/OBR_Simple_Radar_Viz.html">
-        <span class="title">OBR Simple Radar Viz</span>
-        <span class="path">04_Visualizations/OBR_Simple_Radar_Viz.html</span>
-      </a>
-    </li>
-    <li>
-      <a href="notebooks/04_Visualizations/Sectioned_Summary_Table_Viz_Tutorial.html">
-        <span class="title">Sectioned Summary Table Viz</span>
-        <span class="path">04_Visualizations/Sectioned_Summary_Table_Viz_Tutorial.html</span>
-      </a>
-    </li>
-  </ul>
-
-  <h2>05 Body Pose</h2>
-  <ul>
-    <li>
-      <a href="notebooks/05_Body_Pose/Part1_Getting_Started_with_Body_Pose.html">
-        <span class="title">Part1 Getting Started with Body Pose</span>
-        <span class="path">05_Body_Pose/Part1_Getting_Started_with_Body_Pose.html</span>
-      </a>
-    </li>
-  </ul>
 </body>
 </html>

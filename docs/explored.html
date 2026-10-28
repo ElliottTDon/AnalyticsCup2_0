@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What has been explored</title><style>
+    :root { color-scheme: light dark; }
+    body { margin:0 auto; max-width:42rem; padding:1.25rem 1rem 3rem; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.5; }
+    h1 { font-size:1.7rem; line-height:1.2; margin:0 0 .5rem; }
+    h2 { font-size:1.25rem; margin:1.8rem 0 .5rem; border-top:1px solid #ddd; padding-top:1rem; }
+    h3 { font-size:1.05rem; margin:1.2rem 0 .3rem; }
+    .lead,.small { color:#555; } .small{font-size:.9rem}
+    @media (prefers-color-scheme:dark){ .lead,.small{color:#aaa} h2{border-top-color:#444} td,th{border-color:#444} nav.top a{border-color:#444} }
+    nav.top a { display:block; padding:.8rem .1rem; min-height:2.75rem; box-sizing:border-box; color:inherit; text-decoration:none; border-bottom:1px solid #ddd; }
+    table { border-collapse:collapse; width:100%; font-size:.92rem; display:block; overflow-x:auto; }
+    th,td { border:1px solid #ddd; padding:.45rem; text-align:left; vertical-align:top; }
+    .warn { border-left:3px solid #888; padding:.15rem 0 .15rem .85rem; }
+    a { color:inherit; }
+</style></head>
+<body>
+<nav class="top"><a href="index.html">Home — the 3 views</a></nav>
+<h1>What has been explored</h1>
+<p class="lead"><strong>Mission:</strong> how can tracking and contextual data help us better understand the way players and teams defend — team shape, spacing, pressure, compactness, marking and defensive decision-making?</p>
+<p class="warn">All seven hypotheses are finished. Nothing is still running.</p>
+
+<h2>The data</h2>
+<table><tr><th>Layer</th><th>Coverage</th><th>Notes</th></tr>
+<tr><td>Tracking, events and phases of play</td><td>SkillCorner A-League 2024/25, 20 matches</td><td>The sample every 20-match result below uses.</td></tr>
+<tr><td>Season aggregates</td><td>175 games</td><td>Aggregate metrics and z-scores; not tracking for every game.</td></tr>
+<tr><td>Body pose</td><td>Only 2 matches: 1925299 and 1996435, plus 1 sample phase</td><td>Every pose result (body shape, goal sight, facing) rests on these two matches and is underpowered at match level.</td></tr>
+<tr><td>Value fields</td><td colspan="2">There is <strong>no xG, xGOT or xT</strong> in this dataset. Value fields are <strong>xshot, xthreat and EPV</strong>. Do not rename them.</td></tr></table>
+
+<h2>First: SkillCorner's own tutorials (not our findings)</h2>
+<p>These notebooks load and validate the sample data. They are SkillCorner's tutorials with saved outputs, copied from SkillCorner open data. Use them to learn the data; do not cite them as our results.</p>
+<h3>01 — Aggregates and visualisation</h3>
+<ul>
+<li><a href="notebooks/01_Getting_Started_with_SkillCorner_Data/Part1_Visualization_with_SkillCorner_Tutorial.html">Part 1: Visualisation with SkillCorner data</a></li>
+<li><a href="notebooks/01_Getting_Started_with_SkillCorner_Data/Part2_Multiple_Metrics_and_Z_Scores_Tutorial.html">Part 2: Multiple metrics and z-scores</a></li>
+<li><a href="notebooks/01_Getting_Started_with_SkillCorner_Data/Part3_Building_Striker_Archetypes_Tutorial.html">Part 3: Building striker archetypes</a></li></ul>
+<h3>02 — Game Intelligence and dynamic events</h3>
+<ul>
+<li><a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part1_Aggregating_Dynamic_Events_Tutorial.html">Part 1: Aggregating dynamic events</a></li>
+<li><a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part2_Data_Aggregating_Phases_of_Play_Tutorial.html">Part 2: Aggregating phases of play</a></li>
+<li><a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part3_Offball_Runs_Pitch_visualization.html">Part 3: Off-ball runs pitch visualisation</a></li>
+<li><a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part4_Merging_Dynamic_Events_and_Tracking_Data_Tutorial.html">Part 4: Merging dynamic events and tracking data</a></li>
+<li><a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part5_Animated_2D_Video_From_Tracking_And_Events.html">Part 5: Animated 2D video from tracking and events</a></li>
+<li><a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part6_BuildYourOwnMetric_Detecting_and_Evaluating_Cutback_Opportunities.html">Part 6: Build your own metric — cutback opportunities</a></li>
+<li><a href="notebooks/02_Working_with_Game_Intelligence_and_Dynamic_Events/Part7_Pitch_Maps_Tracking_by_Phase_Tutorial.html">Part 7: Pitch maps — tracking by phase</a></li></ul>
+<h3>03 — Tracking and Kloppy</h3>
+<ul>
+<li><a href="notebooks/03_Basics_of_Tracking/Open_Data_Getting_Started_with_Tracking_and_Kloppy_Tutorial.html">Getting started with tracking and Kloppy</a></li>
+<li><a href="notebooks/03_Basics_of_Tracking/Open_Data_Tracking_Tutorial.html">Tracking tutorial</a></li></ul>
+<h3>04 — Visualisation bank</h3>
+<ul>
+<li><a href="notebooks/04_Visualizations/OBR_Simple_Radar_Viz.html">Off-ball runs: simple radar visualisation</a></li>
+<li><a href="notebooks/04_Visualizations/Sectioned_Summary_Table_Viz_Tutorial.html">Sectioned summary table visualisation</a></li></ul>
+<h3>05 — Body pose</h3>
+<ul>
+<li><a href="notebooks/05_Body_Pose/Part1_Getting_Started_with_Body_Pose.html">Part 1: Getting started with body pose</a></li></ul>
+
+<h2>Then: our work, in order</h2>
+<h3>1. Event EDA — block, pressure, box (20 matches)</h3>
+<p>Shot rate by block height: low block about <strong>18.5–18.7%</strong>, medium about <strong>9.0–9.3%</strong>, high <strong>6.0%</strong>. By on-ball pressure, shot rate runs from <strong>2.2%</strong> with no pressure to <strong>21.4%</strong> with very high pressure — read pressure as context, because dangerous attacks attract pressure. Shot phases have a smaller defensive box, about <strong>148–166 m² smaller in the low block</strong>. Evidence: <a href="eda.html">Event EDA</a>, <a href="eda_notebook.html">full EDA notebook</a>, <a href="team-zones.html">team shot zones</a>.</p>
+<h3>2. Coupled two-graph test</h3>
+<p>Defence proximity graph + attack Delaunay graph, Hungarian marking and a supra-Laplacian, on organised blocks. After baselines (OOP width, length, area, nearest defender, on-ball pressure), only supra-Laplacian lambda2 remained: residual <strong>−0.013, interval [−0.022, −0.004]</strong>. Everything else was null. Verdict: not a KPI. Evidence: <a href="graphs.html">Coupled graphs</a>, <a href="defend.html">graph notebook</a>, <a href="graph-tool-notes.html">graph tool notes</a>.</p>
+
+<h3>3. All seven hypotheses — one-line verdicts</h3>
+<table><tr><th>#</th><th>Question</th><th>Verdict (this summary stands alone)</th><th>Evidence</th></tr>
+<tr><td>H1</td><td>Defender body shape at reception</td><td>Side-on receptions carry <strong>+0.007 EPV vs square</strong>; 81.9% square, 17.6% side-on, back-to n=7. Two pose matches only — not a KPI.</td><td><a href="body-shape.html">Body shape</a></td></tr>
+<tr><td>H2</td><td>Sight of goal</td><td>With <strong>≥50% of the goal visible</strong>, big-chance rate <strong>0.38 vs 0.19</strong> below. Mostly heading, not occlusion. Two pose matches — supported but underpowered.</td><td><a href="goal-sight.html">Sight of goal</a></td></tr>
+<tr><td>H3</td><td>Shadow screening</td><td>High-block lane occupation (opponent within 1.5 m of the lane) cuts forward completion by <strong>27 points (63.7% vs 90.7%) on 20 matches</strong>; facing only on 2 matches; pass EPV null; busier passers are screened <em>less</em>.</td><td><a href="shadow-screen.html">Shadow screening</a></td></tr>
+<tr><td>H4</td><td>Wide-to-central passing angle</td><td>First-line-break probability <strong>falls 0.041 per 10°</strong> — straighter lanes break the line. No threshold. 348 passes, 14 matches with a labelled central midfielder (6 of 20 have none).</td><td><a href="pass-angle.html">Passing angle</a></td></tr>
+<tr><td>H5</td><td>Full-back tracking of overlaps/underlaps</td><td>Tracked runs (within 6 m + goal-side + velocity match for 1 s) received <strong>−12.9 points</strong> less often (20.0% vs 32.9%); shots and xthreat null. 260 runs, 17 matches with both groups.</td><td><a href="fullback-tracking.html">Full-back tracking</a></td></tr>
+<tr><td>H6</td><td>Overlaps/underlaps and shots</td><td>Non-shot runs have a defender <strong>1.33 m closer</strong> at the run (4.84 m vs 6.17 m); goal-side and lane do not separate shots. Association, not a prevention system. 534 runs, 20 matches.</td><td><a href="overlaps.html">Overlaps</a></td></tr>
+<tr><td>H7</td><td>Centre-backs drawn out</td><td>CBs sit <strong>+1.60 m</strong> from their usual spot when the striker is marked within 3 m (CM/FB null); tight marks coincide with <strong>+8.5 points</strong> of shots. 1,171 striker possessions.</td><td><a href="drawn-out.html">Drawn out</a></td></tr></table>
+<p class="small">Sequence view: <a href="timeline.html">How the checks evolved</a>. Idea pages kept as evidence: <a href="cup-ideas.html">cup-goal ideas</a>, <a href="marking-debt.html">marking debt</a>, <a href="compact-weak-coupling.html">compact box, weak coverage</a>, <a href="pressing-chain-weak-side.html">pressing chains vs far-side runners</a>.</p>
+
+<nav class="top"><a href="index.html">Home</a><a href="explored.html">1. What has been explored</a><a href="tools.html">2. Valid reusable tools and KPIs</a><a href="next.html">3. Worth exploring next</a></nav>
+</body></html>
